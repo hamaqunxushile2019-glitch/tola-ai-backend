@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="om">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tola AI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #101827;
+      color: white;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h1 { color: #39dbc3; text-align: center; }
+    p { text-align: center; }
+    select, textarea, button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 12px;
+      border-radius: 9px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+    textarea { min-height: 120px; }
+    button {
+      background: #39dbc3;
+      border: 0;
+      font-weight: bold;
+    }
+    #answer {
+      background: #1d293b;
+      padding: 15px;
+      border-radius: 9px;
+      margin-top: 18px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌟 Tola AI</h1>
+  <p>Gargaaraa barnootaa kee</p>
+
+  <label for="language">Afaan filadhu</label>
+  <select id="language">
+    <option>Afaan Oromoo</option>
+    <option>Amharic</option>
+    <option>English</option>
+  </select>
+
+  <textarea id="message" placeholder="Gaaffii kee asitti barreessi..."></textarea>
+  <button id="ask" onclick="askAI()">Gaaffii ergi</button>
+  <div id="answer">Deebiin kee asitti mul'ata.</div>
+
+  <script>
+    async function askAI() {
+      const message = document.getElementById("message").value.trim();
+      const language = document.getElementById("language").value;
+      const answer = document.getElementById("answer");
+      const button = document.getElementById("ask");
+
+      if (!message) {
+        answer.textContent = "Maaloo gaaffii kee barreessi.";
+        return;
+      }
+
+      button.disabled = true;
+      answer.textContent = "Deebii barbaadaa jira...";
+
+      try {
+        const response = await fetch("/.netlify/functions/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message, language })
+        });
+
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.error || "Dogoggorri uumame.");
+        answer.textContent = data.answer;
+      } catch (error) {
+        answer.textContent = "Deebii argachuu hin dandeenye. API key fi backend ilaali.";
+      } finally {
+        button.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
