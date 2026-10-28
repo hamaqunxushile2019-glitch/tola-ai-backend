@@ -5,17 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tola AI</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
       background: #101827;
       color: white;
-      padding: 20px;
+      padding: 18px;
       max-width: 600px;
       margin: auto;
+      line-height: 1.6;
     }
-    h1 { color: #39dbc3; text-align: center; }
+
+    h1 {
+      color: #39dbc3;
+      text-align: center;
+    }
+
     p { text-align: center; }
+
+    label { display: block; margin-top: 12px; }
+
     select, textarea, button {
       width: 100%;
       padding: 13px;
@@ -24,42 +34,119 @@
       box-sizing: border-box;
       font-size: 16px;
     }
-    textarea { min-height: 120px; }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
     button {
       background: #39dbc3;
+      color: #101827;
       border: 0;
       font-weight: bold;
+      cursor: pointer;
     }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     #answer {
       background: #1d293b;
-      padding: 15px;
+      padding: 16px;
       border-radius: 9px;
       margin-top: 18px;
       white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .download-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .download-buttons button {
+      background: #f4d35e;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+        max-width: 100%;
+        padding: 0;
+      }
+
+      h1 { color: black; }
+
+      #answer {
+        background: white;
+        color: black;
+        padding: 0;
+      }
+
+      .no-print { display: none !important; }
     }
   </style>
+
+  <script src="https://unpkg.com/docx@8.5.0/build/index.umd.js"></script>
 </head>
+
 <body>
   <h1>🌟 Tola AI</h1>
-  <p>Gargaaraa barnootaa kee</p>
+  <p class="no-print">Gargaaraa barnootaa kee</p>
 
-  <label for="language">Afaan filadhu</label>
-  <select id="language">
-    <option>Afaan Oromoo</option>
-    <option>Amharic</option>
-    <option>English</option>
-  </select>
+  <div class="no-print">
+    <label for="language">Afaan filadhu</label>
+    <select id="language">
+      <option>Afaan Oromoo</option>
+      <option>Amharic</option>
+      <option>English</option>
+    </select>
 
-  <textarea id="message" placeholder="Gaaffii kee asitti barreessi..."></textarea>
-  <button id="ask" onclick="askAI()">Gaaffii ergi</button>
+    <label for="message">Gaaffii kee</label>
+    <textarea id="message"
+      placeholder="Gaaffii kee asitti barreessi..."></textarea>
+
+    <button id="ask" onclick="askAI()">Gaaffii ergi</button>
+  </div>
+
+  <h3 id="answerTitle">Deebii Tola AI</h3>
   <div id="answer">Deebiin kee asitti mul'ata.</div>
 
+  <div class="download-buttons no-print">
+    <button id="pdfButton" onclick="downloadPDF()" disabled>
+      📄 PDF buufadhu
+    </button>
+
+    <button id="wordButton" onclick="downloadDOCX()" disabled>
+      📝 Word buufadhu
+    </button>
+  </div>
+
+  <p id="status" class="note no-print">
+    Gaaffii kee ergi; achiis deebii buufadhu.
+  </p>
+
   <script>
+    let currentAnswer = "";
+    let currentQuestion = "";
+    let currentLanguage = "";
+
     async function askAI() {
       const message = document.getElementById("message").value.trim();
       const language = document.getElementById("language").value;
       const answer = document.getElementById("answer");
       const button = document.getElementById("ask");
+      const status = document.getElementById("status");
 
       if (!message) {
         answer.textContent = "Maaloo gaaffii kee barreessi.";
@@ -67,22 +154,186 @@
       }
 
       button.disabled = true;
+      document.getElementById("pdfButton").disabled = true;
+      document.getElementById("wordButton").disabled = true;
       answer.textContent = "Deebii barbaadaa jira...";
+      status.textContent = "Mee xiqqoo eegi.";
 
       try {
-        const response = await fetch("https://tola-ai-chat-2026.hamaqunxushile2019.workers.dev", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message, language })
-        });
+        const response = await fetch(
+          "https://tola-ai-chat-2026.hamaqunxushile2019.workers.dev",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message, language })
+          }
+        );
 
         const data = await response.json();
-        if (!response.ok) throw new Error(data.error || "Dogoggorri uumame.");
-        answer.textContent = data.answer;
+
+        if (!response.ok) {
+          throw new Error(data.error || "Dogoggorri uumame.");
+        }
+
+        if (!data.answer || typeof data.answer !== "string") {
+          throw new Error("Deebiin sirrii hin argamne.");
+        }
+
+        currentAnswer = data.answer;
+        currentQuestion = message;
+        currentLanguage = language;
+
+        answer.textContent = currentAnswer;
+
+        document.getElementById("answerTitle").textContent =
+          "Deebii Tola AI";
+
+        document.getElementById("pdfButton").disabled = false;
+        document.getElementById("wordButton").disabled = false;
+
+        status.textContent =
+          "Deebiin qophaa'eera. PDF ykn Word buufachuu dandeessa.";
+
       } catch (error) {
-        answer.textContent = "Deebii argachuu hin dandeenye. API key fi backend ilaali.";
+        answer.textContent =
+          "Deebii argachuu hin dandeenye. Internet fi backend ilaali.";
+        status.textContent = "Dogoggora: " + error.message;
       } finally {
         button.disabled = false;
+      }
+    }
+
+    function downloadPDF() {
+      if (!currentAnswer) {
+        alert("Jalqaba gaaffii ergi.");
+        return;
+      }
+
+      const printWindow = window.open("", "_blank");
+
+      if (!printWindow) {
+        alert("Browser keessatti pop-up hayyami, achiis irra deebi'i.");
+        return;
+      }
+
+      const safe = (text) => String(text).replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+
+      printWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="om">
+        <head>
+          <meta charset="UTF-8">
+          <title>Tola AI - Barnoota</title>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+              margin: 35px;
+              color: #111;
+              line-height: 1.7;
+            }
+            h1 { text-align: center; }
+            .question { font-weight: bold; }
+            .answer { white-space: pre-wrap; overflow-wrap: anywhere; }
+          </style>
+        </head>
+        <body>
+          <h1>Tola AI</h1>
+          <p><b>Afaan:</b> ${safe(currentLanguage)}</p>
+          <p class="question">Gaaffii:</p>
+          <p>${safe(currentQuestion)}</p>
+          <hr>
+          <h2>Deebii</h2>
+          <div class="answer">${safe(currentAnswer)}</div>
+          <script>
+            window.onload = function() {
+              setTimeout(function() {
+                window.print();
+              }, 400);
+            };
+          <\/script>
+        </body>
+        </html>
+      `);
+
+      printWindow.document.close();
+    }
+
+    async function downloadDOCX() {
+      if (!currentAnswer) {
+        alert("Jalqaba gaaffii ergi.");
+        return;
+      }
+
+      const status = document.getElementById("status");
+
+      try {
+        if (!window.docx) {
+          throw new Error(
+            "Meeshaan Word hin banamne. Internet ilaaliitii irra deebi'i."
+          );
+        }
+
+        const { Document, Packer, Paragraph, TextRun } = window.docx;
+
+        const paragraphs = [
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Tola AI",
+                bold: true,
+                size: 32
+              })
+            ]
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Afaan: " + currentLanguage,
+                bold: true
+              })
+            ]
+          }),
+          new Paragraph({
+            children: [
+              new TextRun({
+                text: "Gaaffii: " + currentQuestion,
+                bold: true
+              })
+            ]
+          }),
+          new Paragraph({ text: "" }),
+          ...currentAnswer.split(/\r?\n/).map(line =>
+            new Paragraph({ children: [new TextRun(line)] })
+          )
+        ];
+
+        const documentFile = new Document({
+          sections: [{ children: paragraphs }]
+        });
+
+        const blob = await Packer.toBlob(documentFile);
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+
+        link.href = url;
+        link.download = "Tola-AI-Deebii.docx";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+
+        status.textContent = "Faayilli Word qophaa'eera.";
+
+      } catch (error) {
+        status.textContent =
+          "Word uumuu hin dandeenye: " + error.message;
       }
     }
   </script>
