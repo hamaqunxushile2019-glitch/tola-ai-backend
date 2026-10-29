@@ -1,250 +1,52 @@
 <!DOCTYPE html>
-<html lang="om">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101827">
-<title>Tola AI</title>
+<html lang="om"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#101827"><title>Tola AI</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#101827;color:#f1f5f9;
-font-family:Arial,sans-serif;min-height:100vh}
-header{background:#17243a;padding:16px;
-display:flex;align-items:center;gap:12px;
-border-bottom:1px solid #334155}
-.logo{background:#0284c7;border-radius:14px;
-width:48px;height:48px;display:grid;place-items:center;
-font-size:25px;font-weight:bold}
-h1{font-size:21px;margin:0}
-.sub{font-size:12px;color:#94a3b8;margin-top:5px}
-main{max-width:760px;margin:auto;padding:16px}
-.welcome{text-align:center;padding:24px 8px}
-.robot{font-size:48px}
-.welcome h2{margin:10px 0;color:#38bdf8}
-.welcome p{color:#cbd5e1;line-height:1.6}
-.languages{display:flex;gap:8px;justify-content:center;
-flex-wrap:wrap;margin:18px 0}
-.languages button,.suggestions button{
-background:#1e293b;color:#e2e8f0;border:1px solid #475569;
-padding:10px 13px;border-radius:18px;cursor:pointer}
-#chat{display:flex;flex-direction:column;gap:14px;
-padding-bottom:16px}
-.msg{padding:13px 15px;border-radius:17px;
-max-width:90%;white-space:pre-wrap;line-height:1.6;
-overflow-wrap:anywhere}
-.user{align-self:flex-end;background:#075985}
-.ai{align-self:flex-start;background:#1e293b;
-border:1px solid #334155}
-.label{font-size:12px;color:#7dd3fc;margin-bottom:5px}
-.suggestions{display:flex;gap:8px;flex-wrap:wrap;
-margin:12px 0 18px}
-.suggestions button{font-size:13px}
-.composer{position:sticky;bottom:0;background:#101827;
-padding:12px 0 8px}
-.inputbox{display:flex;gap:8px;align-items:flex-end;
-background:#1e293b;border:1px solid #475569;
-border-radius:18px;padding:9px}
-textarea{background:transparent;color:white;border:0;
-outline:0;resize:vertical;min-height:42px;max-height:140px;
-flex:1;font:16px Arial,sans-serif;padding:10px 4px}
-#send{border:0;border-radius:13px;background:#0284c7;
-color:white;padding:13px 16px;font-size:16px;cursor:pointer}
-#send:disabled{opacity:.5}
-.status{text-align:center;color:#94a3b8;
-font-size:12px;padding:8px}
-footer{text-align:center;color:#64748b;font-size:12px;
-padding:18px}
-button:focus-visible,textarea:focus-visible{
-outline:2px solid #38bdf8;outline-offset:2px}
-</style>
-</head>
-<body>
-<header>
-  <div class="logo">T</div>
-  <div>
-    <h1>Tola AI</h1>
-    <div class="sub">Gargaaraa kee kan ogummaa qabu</div>
-  </div>
-</header>
-
+*{box-sizing:border-box}body{margin:0;background:#101827;color:#f1f5f9;font-family:Arial,sans-serif}
+header{background:#17243a;padding:16px;display:flex;gap:12px;align-items:center;border-bottom:1px solid #334155}
+.logo{background:#0284c7;border-radius:14px;width:48px;height:48px;display:grid;place-items:center;font-size:25px;font-weight:bold}
+h1{font-size:21px;margin:0}.sub,.status{font-size:12px;color:#94a3b8;margin-top:5px}
+main{max-width:760px;margin:auto;padding:16px}.welcome{text-align:center;padding:24px 8px}.robot{font-size:48px}
+h2{color:#38bdf8}.welcome p{color:#cbd5e1;line-height:1.6}
+.languages,.suggestions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+button{cursor:pointer}.languages button,.suggestions button{background:#1e293b;color:#e2e8f0;border:1px solid #475569;padding:10px 13px;border-radius:18px}
+#chat{display:flex;flex-direction:column;gap:14px;padding-bottom:16px}.msg{padding:13px 15px;border-radius:17px;max-width:90%;white-space:pre-wrap;line-height:1.6;overflow-wrap:anywhere}
+.user{align-self:flex-end;background:#075985}.ai{align-self:flex-start;background:#1e293b;border:1px solid #334155}.label{font-size:12px;color:#7dd3fc;margin-bottom:5px}
+.composer{position:sticky;bottom:0;background:#101827;padding:12px 0 8px}.inputbox{display:flex;gap:8px;align-items:flex-end;background:#1e293b;border:1px solid #475569;border-radius:18px;padding:9px}
+textarea{background:transparent;color:white;border:0;outline:0;resize:vertical;min-height:42px;max-height:140px;flex:1;font:16px Arial,sans-serif;padding:10px 4px}
+#send{border:0;border-radius:13px;background:#0284c7;color:white;padding:13px 16px;font-size:16px}#send:disabled{opacity:.5}
+.status{text-align:center;padding:8px}footer{text-align:center;color:#64748b;font-size:12px;padding:18px}
+</style></head><body>
+<header><div class="logo">T</div><div><h1>Tola AI</h1><div class="sub">Gargaaraa kee kan ogummaa qabu</div></div></header>
 <main>
-  <section class="welcome" id="welcome">
-    <div class="robot">🤖</div>
-    <h2>Baga nagaan dhuftan!</h2>
-    <p>Ani Tola AI dha. Barnoota, saayinsii,
-    herrega, barreessuu, hiikkaa fi gaaffiiwwan
-    kee irratti si gargaaruuf qophaa'eera.</p>
-    <div class="languages">
-      <button onclick="setLanguage('om')">Afaan Oromoo</button>
-      <button onclick="setLanguage('am')">አማርኛ</button>
-      <button onclick="setLanguage('en')">English</button>
-    </div>
-  </section>
-
-  <div class="suggestions" id="suggestions">
-    <button onclick="ask('Herrega kana naaf ibsi.')">
-      ➗ Herrega
-    </button>
-    <button onclick="ask('Gaaffii saayinsii naaf ibsi.')">
-      🔬 Saayinsii
-    </button>
-    <button onclick="ask('Afaan Oromoo sirriitti barreessuu na barsiisi.')">
-      ✍️ Afaan Oromoo
-    </button>
-    <button onclick="ask('Tapha jechootaa waliin haa taphannu.')">
-      🎮 Tapha
-    </button>
-  </div>
-
-  <section id="chat" aria-live="polite"></section>
-
-  <div class="status" id="status">
-    Gaaffii kee asitti barreessi.
-  </div>
-
-  <section class="composer">
-    <div class="inputbox">
-      <textarea id="question"
-        placeholder="Tola AI gaafadhu..."
-        aria-label="Gaaffii kee barreessi"
-        rows="1"></textarea>
-      <button id="send" onclick="sendMessage()">➤</button>
-    </div>
-    <div class="status">Tola AI — Baradhu, gaafadhu, guddadhu.</div>
-  </section>
-</main>
-
-<footer>
-  Tola AI © 2026 | Beekumsa fi barnootaaf
-</footer>
-
+<section class="welcome" id="welcome"><div class="robot">🤖</div><h2>Baga nagaan dhuftan!</h2>
+<p>Ani Tola AI dha. Barnoota, saayinsii, herrega, barreessuu, hiikkaa fi gaaffiiwwan kee irratti si gargaaruuf qophaa'eera.</p>
+<div class="languages"><button onclick="setLanguage('om')">Afaan Oromoo</button><button onclick="setLanguage('am')">አማርኛ</button><button onclick="setLanguage('en')">English</button></div></section>
+<div class="suggestions" id="suggestions">
+<button onclick="ask('Herrega kana naaf ibsi.')">➗ Herrega</button><button onclick="ask('Gaaffii saayinsii naaf ibsi.')">🔬 Saayinsii</button>
+<button onclick="ask('Afaan Oromoo sirriitti barreessuu na barsiisi.')">✍️ Afaan Oromoo</button><button onclick="ask('Tapha jechootaa waliin haa taphannu.')">🎮 Tapha</button></div>
+<section id="chat" aria-live="polite"></section><div class="status" id="status">Gaaffii kee asitti barreessi.</div>
+<section class="composer"><div class="inputbox"><textarea id="question" placeholder="Tola AI gaafadhu..." aria-label="Gaaffii kee barreessi" rows="1"></textarea><button id="send" onclick="sendMessage()">➤</button></div>
+<div class="status">Tola AI — Baradhu, gaafadhu, guddadhu.</div></section></main><footer>Tola AI © 2026 | Beekumsa fi barnootaaf</footer>
 <script>
-const chat = document.getElementById("chat");
-const question = document.getElementById("question");
-const sendButton = document.getElementById("send");
-const statusBox = document.getElementById("status");
-
-let language = "om";
-let history = [];
-let busy = false;
-
-function setLanguage(lang) {
-  language = lang;
-  const placeholders = {
-    om: "Tola AI gaafadhu...",
-    am: "Tola AIን ይጠይቁ...",
-    en: "Ask Tola AI..."
-  };
-  question.placeholder = placeholders[lang];
-  statusBox.textContent = lang === "om"
-    ? "Afaan Oromoo filatte."
-    : lang === "am"
-    ? "አማርኛ መርጠዋል።"
-    : "English selected.";
-  question.focus();
+const API_URL="https://tola-ai-chat-2026.hamaqunxushile2019.workers.dev";
+const chat=document.getElementById("chat"),question=document.getElementById("question"),sendButton=document.getElementById("send"),statusBox=document.getElementById("status");
+let language="om",history=[],busy=false;
+function setLanguage(lang){language=lang;question.placeholder={om:"Tola AI gaafadhu...",am:"Tola AIን ይጠይቁ...",en:"Ask Tola AI..."}[lang];statusBox.textContent=lang==="om"?"Afaan Oromoo filatte.":lang==="am"?"አማርኛ መርጠዋል።":"English selected.";question.focus()}
+function addMessage(text,type){const box=document.createElement("div");box.className="msg "+type;const label=document.createElement("div");label.className="label";label.textContent=type==="user"?"Ati":"Tola AI";const content=document.createElement("div");content.textContent=text;box.append(label,content);chat.appendChild(box);window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});return box}
+function ask(text){question.value=text;sendMessage()}
+async function sendMessage(){
+ const text=question.value.trim();if(!text||busy)return;
+ document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";addMessage(text,"user");question.value="";busy=true;sendButton.disabled=true;statusBox.textContent="Tola AI deebii qopheessaa jira...";const waiting=addMessage("Xiqqoo na eegi...","ai");
+ try{
+  const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,language:language,history:history.slice(-12)})});
+  let data={};try{data=await response.json()}catch(_){}
+  if(!response.ok)throw new Error(data.details||data.error||("HTTP "+response.status));
+  const answer=data.reply||data.answer||data.text;if(typeof answer!=="string"||!answer.trim())throw new Error(data.error||"Deebii sirrii hin arganne.");
+  waiting.lastChild.textContent=answer;history.push({role:"user",content:text},{role:"assistant",content:answer});statusBox.textContent="Deebiin qophaa'eera.";
+ }catch(error){waiting.lastChild.textContent="Dhiifama, deebii argachuu hin dandeenye.\nSababa: "+(error.message||"Walqunnamtii serverii")+"\n\nRakkoo CORS, API key, ykn maqaa modelii ta'uu danda'a. Ergaa kana naaf ergi.";statusBox.textContent="Rakkoon backend/API jiraachuu danda'a.";console.error(error)}
+ finally{busy=false;sendButton.disabled=false;question.focus()}
 }
-
-function addMessage(text, type) {
-  const box = document.createElement("div");
-  box.className = "msg " + type;
-
-  const label = document.createElement("div");
-  label.className = "label";
-  label.textContent = type === "user" ? "Ati" : "Tola AI";
-
-  const content = document.createElement("div");
-  content.textContent = text;
-
-  box.appendChild(label);
-  box.appendChild(content);
-  chat.appendChild(box);
-
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth"
-  });
-  return box;
-}
-
-function ask(text) {
-  question.value = text;
-  sendMessage();
-}
-
-async function sendMessage() {
-  const text = question.value.trim();
-
-  if (!text || busy) return;
-
-  document.getElementById("welcome").style.display = "none";
-  document.getElementById("suggestions").style.display = "none";
-
-  addMessage(text, "user");
-  question.value = "";
-  busy = true;
-  sendButton.disabled = true;
-  statusBox.textContent = "Tola AI deebii qopheessaa jira...";
-
-  const waiting = addMessage("Xiqqoo na eegi...", "ai");
-
-  try {
-    /*
-      BACKEND NAGEENYA QABU BARBAACHISA.
-      Endpoint /api/chat jedhu backend kee keessatti
-      uumamuu qaba. API key asitti hin galchin.
-    */
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        message: text,
-        language: language,
-        history: history.slice(-12)
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error("HTTP " + response.status);
-    }
-
-    const data = await response.json();
-    const answer = data.reply || data.answer || data.text;
-
-    if (typeof answer !== "string" || !answer.trim()) {
-      throw new Error("Deebii sirrii hin arganne.");
-    }
-
-    waiting.lastChild.textContent = answer;
-    history.push(
-      { role: "user", content: text },
-      { role: "assistant", content: answer }
-    );
-    statusBox.textContent = "Deebiin qophaa'eera.";
-
-  } catch (error) {
-    waiting.lastChild.textContent =
-      "Dhiifama! Tola AI server waliin wal hin qabanne. " +
-      "Backend/API AI qindeessuun barbaachisa. " +
-      "Yoo server kee jiraate, endpoint /api/chat " +
-      "sirrii ta'uu isaa mirkaneessi.";
-    statusBox.textContent = "Walqunnamtii serverii hin mirkanoofne.";
-    console.error(error);
-  } finally {
-    busy = false;
-    sendButton.disabled = false;
-    question.focus();
-  }
-}
-
-question.addEventListener("keydown", function(event) {
-  if (event.key === "Enter" && !event.shiftKey) {
-    event.preventDefault();
-    sendMessage();
-  }
-});
-</script>
-</body>
-</html>
-
+question.addEventListener("keydown",event=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();sendMessage()}});
+</script></body></html>
