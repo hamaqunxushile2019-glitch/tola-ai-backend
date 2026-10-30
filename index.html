@@ -24,8 +24,8 @@ body {
 }
 
 #chatMessages {
-  font-size: 21px;
-  line-height: 1.9;
+  font-size: 30px;
+  line-height: 2.5;
 }
 
 button, input, textarea {
@@ -70,7 +70,7 @@ header .sub {
 <div class="suggestions" id="suggestions">
 <button onclick="ask('Herrega kana naaf ibsi.')">➗ Herrega</button><button onclick="ask('Gaaffii saayinsii naaf ibsi.')">🔬 Saayinsii</button>
 <button onclick="ask('Afaan Oromoo sirriitti barreessuu na barsiisi.')">✍️ Afaan Oromoo</button><button onclick="ask('Tapha jechootaa waliin haa taphannu.')">🎮 Tapha</button></div>
-<section id="chat" aria-live="polite"></section><div class="status" id="status">Gaaffii kee asitti barreessi.</div>
+<section id="chat" aria-live="polite"></section><div class="status" id="status">
 <section class="composer"><div class="inputbox"><textarea id="question" placeholder="Tola AI gaafadhu..." aria-label="Gaaffii kee barreessi" rows="1"></textarea><button id="send" onclick="sendMessage()">➤</button></div>
 <div class="status">Tola Ai — Gaafadhu, baradhu, .</div></section></main><footer>Tola Ai © 2026 | Beekumsa fi barnootaaf</footer>
 <script>
@@ -82,7 +82,7 @@ function addMessage(text,type){const box=document.createElement("div");box.class
 function ask(text){question.value=text;sendMessage()}
 async function sendMessage(){
  const text=question.value.trim();if(!text||busy)return;
- document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";addMessage(text,"user");question.value="";busy=true;sendButton.disabled=true;statusBox.textContent="Tola AI deebii qopheessaa jira...";const waiting=addMessage("Xiqqoo na eegi...","ai");
+ document.getElementById("welcome").style.display="none";document.getElementById("suggestions").style.display="none";addMessage(text,"user");question.value="";busy=true;sendButton.disabled=true;statusBox.textContent="Tola Ai deebii qopheessaa jira...";const waiting=addMessage("Xiqqoo na eegi...","ai");
  try{
   const response=await fetch(API_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:text,language:language,history:history.slice(-12)})});
   let data={};try{data=await response.json()}catch(_){}
