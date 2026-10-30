@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101827">
-<title>Tola AI</title>
+<title>Tola Ai</title>
 
 <style>
 *{box-sizing:border-box}
@@ -77,18 +77,17 @@ footer{text-align:center;color:#64748b;font-size:12px;padding:20px}
 <header>
  <div class="logo">T</div>
  <div>
-  <h1>Tola AI</h1>
-  <div class="sub">Gargaaraa barnootaa fi beekumsaa kee</div>
+  <h1>Tola Ai</h1>
+  <div class="sub">Gargaaraa Barnootaa</div>
  </div>
 </header>
 
 <main>
  <section class="welcome" id="welcome">
   <div class="robot">🤖</div>
-  <h2>Baga gara Tola AI dhuftan!</h2>
+  <h2>Baga Nagaan dhufte!</h2>
   <p>
-   Gaaffii kee barreessi. Tola AI barnoota,
-   beekumsa, hojii fi jireenya guyyaa guyyaa irratti si gargaara.
+   Wasa barbaadde na gaafadhu!
   </p>
  </section>
 
@@ -101,14 +100,14 @@ footer{text-align:center;color:#64748b;font-size:12px;padding:20px}
  <div class="suggestions" id="suggestions">
   <button onclick="ask('Saayinsiin maal jechuudha?')">🔬 Saayinsii</button>
   <button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
-  <button onclick="ask('Seenaa Itoophiyaa natti himi')">📚 Seenaa</button>
+  <button onclick="ask('Seenaa Na barsiisi')">📚 Seenaa</button>
   <button onclick="ask('English na barsiisi')">🌍 Afaan</button>
  </div>
 
  <section id="chat"></section>
 
  <div class="status" id="status">
-  Tola AI qophaa'eera.
+  Tola Ai qophaa'eera.
  </div>
 
  <div class="composer">
@@ -116,12 +115,12 @@ footer{text-align:center;color:#64748b;font-size:12px;padding:20px}
    <textarea id="question"
     placeholder="Tola AI gaafadhu..."
     rows="1"></textarea>
-   <button id="send" onclick="sendMessage()">Ergi ➤</button>
+   <button id="send" onclick="sendMessage()"> ➤</button>
   </div>
  </div>
 </main>
 
-<footer>Tola AI © 2026</footer>
+<footer>Tola Ai © 2026</footer>
 
 <script>
 const API_URL =
@@ -145,9 +144,9 @@ function setLanguage(lang,button){
  button.classList.add("active");
 
  question.placeholder = {
-  om:"Tola AI gaafadhu...",
-  am:"Tola AIን ይጠይቁ...",
-  en:"Ask Tola AI..."
+  om:"Tola Ai gaafadhu...",
+  am:"Tola Aiን ይጠይቁ...",
+  en:"Ask Tola Ai..."
  }[lang];
 
  statusBox.textContent = {
@@ -198,9 +197,9 @@ async function sendMessage(){
 
  busy = true;
  sendButton.disabled = true;
- statusBox.textContent = "Tola AI deebii qopheessaa jira...";
+ statusBox.textContent = "
 
- const waiting = addMessage("Xiqqoo na eegi...","ai");
+ const waiting = addMessage("Eegi...","ai");
 
  try{
   const response = await fetch(API_URL,{
