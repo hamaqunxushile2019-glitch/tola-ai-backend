@@ -112,3 +112,27 @@ question.addEventListener("keydown",event=>{
 </script>
 </body>
 </html>
+function startVoiceInput(){
+ const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+ if(!SpeechRecognition){
+   alert("Browser kee sagalee fudhachuu hin deeggaru. Google Chrome fayyadami.");
+   return;
+ }
+
+ const recognition = new SpeechRecognition();
+ recognition.lang = language === "om" ? "om-ET" : language === "am" ? "am-ET" : "en-US";
+ recognition.continuous = false;
+ recognition.interimResults = false;
+
+ recognition.onresult = function(event){
+   question.value = event.results[0][0].transcript;
+   question.focus();
+ };
+
+ recognition.onerror = function(){
+   alert("Sagalee dhaga'uu hin dandeenye. Microphone hayyami.");
+ };
+
+ recognition.start();
+}
