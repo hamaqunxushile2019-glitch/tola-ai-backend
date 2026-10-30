@@ -72,7 +72,11 @@ header .sub {
 <button onclick="ask('Herrega kana naaf ibsi.')">Herrega</button><button onclick="ask('Gaaffii saayinsii naaf ibsi.')">S/Naannoo</button>
 <button onclick="ask('Afaan Oromoo sirriitti barreessuu na barsiisi.')">A/Oromoo</button><button onclick="ask('Tapha jechootaa waliin haa taphannu.')">🎮 Tapha</button></div>
 <section id="chat" aria-live="polite"></section><div class="status" id="status"></div>
-<section class="composer"><div class="inputbox"><textarea id="question" placeholder="Tola AI gaafadhu..." aria-label="Gaaffii kee barreessi" rows="1"></textarea><button id="send" onclick="sendMessage()">➤</button></div>
+<section class="composer"><div class="inputbox">
+<textarea id="question" placeholder="Tola AI gaafadhu..." aria-label="Gaaffii kee barreessi" rows="1"></textarea>
+<button id="voice" onclick="startVoiceInput()">🎤</button>
+<button id="send" onclick="sendMessage()">➤</button>
+</div>
 <div class="status">Tola Ai — Gaafadhu, baradhu, .</div></section></main><footer>Tola Ai © 2026 | Beekumsa fi barnootaaf</footer>
 <script>
 const API_URL="https://tola-ai-chat-2026.hamaqunxushile2019.workers.dev";
