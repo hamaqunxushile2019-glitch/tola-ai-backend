@@ -62,22 +62,22 @@ header .sub {
   text-align: center;
 </style></head><body>
 <header>
-<div class="logo-text">Tola AI</div><div><h1>Tola AI</h1><div class="sub">Gargaaraa kee </div></div></header>
+<div><h1>Tola Ai</h1><div class="sub">Gargaaraa kee </div></div></header>
 <main>
 <section class="welcome" id="welcome"><div class="robot">🤖</div><h2>Baga nagaan dhuftan!</h2>
-<p>Ani Tola AI dha. Barnoota hundaa gaaffiiwwan kee irratti si gargaaruuf qophaa'eera.</p>
+<p>Ani Tola Ai dha. Barnoota hundaa gaaffiiwwan kee irratti hundaa'ee si gargaaruuf qophaa'eera.</p>
 <div class="languages"><button onclick="setLanguage('om')">Afaan Oromoo</button><button onclick="setLanguage('am')">አማርኛ</button><button onclick="setLanguage('en')">English</button></div></section>
 <div class="suggestions" id="suggestions">
 <button onclick="ask('Herrega kana naaf ibsi.')">➗ Herrega</button><button onclick="ask('Gaaffii saayinsii naaf ibsi.')">🔬 Saayinsii</button>
 <button onclick="ask('Afaan Oromoo sirriitti barreessuu na barsiisi.')">✍️ Afaan Oromoo</button><button onclick="ask('Tapha jechootaa waliin haa taphannu.')">🎮 Tapha</button></div>
 <section id="chat" aria-live="polite"></section><div class="status" id="status">Gaaffii kee asitti barreessi.</div>
 <section class="composer"><div class="inputbox"><textarea id="question" placeholder="Tola AI gaafadhu..." aria-label="Gaaffii kee barreessi" rows="1"></textarea><button id="send" onclick="sendMessage()">➤</button></div>
-<div class="status">Tola AI — Baradhu, gaafadhu, guddadhu.</div></section></main><footer>Tola AI © 2026 | Beekumsa fi barnootaaf</footer>
+<div class="status">Tola Ai — Gaafadhu, baradhu, .</div></section></main><footer>Tola AI © 2026 | Beekumsa fi barnootaaf</footer>
 <script>
 const API_URL="https://tola-ai-chat-2026.hamaqunxushile2019.workers.dev";
 const chat=document.getElementById("chat"),question=document.getElementById("question"),sendButton=document.getElementById("send"),statusBox=document.getElementById("status");
 let language="om",history=[],busy=false;
-function setLanguage(lang){language=lang;question.placeholder={om:"Tola AI gaafadhu...",am:"Tola AIን ይጠይቁ...",en:"Ask Tola AI..."}[lang];statusBox.textContent=lang==="om"?"Afaan Oromoo filatte.":lang==="am"?"አማርኛ መርጠዋል።":"English selected.";question.focus()}
+function setLanguage(lang){language=lang;question.placeholder={om:"Tola Ai gaafadhu...",am:"Tola Aiን ይጠይቁ...",en:"Ask Tola Ai..."}[lang];statusBox.textContent=lang==="om"?"Afaan Oromoo filatte.":lang==="am"?"አማርኛ መርጠዋል።":"English selected.";question.focus()}
 function addMessage(text,type){const box=document.createElement("div");box.className="msg "+type;const label=document.createElement("div");label.className="label";label.textContent=type==="user"?"Ati":"Tola AI";const content=document.createElement("div");content.textContent=text;box.append(label,content);chat.appendChild(box);window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});return box}
 function ask(text){question.value=text;sendMessage()}
 async function sendMessage(){
