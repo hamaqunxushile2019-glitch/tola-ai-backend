@@ -90,7 +90,11 @@ async function sendMessage(){
   const answer=data.reply||data.answer||data.text;if(typeof answer!=="string"||!answer.trim())throw new Error(data.error||"Deebii sirrii hin arganne.");
   waiting.lastChild.textContent=answer;history.push({role:"user",content:text},{role:"assistant",content:answer});statusBox.textContent="Deebiin qophaa'eera.";
  }catch(error){waiting.lastChild.textContent="Dhiifama, deebii argachuu hin dandeenye.\nSababa: "+(error.message||"Walqunnamtii serverii")+"\n\nRakkoo CORS, API key, ykn maqaa modelii ta'uu danda'a. Ergaa kana naaf ergi.";statusBox.textContent="Rakkoon backend/API jiraachuu danda'a.";console.error(error)}
- finally{busy=false;sendButton.disabled=false;question.focus()}
-}
+ finally{
+ busy=false;
+ sendButton.disabled=false;
+ question.focus();
+ setTimeout(()=>question.scrollIntoView({behavior:"smooth",block:"center"}),300);
+ }
 question.addEventListener("keydown",event=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();sendMessage()}});
 </script></body></html>
