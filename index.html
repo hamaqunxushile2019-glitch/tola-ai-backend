@@ -60,6 +60,7 @@ header h1 {
 
 header .sub {
   text-align: center;
+}
 </style></head><body>
 <header>
 <div><h1>Tola Ai</h1><div class="sub">Gargaaraa kee </div></div></header>
@@ -70,7 +71,7 @@ header .sub {
 <div class="suggestions" id="suggestions">
 <button onclick="ask('Herrega kana naaf ibsi.')">➗ Herrega</button><button onclick="ask('Gaaffii saayinsii naaf ibsi.')">🔬 Saayinsii</button>
 <button onclick="ask('Afaan Oromoo sirriitti barreessuu na barsiisi.')">✍️ Afaan Oromoo</button><button onclick="ask('Tapha jechootaa waliin haa taphannu.')">🎮 Tapha</button></div>
-<section id="chat" aria-live="polite"></section><div class="status" id="status">
+<section id="chat" aria-live="polite"></section><div class="status" id="status"></div>
 <section class="composer"><div class="inputbox"><textarea id="question" placeholder="Tola AI gaafadhu..." aria-label="Gaaffii kee barreessi" rows="1"></textarea><button id="send" onclick="sendMessage()">➤</button></div>
 <div class="status">Tola Ai — Gaafadhu, baradhu, .</div></section></main><footer>Tola Ai © 2026 | Beekumsa fi barnootaaf</footer>
 <script>
@@ -96,5 +97,12 @@ async function sendMessage(){
  question.focus();
  setTimeout(()=>question.scrollIntoView({behavior:"smooth",block:"center"}),300);
  }
-question.addEventListener("keydown",event=>{if(event.key==="Enter"&&!event.shiftKey){event.preventDefault();sendMessage()}});
-</script></body></html>
+question.addEventListener("keydown",event=>{
+ if(event.key==="Enter"&&!event.shiftKey){
+   event.preventDefault();
+   sendMessage();
+ }
+});
+</script>
+</body>
+</html>
