@@ -197,7 +197,7 @@ async function sendMessage(){
 
  busy = true;
  sendButton.disabled = true;
- statusBox.textContent = "
+ statusBox.textContent = "Gaaffii kee deebisaa jira...";
 
  const waiting = addMessage("Eegi...","ai");
 
@@ -261,6 +261,7 @@ question.addEventListener("keydown",function(event){
   sendMessage();
  }
 });
+ sendButton.addEventListener("click", sendMessage);
 </script>
 </body>
      </html>
