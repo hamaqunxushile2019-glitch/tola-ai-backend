@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="om">
 <head>
@@ -7,127 +8,305 @@
 <title>Tola Ai</title>
 
 <style>
-*{box-sizing:border-box}
-body{
- margin:0;background:#101827;color:#f1f5f9;
- font-family:Arial,sans-serif;font-size:16px;
+* {
+  box-sizing: border-box;
 }
-header{
- background:#17243a;padding:15px;
- display:flex;align-items:center;gap:12px;
- border-bottom:1px solid #334155;
- position:sticky;top:0;z-index:5;
+
+body {
+  margin: 0;
+  background: #101827;
+  color: #f1f5f9;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
 }
-.logo{
- width:48px;height:48px;border-radius:15px;
- background:#0284c7;display:grid;place-items:center;
- font-size:27px;font-weight:bold;
+
+header {
+  background: #17243a;
+  padding: 14px;
+  border-bottom: 1px solid #334155;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
-h1{margin:0;font-size:22px;color:#38bdf8}
-.sub{font-size:12px;color:#cbd5e1;margin-top:5px}
-main{max-width:760px;margin:auto;padding:15px}
-.welcome{text-align:center;padding:25px 8px}
-.robot{font-size:55px}
-h2{color:#38bdf8}
-.welcome p{color:#cbd5e1;line-height:1.7}
-.languages,.suggestions{
- display:flex;gap:8px;justify-content:center;
- flex-wrap:wrap;margin:18px 0;
+
+.logo-image {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 16px;
 }
-button{cursor:pointer}
-.languages button,.suggestions button{
- background:#1e293b;color:white;border:1px solid #475569;
- padding:10px 13px;border-radius:20px;
+
+h1 {
+  margin: 8px 0 0;
+  font-size: 28px;
+  background: linear-gradient(90deg, #facc15, #38bdf8, #c084fc);
+  -webkit-background-clip: text;
+  color: transparent;
 }
-.languages button.active{background:#0284c7}
-#chat{display:flex;flex-direction:column;gap:13px;padding-bottom:15px}
-.msg{
- padding:13px 15px;border-radius:17px;
- max-width:92%;white-space:pre-wrap;
- line-height:1.65;overflow-wrap:anywhere;
+
+.sub {
+  color: #cbd5e1;
+  font-size: 13px;
+  margin-top: 5px;
 }
-.user{align-self:flex-end;background:#075985}
-.ai{align-self:flex-start;background:#1e293b;border:1px solid #334155}
-.label{font-size:12px;color:#7dd3fc;margin-bottom:6px}
-.composer{
- position:sticky;bottom:0;background:#101827;
- padding:10px 0 8px;
+
+main {
+  max-width: 760px;
+  margin: auto;
+  padding: 15px;
 }
-.inputbox{
- display:flex;gap:8px;align-items:flex-end;
- background:#1e293b;border:1px solid #475569;
- border-radius:18px;padding:8px;
+
+.welcome {
+  text-align: center;
+  padding: 22px 8px;
 }
-textarea{
- background:transparent;color:white;border:0;outline:0;
- resize:vertical;min-height:45px;max-height:140px;
- flex:1;font:16px Arial;padding:10px 4px;
+
+.robot {
+  font-size: 48px;
 }
-#send{
- border:0;border-radius:13px;background:#0284c7;
- color:white;padding:13px 16px;font-size:16px;
+
+h2 {
+  color: #38bdf8;
 }
-#send:disabled{opacity:.5}
-.status{text-align:center;padding:9px;color:#94a3b8;font-size:12px}
-footer{text-align:center;color:#64748b;font-size:12px;padding:20px}
+
+.welcome p {
+  color: #cbd5e1;
+  line-height: 1.7;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.language-menu {
+  position: relative;
+  text-align: center;
+  margin: 18px 0;
+}
+
+.language-toggle {
+  background: linear-gradient(90deg, #0284c7, #7c3aed);
+  color: white;
+  border: 0;
+  padding: 12px 24px;
+  border-radius: 22px;
+  font-size: 16px;
+}
+
+.language-options {
+  margin-top: 9px;
+}
+
+.language-options button {
+  display: block;
+  margin: 7px auto;
+  min-width: 180px;
+  padding: 11px 20px;
+  border-radius: 18px;
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+}
+
+.language-options button.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+}
+
+.suggestions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+
+.suggestions button {
+  background: #1e293b;
+  color: white;
+  border: 1px solid #475569;
+  padding: 10px 13px;
+  border-radius: 20px;
+}
+
+#chat {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  padding-bottom: 15px;
+}
+
+.msg {
+  padding: 13px 15px;
+  border-radius: 17px;
+  max-width: 92%;
+  white-space: pre-wrap;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+.user {
+  align-self: flex-end;
+  background: #075985;
+}
+
+.ai {
+  align-self: flex-start;
+  background: #1e293b;
+  border: 1px solid #334155;
+}
+
+.label {
+  font-size: 12px;
+  color: #7dd3fc;
+  margin-bottom: 6px;
+}
+
+.composer {
+  position: sticky;
+  bottom: 0;
+  background: #101827;
+  padding: 10px 0 8px;
+}
+
+.inputbox {
+  display: flex;
+  gap: 8px;
+  align-items: flex-end;
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 18px;
+  padding: 8px;
+}
+
+textarea {
+  background: transparent;
+  color: white;
+  border: 0;
+  outline: 0;
+  resize: vertical;
+  min-height: 45px;
+  max-height: 140px;
+  flex: 1;
+  font: 16px Arial;
+  padding: 10px 4px;
+}
+
+#send {
+  border: 0;
+  border-radius: 13px;
+  background: #0284c7;
+  color: white;
+  padding: 13px 16px;
+  font-size: 16px;
+}
+
+#send:disabled {
+  opacity: .5;
+}
+
+.status {
+  text-align: center;
+  padding: 9px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+footer {
+  text-align: center;
+  color: #64748b;
+  font-size: 12px;
+  padding: 20px;
+}
 </style>
 </head>
 
 <body>
+
 <header>
- <div class=></div>
- <div>
-  <h1></h1>
-  <div class="sub"></div>
- </div><div style="text-align:center; margin:20px auto;">
   <img
+    class="logo-image"
     src="file_00000000541081f5acdd80f1182cdd58.png"
-    alt="Tola Ai Logo"
-    style="width:100%; max-width:420px; height:auto; border-radius:18px;"
+    alt="Tola AI Logo"
   >
- </div>
+  <h1>Tola Ai</h1>
+  <div class="sub">Beekumsa • Barnoota • Biyya Keenyaaf</div>
 </header>
 
 <main>
- <section class="welcome" id="welcome">
-  <div class="robot"></div>
-  <h2>Baga Nagaan dhufte!</h2>
-  <p>
-   Waan barbaadde na gaafadhu!
-  </p>
- </section>
 
- <div class="language-menu">
-  <button class="language-toggle" onclick="toggleLanguages()">
-    🌐 Afaan ▼
-  </button>
+  <section class="welcome" id="welcome">
+    <div class="robot">🤖</div>
+    <h2>Baga Nagaan dhufte!</h2>
+    <p>Waan barbaadde na gaafadhu!</p>
+  </section>
 
-  <div id="languageOptions" class="language-options" style="display:none;">
-    <button class="active" onclick="setLanguage('om',this)">Afaan Oromoo</button>
-    <button onclick="setLanguage('am',this)">አማርኛ</button>
-    <button onclick="setLanguage('en',this)">English</button>
+  <div class="language-menu">
+    <button
+      class="language-toggle"
+      type="button"
+      onclick="toggleLanguages()"
+    >
+      🌐 Afaan ▼
+    </button>
+
+    <div
+      id="languageOptions"
+      class="language-options"
+      style="display:none;"
+    >
+      <button class="active" onclick="setLanguage('om',this)">
+        Afaan Oromoo
+      </button>
+      <button onclick="setLanguage('am',this)">
+        አማርኛ
+      </button>
+      <button onclick="setLanguage('en',this)">
+        English
+      </button>
+    </div>
   </div>
-</div>
 
-<div class="suggestions" id="suggestions">
-  <button onclick="ask('Saayinsiin maal jechuudha?')">🔬 Saayinsii</button>
-  <button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
-  <button onclick="ask('Seenaa na barsiisi')">📚 Seenaa</button>
-  <button onclick="ask('English na barsiisi')">🌍 Afaan</button>
-</div>
-
-<section id="chat"></section>
-
-<div class="status" id="status">👇</div>
-
-<div class="composer">
-  <div class="inputbox">
-    <textarea id="question"
-      placeholder="Tola Ai gaafadhu..."
-      rows="1"></textarea>
-    <button id="send" type="button" onclick="sendMessage()">➤</button>
+  <div class="suggestions" id="suggestions">
+    <button onclick="ask('Saayinsiin maal jechuudha?')">
+      🔬 Saayinsii
+    </button>
+    <button onclick="ask('Herrega na barsiisi')">
+      ➗ Herrega
+    </button>
+    <button onclick="ask('Seenaa na barsiisi')">
+      📚 Seenaa
+    </button>
+    <button onclick="ask('English na barsiisi')">
+      🌍 Afaan
+    </button>
   </div>
-</div>
+
+  <section id="chat"></section>
+
+  <div class="status" id="status">
+    👇
+  </div>
+
+  <div class="composer">
+    <div class="inputbox">
+      <textarea
+        id="question"
+        placeholder="Tola AI gaafadhu..."
+        rows="1"
+      ></textarea>
+      <button
+        id="send"
+        type="button"
+        onclick="sendMessage()"
+      >➤</button>
+    </div>
+  </div>
+
 </main>
 
 <footer>Tola Ai © Hama 2026</footer>
@@ -147,132 +326,143 @@ let busy = false;
 
 function toggleLanguages() {
   const menu = document.getElementById("languageOptions");
+
   menu.style.display =
     menu.style.display === "none" ? "block" : "none";
 }
 
- button.classList.add("active");
+function setLanguage(lang, button) {
+  language = lang;
 
- question.placeholder = {
-  om:"Tola Ai gaafadhu...",
-  am:"Tola Aiን ይጠይቁ...",
-  en:"Ask Tola Ai..."
- }[lang];
+  document
+    .querySelectorAll("#languageOptions button")
+    .forEach(btn => btn.classList.remove("active"));
 
- statusBox.textContent = {
-  om:"Afaan Oromoo filatte.",
-  am:"አማርኛ መርጠዋል።",
-  en:"English selected."
- }[lang];
- question.focus();
+  button.classList.add("active");
+
+  question.placeholder = {
+    om: "Tola Ai gaafadhu...",
+    am: "Tola Aiን ይጠይቁ...",
+    en: "Ask Tola Ai..."
+  }[lang];
+
+  statusBox.textContent = {
+    om: "Afaan Oromoo filatte.",
+    am: "አማርኛ መርጠዋል።",
+    en: "English selected."
+  }[lang];
+
+  document.getElementById("languageOptions").style.display = "none";
+  question.focus();
 }
 
-function addMessage(text,type){
- const box = document.createElement("div");
- box.className = "msg " + type;
+function addMessage(text, type) {
+  const box = document.createElement("div");
+  box.className = "msg " + type;
 
- const label = document.createElement("div");
- label.className = "label";
- label.textContent = type === "user" ? "Ana" : "Tola Ai";
+  const label = document.createElement("div");
+  label.className = "label";
+  label.textContent = type === "user" ? "Ana" : "Tola Ai";
 
- const content = document.createElement("div");
- content.textContent = text;
+  const content = document.createElement("div");
+  content.textContent = text;
 
- box.append(label,content);
- chat.appendChild(box);
+  box.append(label, content);
+  chat.appendChild(box);
 
- window.scrollTo({
-  top:document.body.scrollHeight,
-  behavior:"smooth"
- });
-
- return box;
-}
-
-function ask(text){
- question.value = text;
- sendMessage();
-}
-
-async function sendMessage(){
- const text = question.value.trim();
-
- if(!text || busy) return;
-
- document.getElementById("welcome").style.display = "none";
- document.getElementById("suggestions").style.display = "none";
-
- addMessage(text,"user");
- question.value = "";
-
- busy = true;
- sendButton.disabled = true;
- statusBox.textContent = "Gaaffii kee deebisaa jira...";
-
- const waiting = addMessage("Eegi...","ai");
-
- try{
-  const response = await fetch(API_URL,{
-   method:"POST",
-   headers:{
-    "Content-Type":"application/json"
-   },
-   body:JSON.stringify({
-    message:text,
-    language:language,
-    history:history.slice(-12)
-   })
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth"
   });
 
-  let data = {};
-  try{
-   data = await response.json();
-  }catch(e){}
-
-  if(!response.ok){
-   throw new Error(data.details || data.error || "HTTP "+response.status);
-  }
-
-  const answer = data.reply || data.answer || data.text;
-
-  if(typeof answer !== "string" || !answer.trim()){
-   throw new Error("Deebii sirrii hin arganne.");
-  }
-
-  waiting.lastChild.textContent = answer;
-
-  history.push(
-   {role:"user",content:text},
-   {role:"assistant",content:answer}
-  );
-
-  statusBox.textContent = "Deebiin qophaa'eera.";
-
- 
-}catch(error){
-
-  waiting.lastChild.textContent =
-   "Dhiifama, deebii argachuu hin dandeenye.\n\n" +
-   "Sababa: " + (error.message || "Walqunnamtii serverii");
-
-  statusBox.textContent = "Rakkoo walqunnamtii jira.";
-  console.error(error);
-
-}finally{
-  busy = false;
-  sendButton.disabled = false;
-  question.focus();
- }
+  return box;
 }
 
-question.addEventListener("keydown",function(event){
- if(event.key === "Enter" && !event.shiftKey){
-  event.preventDefault();
+function ask(text) {
+  question.value = text;
   sendMessage();
- }
+}
+
+async function sendMessage() {
+  const text = question.value.trim();
+
+  if (!text || busy) return;
+
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("suggestions").style.display = "none";
+
+  addMessage(text, "user");
+  question.value = "";
+
+  busy = true;
+  sendButton.disabled = true;
+  statusBox.textContent = "Gaaffii kee deebisaa jira...";
+
+  const waiting = addMessage("Xiqqoo na eegi...", "ai");
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: text,
+        language: language,
+        history: history.slice(-12)
+      })
+    });
+
+    let data = {};
+
+    try {
+      data = await response.json();
+    } catch (e) {}
+
+    if (!response.ok) {
+      throw new Error(
+        data.details || data.error || "HTTP " + response.status
+      );
+    }
+
+    const answer = data.reply || data.answer || data.text;
+
+    if (typeof answer !== "string" || !answer.trim()) {
+      throw new Error("Deebii sirrii hin arganne.");
+    }
+
+    waiting.lastChild.textContent = answer;
+
+    history.push(
+      { role: "user", content: text },
+      { role: "assistant", content: answer }
+    );
+
+    statusBox.textContent = "Deebiin qophaa'eera.";
+
+  } catch (error) {
+    waiting.lastChild.textContent =
+      "Dhiifama, deebii argachuu hin dandeenye.\n\n" +
+      "Sababa: " +
+      (error.message || "Walqunnamtii serverii");
+
+    statusBox.textContent = "Rakkoo walqunnamtii jira.";
+    console.error(error);
+
+  } finally {
+    busy = false;
+    sendButton.disabled = false;
+    question.focus();
+  }
+}
+
+question.addEventListener("keydown", function(event) {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    sendMessage();
+  }
 });
- 
 </script>
+
 </body>
-     </html>
-     
+</html>
