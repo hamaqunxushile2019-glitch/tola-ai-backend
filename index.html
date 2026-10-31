@@ -253,13 +253,6 @@ async function sendMessage(){
   sendButton.disabled = false;
   question.focus();
  }
- 
-
- }finally{
-  busy = false;
-  sendButton.disabled = false;
-  question.focus();
- }
 }
 
 question.addEventListener("keydown",function(event){
