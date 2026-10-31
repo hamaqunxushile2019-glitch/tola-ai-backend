@@ -238,14 +238,22 @@ async function sendMessage(){
 
   statusBox.textContent = "Deebiin qophaa'eera.";
 
- }catch(error){
+ 
+}catch(error){
 
   waiting.lastChild.textContent =
    "Dhiifama, deebii argachuu hin dandeenye.\n\n" +
-   "Sababa: " + (error.message || "Walqunnamtii serverii") +
+   "Sababa: " + (error.message || "Walqunnamtii serverii");
 
   statusBox.textContent = "Rakkoo walqunnamtii jira.";
   console.error(error);
+
+}finally{
+  busy = false;
+  sendButton.disabled = false;
+  question.focus();
+ }
+ 
 
  }finally{
   busy = false;
@@ -260,7 +268,6 @@ question.addEventListener("keydown",function(event){
   sendMessage();
  }
 });
- sendButton.addEventListener("click", sendMessage);
 </script>
 </body>
      </html>
