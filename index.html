@@ -97,33 +97,37 @@ footer{text-align:center;color:#64748b;font-size:12px;padding:20px}
   </p>
  </section>
 
- <div class="languages">
-  <button class="active" onclick="setLanguage('om',this)">Afaan Oromoo</button>
-  <button onclick="setLanguage('am',this)">አማርኛ</button>
-  <button onclick="setLanguage('en',this)">English</button>
- </div>
+ <div class="language-menu">
+  <button class="language-toggle" onclick="toggleLanguages()">
+    🌐 Afaan ▼
+  </button>
 
- <div class="suggestions" id="suggestions">
+  <div id="languageOptions" class="language-options" style="display:none;">
+    <button class="active" onclick="setLanguage('om',this)">Afaan Oromoo</button>
+    <button onclick="setLanguage('am',this)">አማርኛ</button>
+    <button onclick="setLanguage('en',this)">English</button>
+  </div>
+</div>
+
+<div class="suggestions" id="suggestions">
   <button onclick="ask('Saayinsiin maal jechuudha?')">🔬 Saayinsii</button>
   <button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
-  <button onclick="ask('Seenaa Na barsiisi')">📚 Seenaa</button>
+  <button onclick="ask('Seenaa na barsiisi')">📚 Seenaa</button>
   <button onclick="ask('English na barsiisi')">🌍 Afaan</button>
- </div>
+</div>
 
- <section id="chat"></section>
+<section id="chat"></section>
 
- <div class="status" id="status">
-  👇
- </div>
+<div class="status" id="status">👇</div>
 
- <div class="composer">
+<div class="composer">
   <div class="inputbox">
-   <textarea id="question"
-    placeholder="Tola Ai gaafadhu..."
-    rows="1"></textarea>
-   <button id="send" type="button" onclick="sendMessage()">➤</button>
+    <textarea id="question"
+      placeholder="Tola Ai gaafadhu..."
+      rows="1"></textarea>
+    <button id="send" type="button" onclick="sendMessage()">➤</button>
   </div>
- </div>
+</div>
 </main>
 
 <footer>Tola Ai © Hama 2026</footer>
@@ -141,11 +145,11 @@ let language = "om";
 let history = [];
 let busy = false;
 
-function setLanguage(lang,button){
- language = lang;
-
- document.querySelectorAll(".languages button")
- .forEach(b=>b.classList.remove("active"));
+function toggleLanguages() {
+  const menu = document.getElementById("languageOptions");
+  menu.style.display =
+    menu.style.display === "none" ? "block" : "none";
+}
 
  button.classList.add("active");
 
