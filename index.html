@@ -15,7 +15,24 @@ header{position:sticky;top:0;z-index:20;text-align:center;padding:10px;backgroun
 h1{margin:0;font-size:31px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15);-webkit-background-clip:text;background-clip:text;color:transparent}
 .subtitle{font-size:11px;color:#cbd5e1;margin-top:3px}
 
-.top-folders{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:9px}
+.top-folders{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  width:100%;
+  max-width:320px;
+  margin:9px auto 0;
+  padding:0 20px;
+}
+
+.folder:first-child{
+  margin-right:auto;
+}
+
+.folder:last-child{
+  margin-left:auto;
+}
 .folder{position:relative}
 .folder summary{list-style:none;cursor:pointer;background:#1e293b;border:1px solid #40516b;border-radius:12px;padding:7px 13px;font-size:21px}
 .folder summary::-webkit-details-marker{display:none}
