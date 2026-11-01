@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="om">
 <head>
@@ -9,78 +10,47 @@
 <style>
 *{box-sizing:border-box}
 html,body{margin:0;width:100%;min-height:100%;background:#080b12;color:#fff;font-family:Arial,sans-serif}
-body{padding-bottom:145px}
-header{
-  position:sticky;top:0;z-index:20;text-align:center;
-  padding:10px;background:#101725;border-bottom:1px solid #263449
-}
-h1{
-  margin:0;font-size:31px;font-weight:900;letter-spacing:1px;
-  background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15);
-  -webkit-background-clip:text;background-clip:text;color:transparent
-}
+body{padding-bottom:150px}
+header{position:sticky;top:0;z-index:20;text-align:center;padding:10px;background:#101725;border-bottom:1px solid #263449}
+h1{margin:0;font-size:31px;font-weight:900;letter-spacing:1px;background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15);-webkit-background-clip:text;background-clip:text;color:transparent}
 .subtitle{font-size:11px;color:#cbd5e1;margin-top:3px}
 
-/* Folders gubbaa */
-.top-folders{
-  display:flex;justify-content:center;align-items:center;
-  gap:12px;margin-top:9px
-}
-.folder{
-  position:relative
-}
-.folder summary{
-  list-style:none;cursor:pointer;
-  background:#1e293b;border:1px solid #40516b;
-  border-radius:12px;padding:7px 13px;font-size:21px
-}
+.top-folders{display:flex;justify-content:center;align-items:center;gap:12px;margin-top:9px}
+.folder{position:relative}
+.folder summary{list-style:none;cursor:pointer;background:#1e293b;border:1px solid #40516b;border-radius:12px;padding:7px 13px;font-size:21px}
 .folder summary::-webkit-details-marker{display:none}
 .folder[open] summary{background:#075985;border-color:#38bdf8}
-.folder-content{
-  position:absolute;top:43px;left:50%;transform:translateX(-50%);
-  width:min(280px,85vw);padding:10px;background:#111c2d;
-  border:1px solid #40516b;border-radius:13px;
-  box-shadow:0 8px 25px #000;z-index:50
-}
+.folder-content{position:absolute;top:43px;left:50%;transform:translateX(-50%);width:min(280px,85vw);padding:10px;background:#111c2d;border:1px solid #40516b;border-radius:13px;box-shadow:0 8px 25px #000;z-index:50}
 .folder-content .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+
 main{max-width:780px;margin:auto;padding:10px}
 .welcome{text-align:center;padding:15px 5px}
 .welcome .logo{font-size:38px}
 .welcome h2{color:#38bdf8}
 .welcome p{color:#cbd5e1;line-height:1.6;font-size:14px}
-.panel{
-  background:#111c2d;border:1px solid #354761;
-  border-radius:14px;padding:10px;margin:10px 0
-}
-.panel summary{color:#7dd3fc;font-weight:bold;cursor:pointer;padding:5px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
-.grid button,.content-card button{
-  background:#1e293b;color:white;border:1px solid #40516b;
-  border-radius:10px;padding:9px 6px;font-size:13px
-}
-.grid button.active{background:#075985;border-color:#38bdf8}
-.content-card{
-  background:#111c2d;border:1px solid #354761;
-  border-radius:13px;padding:13px;margin:10px 0
-}
+
+.content-card{background:#111c2d;border:1px solid #354761;border-radius:13px;padding:13px;margin:10px 0}
 .content-card h3{color:#7dd3fc;margin-top:0}
 .content-card p{line-height:1.6;color:#e2e8f0}
+.content-card button{background:#1e293b;color:white;border:1px solid #40516b;border-radius:10px;padding:9px 12px;font-size:13px}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.grid button{background:#1e293b;color:white;border:1px solid #40516b;border-radius:10px;padding:9px 6px;font-size:13px}
+.grid button.active{background:#075985;border-color:#38bdf8}
+
 #chat{display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
-.msg{
-  max-width:94%;padding:11px;border-radius:14px;
-  line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px
-}
+.msg{max-width:94%;padding:11px;border-radius:14px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
 .user{align-self:flex-end;background:#075985;color:#fff}
 .ai{align-self:flex-start;background:#000;border:1px solid #334155;color:#fff}
 .label{color:#7dd3fc;font-size:11px;font-weight:bold;margin-bottom:5px}
-.status{text-align:center;color:#94a3b8;font-size:12px;padding:5px}
+
+.status{text-align:center;color:#94a3b8;font-size:12px;padding:5px;line-height:1.5}
 .status.error{color:#fca5a5}
 
-/* Saanduqa ergaa */
 .composer{
   position:fixed;left:0;right:0;bottom:58px;z-index:30;
-  background:#080b12;padding:6px 9px;
-  padding-bottom:calc(6px + env(safe-area-inset-bottom));
+  background:#080b12;padding:8px 9px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom));
   border-top:1px solid #263449
 }
 .inputbox{
@@ -88,48 +58,50 @@ main{max-width:780px;margin:auto;padding:10px}
   background:#000;border:1px solid #64748b;border-radius:13px;padding:5px
 }
 textarea{
-  flex:1;min-width:0;height:38px;min-height:38px;max-height:85px;
-  resize:none;background:#075985;color:white;border:1px solid #38bdf8;
-  border-radius:9px;padding:9px;font-size:14px;outline:none;font-family:Arial
+  flex:1;min-width:0;height:42px;min-height:42px;max-height:100px;
+  resize:none;overflow-y:auto;background:#075985;color:white;
+  border:1px solid #38bdf8;border-radius:9px;padding:10px;
+  font-size:15px;outline:none;font-family:Arial;line-height:1.4
 }
 textarea::placeholder{color:#dbeafe}
 #send,#micButton,#voiceButton{
   border:0;border-radius:9px;display:flex;align-items:center;
-  justify-content:center;cursor:pointer
+  justify-content:center;cursor:pointer;flex-shrink:0
 }
-#send{width:38px;height:36px;background:#0284c7;color:white;font-size:19px}
-#micButton,#voiceButton{
-  width:32px;height:32px;margin-bottom:2px;background:#25364e;color:white;font-size:15px
-}
+#send{width:40px;height:40px;background:#0284c7;color:white;font-size:19px}
+#micButton,#voiceButton{width:35px;height:35px;margin-bottom:2px;background:#25364e;color:white;font-size:16px}
 #micButton.listening{background:#b91c1c}
 #voiceButton.active{background:#075985;border:1px solid #38bdf8}
 button:disabled{opacity:.5;cursor:not-allowed}
 
-/* Menu jalaa */
 .bottom-menu{
   position:fixed;bottom:0;left:0;right:0;z-index:40;
   display:flex;justify-content:space-around;align-items:center;
   background:#101725;border-top:1px solid #354761;
   padding:7px 3px calc(7px + env(safe-area-inset-bottom))
 }
-.bottom-menu button{
-  flex:1;background:transparent;border:0;color:#cbd5e1;
-  font-size:11px;padding:5px 2px
-}
+.bottom-menu button{flex:1;background:transparent;border:0;color:#cbd5e1;font-size:11px;padding:5px 2px}
 .bottom-menu button span{display:block;font-size:20px;margin-bottom:3px}
 .bottom-menu button.active{color:#38bdf8}
+
 .hidden{display:none!important}
 footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
-@media(min-width:600px){
-  .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+
+@media(min-width:600px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:380px){
+  h1{font-size:27px}
+  .inputbox{gap:4px}
+  #micButton,#voiceButton{width:31px;height:33px;font-size:14px}
+  #send{width:36px;height:36px}
+  textarea{font-size:14px}
 }
 </style>
 </head>
 
 <body>
 <header>
-  <h1>Tola Ai</h2>
-  <div class="subtitle">Gargaaraa Barnootaa </div>
+  <h1>Tola Ai</h1>
+  <div class="subtitle">Gargaaraa Barnootaa</div>
 
   <div class="top-folders">
     <details class="folder">
@@ -163,80 +135,80 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 </header>
 
 <main>
-<section id="home" class="page">
-  <section class="welcome">
-    <div class="logo">📚✨</div>
-    <h2>Baga Nagaan dhufte!</h2>
-    <p>Waan barbaadde na gaafadhu!</p>
+  <section id="home" class="page">
+    <section class="welcome">
+      <div class="logo">📚✨</div>
+      <h2>Baga Nagaan dhufte!</h2>
+      <p>Waan barbaadde na gaafadhu! Sanduuqa ergaa jala jiru fayyadami.</p>
+    </section>
   </section>
-</section>
 
-<section id="knowledge" class="page hidden">
-  <h2>📚 Bakka Beekumsa Dubbisuu</h2>
-  <div class="content-card">
-    <h3>🔬 Saayinsii</h3>
-    <p>Saayinsiin uumama, wantoota naannoo keenya jiran, fi akkamitti akka hojjetan qorata.</p>
-    <button data-ask="Saayinsii Waliigalaa keessatti mata dureewwan bu'uuraa na barsiisi">Baradhu</button>
-  </div>
-  <div class="content-card">
-    <h3>🌍 Ji’oograafii</h3>
-    <p>Ji’oograafiin lafa, qilleensa, bishaan, biyyoota fi namoota addunyaa qorata.</p>
-    <button data-ask="Ji'oograafii bu'uuraa na barsiisi">Baradhu</button>
-  </div>
-  <div class="content-card">
-    <h3>📜 Seenaa</h3>
-    <p>Seenaa jechuun taateewwan darban, namoota fi jijjiirama hawaasaa qorachuu dha.</p>
-    <button data-ask="Seenaa Itoophiyaa na barsiisi">Baradhu</button>
-  </div>
-  <div class="content-card">
-    <h3>🧠 Beekumsa Waliigalaa</h3>
-    <p>Gaaffiiwwan addunyaa, uumama, teeknooloojii fi aadaa irratti beekumsa kee bal’isi.</p>
-    <button data-ask="Gaaffii fi deebii beekumsa waliigalaa naaf kenni">Baradhu</button>
-  </div>
-</section>
+  <section id="knowledge" class="page hidden">
+    <h2>📚 Bakka Beekumsa Dubbisuu</h2>
+    <div class="content-card">
+      <h3>🔬 Saayinsii</h3>
+      <p>Saayinsiin uumama, wantoota naannoo keenya jiran, fi akkamitti akka hojjetan qorata.</p>
+      <button data-ask="Saayinsii Waliigalaa keessatti mata dureewwan bu'uuraa na barsiisi">Baradhu</button>
+    </div>
+    <div class="content-card">
+      <h3>🌍 Ji’oograafii</h3>
+      <p>Ji’oograafiin lafa, qilleensa, bishaan, biyyoota fi namoota addunyaa qorata.</p>
+      <button data-ask="Ji'oograafii bu'uuraa na barsiisi">Baradhu</button>
+    </div>
+    <div class="content-card">
+      <h3>📜 Seenaa</h3>
+      <p>Seenaa jechuun taateewwan darban, namoota fi jijjiirama hawaasaa qorachuu dha.</p>
+      <button data-ask="Seenaa Itoophiyaa na barsiisi">Baradhu</button>
+    </div>
+    <div class="content-card">
+      <h3>🧠 Beekumsa Waliigalaa</h3>
+      <p>Gaaffiiwwan addunyaa, uumama, teeknooloojii fi aadaa irratti beekumsa kee bal’isi.</p>
+      <button data-ask="Gaaffii fi deebii beekumsa waliigalaa naaf kenni">Baradhu</button>
+    </div>
+  </section>
 
-<section id="fun" class="page hidden">
-  <h2>😄 Bakka Bashannanaa</h2>
-  <div class="content-card">
-    <h3>😄 Qoosaa</h3>
-    <p>Qoosaa haaraa fi kan nama kolfisiisu argachuuf Tola Ai gaafadhu.</p>
-    <button data-ask="Qoosaa qulqulluu fi nama kolfisiisu sadii naaf himi">Qoosaa naaf himi</button>
-  </div>
-  <div class="content-card">
-    <h3>❓ Gaaffii Bashannanaa</h3>
-    <p>Gaaffii sammuu qoruuf yaali.</p>
-    <button data-ask="Gaaffii sammuu qoru tokko na gaafadhu; deebii koo eegi">Gaaffii na gaafadhu</button>
-  </div>
-</section>
+  <section id="fun" class="page hidden">
+    <h2>😄 Bakka Bashannanaa</h2>
+    <div class="content-card">
+      <h3>😄 Qoosaa</h3>
+      <p>Qoosaa haaraa fi kan nama kolfisiisu argachuuf Tola Ai gaafadhu.</p>
+      <button data-ask="Qoosaa qulqulluu fi nama kolfisiisu sadii naaf himi">Qoosaa naaf himi</button>
+    </div>
+    <div class="content-card">
+      <h3>❓ Gaaffii Bashannanaa</h3>
+      <p>Gaaffii sammuu qoruuf yaali.</p>
+      <button data-ask="Gaaffii sammuu qoru tokko na gaafadhu; deebii koo eegi">Gaaffii na gaafadhu</button>
+    </div>
+  </section>
 
-<section id="chatPage" class="page hidden">
-  <h2>💬 Marii Tola Ai</h2>
-  <section id="chat" aria-live="polite"></section>
-  <div class="status" id="status">Gaaffii kee barreessi ykn sagaleedhaan dubbadhu.</div>
-</section>
+  <section id="chatPage" class="page hidden">
+    <h2>💬 Marii Tola Ai</h2>
+    <section id="chat" aria-live="polite"></section>
+  </section>
 
-<section id="gamePage" class="page hidden">
-  <h2>🎮 Bakka Taphaa</h2>
-  <div class="content-card">
-    <h3>🧠 Tapha Beekumsaa</h3>
-    <p id="gameQuestion"></p>
-    <div class="grid" id="gameChoices"></div>
-    <p id="gameResult">Deebii sirrii filadhu!</p>
-    <button id="nextGame">Gaaffii biraa</button>
-  </div>
-</section>
+  <section id="gamePage" class="page hidden">
+    <h2>🎮 Bakka Taphaa</h2>
+    <div class="content-card">
+      <h3>🧠 Tapha Beekumsaa</h3>
+      <p id="gameQuestion"></p>
+      <div class="grid" id="gameChoices"></div>
+      <p id="gameResult">Deebii sirrii filadhu!</p>
+      <button id="nextGame">Gaaffii biraa</button>
+    </div>
+  </section>
 </main>
 
-<div class="composer hidden" id="composer">
+<!-- Sanduuqa ergaa: fuula jalqabaa fi marii irratti mul'ata -->
+<div class="composer" id="composer">
   <div class="inputbox">
     <textarea id="question" rows="1" placeholder="Tola Ai gaafadhu..." aria-label="Gaaffii barreessi"></textarea>
-    <button id="voiceButton" type="button" aria-label="Deebii sagaleedhaan dubbisi" title="Sagalee deebii">🔊</button>
+    <button id="voiceButton" type="button" aria-label="Sagalee deebii" title="Sagalee deebii">🔊</button>
     <button id="micButton" type="button" aria-label="Sagalee galchi" title="Sagalee galchi">🎙️</button>
     <button id="send" type="button" aria-label="Ergi">➤</button>
   </div>
+  <div class="status" id="status" role="status">Gaaffii kee barreessi; achiis ergi.</div>
 </div>
 
-<!-- Menu jalaa akkuma duraanii -->
 <nav class="bottom-menu">
   <button class="active" data-page="home"><span>🏠</span>Mana</button>
   <button data-page="knowledge"><span>📚</span>Beekumsa</button>
@@ -266,11 +238,7 @@ let recognition=null;
 let isListening=false;
 let voiceMode=false;
 
-const speechLanguages={
-  om:'om-ET',
-  am:'am-ET',
-  en:'en-US'
-};
+const speechLanguages={om:'om-ET',am:'am-ET',en:'en-US'};
 
 const messages={
   om:{
@@ -295,20 +263,25 @@ const messages={
 
 function showPage(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
-  document.getElementById(page).classList.remove('hidden');
+
+  const target=document.getElementById(page);
+  if(!target)return;
+
+  target.classList.remove('hidden');
 
   document.querySelectorAll('[data-page]').forEach(b=>{
     b.classList.toggle('active',b.dataset.page===page);
   });
 
-  composer.classList.toggle('hidden',page!=='chatPage');
+  // Sanduuqni ergaa Mana fi Marii irratti qofa mul'ata.
+  composer.classList.toggle('hidden',page!=='home' && page!=='chatPage');
 
   document.querySelectorAll('.folder').forEach(folder=>{
     folder.removeAttribute('open');
   });
 
   if(page==='chatPage'){
-    setTimeout(()=>question.focus(),100);
+    setTimeout(()=>question.focus(),150);
   }
 }
 
@@ -322,6 +295,7 @@ function setStatus(text,error=false){
 }
 
 function setLanguage(lang){
+  if(!messages[lang])return;
   language=lang;
 
   document.querySelectorAll('#languages button').forEach(b=>{
@@ -335,7 +309,7 @@ function setLanguage(lang){
   }
 
   setStatus('Afaan jijjiirame.');
-  document.querySelector('.folder')?.removeAttribute('open');
+  document.querySelectorAll('.folder').forEach(f=>f.removeAttribute('open'));
 }
 
 document.querySelectorAll('#languages button').forEach(b=>{
@@ -355,27 +329,25 @@ function addMessage(text,type){
 
   box.append(label,content);
   chat.appendChild(box);
-
   box.scrollIntoView({behavior:'smooth',block:'end'});
   return box;
 }
 
-async function askTola(text){
+async function askAI(text){
+  if(busy)return;
   question.value=text;
   showPage('chatPage');
   await sendMessage();
 }
 
-/* Folders keessaa gaaffii gara AI erguu */
 document.querySelectorAll('[data-question]').forEach(b=>{
-  b.addEventListener('click',()=>askTola(b.dataset.question));
+  b.addEventListener('click',()=>askAI(b.dataset.question));
 });
 
 document.querySelectorAll('[data-ask]').forEach(b=>{
-  b.addEventListener('click',()=>askTola(b.dataset.ask));
+  b.addEventListener('click',()=>askAI(b.dataset.ask));
 });
 
-/* Deebii sagaleedhaan dubbisuu */
 function speakAnswer(text){
   if(!voiceMode)return;
 
@@ -398,7 +370,6 @@ function speakAnswer(text){
   window.speechSynthesis.speak(speech);
 }
 
-/* Sagalee deebii ON/OFF */
 voiceButton.addEventListener('click',()=>{
   voiceMode=!voiceMode;
   voiceButton.classList.toggle('active',voiceMode);
@@ -410,12 +381,11 @@ voiceButton.addEventListener('click',()=>{
   setStatus(voiceMode?'Deebiin sagaleedhaan ni dubbifama.':'Deebiin sagaleedhaan dubbifamu dhaabbate.');
 });
 
-/* Microphone */
 function startVoice(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 
   if(!SR){
-    setStatus('Browser kun sagalee kallattiin hin deeggaru. Gboard microphone fayyadami.',true);
+    setStatus('Sagalee kallattiin hin deeggaramu. Gboard microphone fayyadami.',true);
     question.focus();
     return;
   }
@@ -452,21 +422,18 @@ function startVoice(){
       let interim='';
       for(let i=e.resultIndex;i<e.results.length;i++){
         const part=e.results[i][0].transcript;
-        if(e.results[i].isFinal){
-          finalTranscript+=part;
-        }else{
-          interim+=part;
-        }
+        if(e.results[i].isFinal)finalTranscript+=part;
+        else interim+=part;
       }
       setStatus(finalTranscript||interim||'Sagalee kee dhagaʼaa jira...');
     };
 
     recognition.onerror=e=>{
-      let message='Microphone hayyama isaa mirkaneessi.';
-      if(e.error==='not-allowed')message='Microphone hayyama hin arganne. Browser settings ilaali.';
-      if(e.error==='no-speech')message='Sagaleen hin dhagaʼamne. Irra deebiʼi dubbadhu.';
-      if(e.error==='network')message='Rakkoo network uumame.';
-      setStatus(message,true);
+      let msg='Microphone hayyama isaa mirkaneessi.';
+      if(e.error==='not-allowed')msg='Microphone hayyama hin arganne. Browser settings ilaali.';
+      if(e.error==='no-speech')msg='Sagaleen hin dhagaʼamne. Irra deebiʼi dubbadhu.';
+      if(e.error==='network')msg='Rakkoo network uumame.';
+      setStatus(msg,true);
     };
 
     recognition.onend=()=>{
@@ -484,7 +451,6 @@ function startVoice(){
     };
 
     recognition.start();
-
   }catch(error){
     isListening=false;
     micButton.classList.remove('listening');
@@ -495,7 +461,6 @@ function startVoice(){
 
 micButton.addEventListener('click',startVoice);
 
-/* Ergaa gara AI erguu */
 async function sendMessage(){
   const text=question.value.trim();
 
@@ -506,7 +471,6 @@ async function sendMessage(){
   }
 
   showPage('chatPage');
-
   addMessage(text,'user');
   question.value='';
 
@@ -573,7 +537,6 @@ async function sendMessage(){
     }
 
     waiting.lastChild.textContent='Dhiifama, deebii argachuu hin dandeenye.\n'+errorText;
-
     question.value=text;
     setStatus(messages[language].failed,true);
 
@@ -594,7 +557,12 @@ question.addEventListener('keydown',e=>{
   }
 });
 
-/* Tapha beekumsaa - filannoowwan gaaffii waliin jijjiiramu */
+// Sanduuqa barreessituu ofumaan dheeressuu
+question.addEventListener('input',()=>{
+  question.style.height='42px';
+  question.style.height=Math.min(question.scrollHeight,100)+'px';
+});
+
 const games=[
   {
     q:'Magaalaan guddoon Itoophiyaa maali?',
@@ -621,14 +589,14 @@ function loadGame(){
 
   document.getElementById('gameQuestion').textContent=game.q;
   document.getElementById('gameResult').textContent='Deebii sirrii filadhu!';
-  const choices=document.getElementById('gameChoices');
 
+  const choices=document.getElementById('gameChoices');
   choices.innerHTML='';
   answered=false;
 
   game.choices.forEach(choice=>{
     const button=document.createElement('button');
-    button.textContent=choice; in 
+    button.textContent=choice;
 
     button.addEventListener('click',()=>{
       if(answered)return;
@@ -652,7 +620,7 @@ document.getElementById('nextGame').addEventListener('click',()=>{
 
 loadGame();
 setLanguage('om');
+showPage('home');
 </script>
 </body>
-                                  </html>
-  
+</html>
