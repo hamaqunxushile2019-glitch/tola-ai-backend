@@ -12,7 +12,7 @@ html,body{margin:0;width:100%;min-height:100%;background:#080b12;color:#fff;font
 body{padding-bottom:145px}
 header{
   position:sticky;top:0;z-index:20;text-align:center;
-  padding:11px;background:#101725;border-bottom:1px solid #263449
+  padding:10px;background:#101725;border-bottom:1px solid #263449
 }
 h1{
   margin:0;font-size:31px;font-weight:900;letter-spacing:1px;
@@ -20,12 +20,29 @@ h1{
   -webkit-background-clip:text;background-clip:text;color:transparent
 }
 .subtitle{font-size:11px;color:#cbd5e1;margin-top:3px}
-.top-menu{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:10px}
-.top-menu button{
-  border:1px solid #40516b;background:#1e293b;color:white;
-  border-radius:18px;padding:7px 11px;font-size:12px
+
+/* Folders gubbaa */
+.top-folders{
+  display:flex;justify-content:center;align-items:center;
+  gap:12px;margin-top:9px
 }
-.top-menu button.active{background:#075985;border-color:#38bdf8}
+.folder{
+  position:relative
+}
+.folder summary{
+  list-style:none;cursor:pointer;
+  background:#1e293b;border:1px solid #40516b;
+  border-radius:12px;padding:7px 13px;font-size:21px
+}
+.folder summary::-webkit-details-marker{display:none}
+.folder[open] summary{background:#075985;border-color:#38bdf8}
+.folder-content{
+  position:absolute;top:43px;left:50%;transform:translateX(-50%);
+  width:min(280px,85vw);padding:10px;background:#111c2d;
+  border:1px solid #40516b;border-radius:13px;
+  box-shadow:0 8px 25px #000;z-index:50
+}
+.folder-content .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 main{max-width:780px;margin:auto;padding:10px}
 .welcome{text-align:center;padding:15px 5px}
 .welcome .logo{font-size:38px}
@@ -36,7 +53,6 @@ main{max-width:780px;margin:auto;padding:10px}
   border-radius:14px;padding:10px;margin:10px 0
 }
 .panel summary{color:#7dd3fc;font-weight:bold;cursor:pointer;padding:5px}
-.panel-title{font-size:12px;color:#94a3b8;margin:10px 0 7px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
 .grid button,.content-card button{
   background:#1e293b;color:white;border:1px solid #40516b;
@@ -60,7 +76,7 @@ main{max-width:780px;margin:auto;padding:10px}
 .status{text-align:center;color:#94a3b8;font-size:12px;padding:5px}
 .status.error{color:#fca5a5}
 
-/* Saanduqa ergaa gadi screen irratti */
+/* Saanduqa ergaa */
 .composer{
   position:fixed;left:0;right:0;bottom:58px;z-index:30;
   background:#080b12;padding:6px 9px;
@@ -77,13 +93,17 @@ textarea{
   border-radius:9px;padding:9px;font-size:14px;outline:none;font-family:Arial
 }
 textarea::placeholder{color:#dbeafe}
-#send,#micButton{
+#send,#micButton,#voiceButton{
   border:0;border-radius:9px;display:flex;align-items:center;
   justify-content:center;cursor:pointer
 }
 #send{width:38px;height:36px;background:#0284c7;color:white;font-size:19px}
-#micButton{width:30px;height:30px;margin-bottom:3px;background:#25364e;color:white;font-size:14px}
+#micButton,#voiceButton{
+  width:32px;height:32px;margin-bottom:2px;background:#25364e;color:white;font-size:15px
+}
 #micButton.listening{background:#b91c1c}
+#voiceButton.active{background:#075985;border:1px solid #38bdf8}
+button:disabled{opacity:.5;cursor:not-allowed}
 
 /* Menu jalaa */
 .bottom-menu{
@@ -110,45 +130,45 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 <header>
   <h1>Tola Ai</h1>
   <div class="subtitle">Gargaaraa Barnootaa fi Beekumsaa</div>
-  <nav class="top-menu">
-    <button class="active" data-page="home">🏠 Mana</button>
-    <button data-page="knowledge">📚 Beekumsa</button>
-    <button data-page="fun">😄 Bashannana</button>
-    <button data-page="chatPage">💬 Marii AI</button>
-  </nav>
+
+  <div class="top-folders">
+    <details class="folder">
+      <summary aria-label="Afaanii">🌐</summary>
+      <div class="folder-content">
+        <div class="grid" id="languages">
+          <button class="active" data-lang="om">Afaan Oromoo</button>
+          <button data-lang="am">አማርኛ</button>
+          <button data-lang="en">English</button>
+        </div>
+      </div>
+    </details>
+
+    <details class="folder">
+      <summary aria-label="Gosa Barnootaa">📚</summary>
+      <div class="folder-content">
+        <div class="grid" id="subjects">
+          <button data-question="Afaan Oromoo na barsiisi">📖 Afaan Oromoo</button>
+          <button data-question="English na barsiisi">🌍 English</button>
+          <button data-question="Afaan Amaaraa na barsiisi">📘 Afaan Amaaraa</button>
+          <button data-question="Saayinsii Waliigalaa na barsiisi">🔬 Saayinsii</button>
+          <button data-question="Hawaasa na barsiisi">👥 Hawaasa</button>
+          <button data-question="Beekumsa Waliigalaa na barsiisi">🧠 Beekumsa</button>
+          <button data-question="Seenaa na barsiisi">📚 Seenaa</button>
+          <button data-question="Ji'oograafii na barsiisi">🌍 Ji’oograafii</button>
+          <button data-question="Herrega na barsiisi">➗ Herrega</button>
+        </div>
+      </div>
+    </details>
+  </div>
 </header>
 
 <main>
 <section id="home" class="page">
-  <section class="welcome" id="welcome">
+  <section class="welcome">
     <div class="logo">📚✨</div>
     <h2>Baga Nagaan dhuftan!</h2>
     <p>Ani Tola Ai dha. Barnoota, beekumsa, gaaffii fi bashannana irratti si gargaaruuf as jira.</p>
   </section>
-
-  <details class="panel">
-    <summary>🌐 Folder Afaanii</summary>
-    <div class="grid" id="languages">
-      <button class="active" data-lang="om">Afaan Oromoo</button>
-      <button data-lang="am">አማርኛ</button>
-      <button data-lang="en">English</button>
-    </div>
-  </details>
-
-  <details class="panel">
-    <summary>📖 Folder Gosa Barnootaa</summary>
-    <div class="grid" id="subjects">
-      <button data-question="Afaan Oromoo na barsiisi">📖 Afaan Oromoo</button>
-      <button data-question="English na barsiisi">🌍 English</button>
-      <button data-question="Afaan Amaaraa na barsiisi">📘 Afaan Amaaraa</button>
-      <button data-question="Saayinsii Waliigalaa na barsiisi">🔬 Saayinsii Waliigalaa</button>
-      <button data-question="Hawaasa na barsiisi">👥 Hawaasa</button>
-      <button data-question="Beekumsa Waliigalaa na barsiisi">🧠 Beekumsa Waliigalaa</button>
-      <button data-question="Seenaa na barsiisi">📚 Seenaa</button>
-      <button data-question="Ji'oograafii na barsiisi">🌍 Ji’oograafii</button>
-      <button data-question="Herrega na barsiisi">➗ Herrega</button>
-    </div>
-  </details>
 </section>
 
 <section id="knowledge" class="page hidden">
@@ -192,33 +212,31 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 <section id="chatPage" class="page hidden">
   <h2>💬 Marii Tola Ai</h2>
   <section id="chat" aria-live="polite"></section>
-  <div class="status" id="status">Gaaffii kee barreessi.</div>
+  <div class="status" id="status">Gaaffii kee barreessi ykn sagaleedhaan dubbadhu.</div>
 </section>
 
 <section id="gamePage" class="page hidden">
   <h2>🎮 Bakka Taphaa</h2>
   <div class="content-card">
     <h3>🧠 Tapha Beekumsaa</h3>
-    <p id="gameQuestion">Magaalaan guddoon Itoophiyaa maali?</p>
-    <div class="grid">
-      <button data-answer="Addis Ababa">Addis Ababa</button>
-      <button data-answer="Bishoftu">Bishoftu</button>
-      <button data-answer="Hawassa">Hawassa</button>
-    </div>
+    <p id="gameQuestion"></p>
+    <div class="grid" id="gameChoices"></div>
     <p id="gameResult">Deebii sirrii filadhu!</p>
     <button id="nextGame">Gaaffii biraa</button>
   </div>
 </section>
 </main>
 
-<div class="composer" id="composer">
+<div class="composer hidden" id="composer">
   <div class="inputbox">
     <textarea id="question" rows="1" placeholder="Tola Ai gaafadhu..." aria-label="Gaaffii barreessi"></textarea>
-    <button id="micButton" type="button" aria-label="Sagalee">🎙️</button>
+    <button id="voiceButton" type="button" aria-label="Deebii sagaleedhaan dubbisi" title="Sagalee deebii">🔊</button>
+    <button id="micButton" type="button" aria-label="Sagalee galchi" title="Sagalee galchi">🎙️</button>
     <button id="send" type="button" aria-label="Ergi">➤</button>
   </div>
 </div>
 
+<!-- Menu jalaa akkuma duraanii -->
 <nav class="bottom-menu">
   <button class="active" data-page="home"><span>🏠</span>Mana</button>
   <button data-page="knowledge"><span>📚</span>Beekumsa</button>
@@ -232,30 +250,68 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 'use strict';
 
 const API_URL='https://tola-ai-chat-2026.hamaqunxushile2019.workers.dev/';
+
 const chat=document.getElementById('chat');
 const question=document.getElementById('question');
 const sendButton=document.getElementById('send');
 const micButton=document.getElementById('micButton');
+const voiceButton=document.getElementById('voiceButton');
 const statusBox=document.getElementById('status');
+const composer=document.getElementById('composer');
 
-let language='om',history=[],busy=false,recognition=null;
-let isListening=false,voiceMode=false;
+let language='om';
+let history=[];
+let busy=false;
+let recognition=null;
+let isListening=false;
+let voiceMode=false;
 
-const speechLanguages={om:'om-ET',am:'am-ET',en:'en-US'};
+const speechLanguages={
+  om:'om-ET',
+  am:'am-ET',
+  en:'en-US'
+};
+
 const messages={
-  om:{placeholder:'Tola Ai gaafadhu...',waiting:'Deebii qopheessaa jira...',ready:'Deebiin qophaaʼeera.',failed:'Rakkoo walqunnamtii uumame.'},
-  am:{placeholder:'Tola Aiን ይጠይቁ...',waiting:'መልሱን እያዘጋጀሁ ነው...',ready:'መልሱ ዝግጁ ነው።',failed:'የግንኙነት ችግር ተፈጥሯል።'},
-  en:{placeholder:'Ask Tola Ai...',waiting:'Preparing your answer...',ready:'Your answer is ready.',failed:'Connection problem.'}
+  om:{
+    placeholder:'Tola Ai gaafadhu...',
+    waiting:'Deebii qopheessaa jira...',
+    ready:'Deebiin qophaaʼeera.',
+    failed:'Rakkoo walqunnamtii uumame.'
+  },
+  am:{
+    placeholder:'Tola Aiን ይጠይቁ...',
+    waiting:'መልሱን እያዘጋጀሁ ነው...',
+    ready:'መልሱ ዝግጁ ነው።',
+    failed:'የግንኙነት ችግር ተፈጥሯል።'
+  },
+  en:{
+    placeholder:'Ask Tola Ai...',
+    waiting:'Preparing your answer...',
+    ready:'Your answer is ready.',
+    failed:'Connection problem.'
+  }
 };
 
 function showPage(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
   document.getElementById(page).classList.remove('hidden');
+
   document.querySelectorAll('[data-page]').forEach(b=>{
     b.classList.toggle('active',b.dataset.page===page);
   });
-  document.getElementById('composer').classList.toggle('hidden',page!=='chatPage');
+
+  composer.classList.toggle('hidden',page!=='chatPage');
+
+  document.querySelectorAll('.folder').forEach(folder=>{
+    folder.removeAttribute('open');
+  });
+
+  if(page==='chatPage'){
+    setTimeout(()=>question.focus(),100);
+  }
 }
+
 document.querySelectorAll('[data-page]').forEach(b=>{
   b.addEventListener('click',()=>showPage(b.dataset.page));
 });
@@ -264,15 +320,24 @@ function setStatus(text,error=false){
   statusBox.textContent=text;
   statusBox.className=error?'status error':'status';
 }
+
 function setLanguage(lang){
   language=lang;
+
   document.querySelectorAll('#languages button').forEach(b=>{
     b.classList.toggle('active',b.dataset.lang===lang);
   });
+
   question.placeholder=messages[lang].placeholder;
+
+  if(recognition){
+    try{recognition.lang=speechLanguages[lang];}catch(e){}
+  }
+
   setStatus('Afaan jijjiirame.');
-  if(recognition) recognition.lang=speechLanguages[lang];
+  document.querySelector('.folder')?.removeAttribute('open');
 }
+
 document.querySelectorAll('#languages button').forEach(b=>{
   b.addEventListener('click',()=>setLanguage(b.dataset.lang));
 });
@@ -280,13 +345,17 @@ document.querySelectorAll('#languages button').forEach(b=>{
 function addMessage(text,type){
   const box=document.createElement('div');
   box.className='msg '+type;
+
   const label=document.createElement('div');
   label.className='label';
   label.textContent=type==='user'?'Ati':'Tola Ai';
+
   const content=document.createElement('div');
   content.textContent=text;
+
   box.append(label,content);
   chat.appendChild(box);
+
   box.scrollIntoView({behavior:'smooth',block:'end'});
   return box;
 }
@@ -296,61 +365,157 @@ async function askTola(text){
   showPage('chatPage');
   await sendMessage();
 }
+
+/* Folders keessaa gaaffii gara AI erguu */
 document.querySelectorAll('[data-question]').forEach(b=>{
   b.addEventListener('click',()=>askTola(b.dataset.question));
 });
+
 document.querySelectorAll('[data-ask]').forEach(b=>{
   b.addEventListener('click',()=>askTola(b.dataset.ask));
 });
 
+/* Deebii sagaleedhaan dubbisuu */
 function speakAnswer(text){
-  if(!voiceMode||!('speechSynthesis' in window))return;
-  speechSynthesis.cancel();
+  if(!voiceMode)return;
+
+  if(!('speechSynthesis' in window)){
+    setStatus('Sagalee dubbisuu browser kanaan hin deeggaramu.');
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
   const speech=new SpeechSynthesisUtterance(text);
   speech.lang=speechLanguages[language];
-  speech.rate=1;
-  speechSynthesis.speak(speech);
+  speech.rate=0.95;
+  speech.pitch=1;
+
+  speech.onstart=()=>setStatus('Deebii sagaleedhaan dubbisaa jira...');
+  speech.onend=()=>setStatus(messages[language].ready);
+  speech.onerror=()=>setStatus('Sagalee dubbisuu hin dandeenye. Deebii barreeffamaa ilaali.');
+
+  window.speechSynthesis.speak(speech);
 }
 
+/* Sagalee deebii ON/OFF */
+voiceButton.addEventListener('click',()=>{
+  voiceMode=!voiceMode;
+  voiceButton.classList.toggle('active',voiceMode);
+
+  if(!voiceMode && 'speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+  }
+
+  setStatus(voiceMode?'Deebiin sagaleedhaan ni dubbifama.':'Deebiin sagaleedhaan dubbifamu dhaabbate.');
+});
+
+/* Microphone */
 function startVoice(){
   const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){question.focus();setStatus('Sagalee browser kanaan hin deeggaramu. Gboard yaali.');return;}
-  if(isListening&&recognition){recognition.stop();return;}
-  if(busy){setStatus('Deebii duraa eegi.');return;}
-  recognition=new SR();
-  recognition.lang=speechLanguages[language];
-  recognition.continuous=false;
-  recognition.interimResults=false;
-  recognition.onstart=()=>{
-    isListening=true;voiceMode=true;
-    micButton.classList.add('listening');micButton.textContent='⏹';
-    setStatus('Amma dubbadhu...');
-  };
-  recognition.onresult=e=>{
-    const spoken=e.results[0][0].transcript.trim();
-    if(spoken)askTola(spoken);
-  };
-  recognition.onerror=()=>{
-    setStatus('Microphone hayyama isaa mirkaneessi.',true);
-  };
-  recognition.onend=()=>{
-    isListening=false;micButton.classList.remove('listening');micButton.textContent='🎙️';
-  };
-  try{recognition.start();}catch(e){setStatus('Microphone jalqabuu hin dandeenye.',true);}
+
+  if(!SR){
+    setStatus('Browser kun sagalee kallattiin hin deeggaru. Gboard microphone fayyadami.',true);
+    question.focus();
+    return;
+  }
+
+  if(isListening && recognition){
+    recognition.stop();
+    return;
+  }
+
+  if(busy){
+    setStatus('Deebii duraa eegi.');
+    return;
+  }
+
+  try{
+    recognition=new SR();
+    recognition.lang=speechLanguages[language];
+    recognition.continuous=false;
+    recognition.interimResults=true;
+    recognition.maxAlternatives=1;
+
+    let finalTranscript='';
+
+    recognition.onstart=()=>{
+      isListening=true;
+      voiceMode=true;
+      voiceButton.classList.add('active');
+      micButton.classList.add('listening');
+      micButton.textContent='⏹';
+      setStatus('Amma dubbadhu...');
+    };
+
+    recognition.onresult=e=>{
+      let interim='';
+      for(let i=e.resultIndex;i<e.results.length;i++){
+        const part=e.results[i][0].transcript;
+        if(e.results[i].isFinal){
+          finalTranscript+=part;
+        }else{
+          interim+=part;
+        }
+      }
+      setStatus(finalTranscript||interim||'Sagalee kee dhagaʼaa jira...');
+    };
+
+    recognition.onerror=e=>{
+      let message='Microphone hayyama isaa mirkaneessi.';
+      if(e.error==='not-allowed')message='Microphone hayyama hin arganne. Browser settings ilaali.';
+      if(e.error==='no-speech')message='Sagaleen hin dhagaʼamne. Irra deebiʼi dubbadhu.';
+      if(e.error==='network')message='Rakkoo network uumame.';
+      setStatus(message,true);
+    };
+
+    recognition.onend=()=>{
+      isListening=false;
+      micButton.classList.remove('listening');
+      micButton.textContent='🎙️';
+
+      const spoken=finalTranscript.trim();
+      if(spoken){
+        question.value=spoken;
+        sendMessage();
+      }else{
+        setStatus('Sagalee hin galmeessine. Irra deebiʼi dubbadhu.');
+      }
+    };
+
+    recognition.start();
+
+  }catch(error){
+    isListening=false;
+    micButton.classList.remove('listening');
+    micButton.textContent='🎙️';
+    setStatus('Microphone jalqabuu hin dandeenye. Gboard yaali.',true);
+  }
 }
+
 micButton.addEventListener('click',startVoice);
 
+/* Ergaa gara AI erguu */
 async function sendMessage(){
   const text=question.value.trim();
+
   if(!text||busy)return;
-  if('speechSynthesis' in window)speechSynthesis.cancel();
+
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+  }
 
   showPage('chatPage');
-  document.getElementById('welcome').classList.add('hidden');
+
   addMessage(text,'user');
   question.value='';
-  busy=true;sendButton.disabled=true;
+
+  busy=true;
+  sendButton.disabled=true;
+  micButton.disabled=true;
+
   setStatus(messages[language].waiting);
+
   const waiting=addMessage('Xiqqoo na eegi...','ai');
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),90000);
@@ -359,55 +524,135 @@ async function sendMessage(){
     const response=await fetch(API_URL,{
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:text,language,history:history.slice(-12)}),
+      body:JSON.stringify({
+        message:text,
+        language:language,
+        history:history.slice(-12)
+      }),
       signal:controller.signal
     });
-    const data=await response.json();
-    if(!response.ok)throw new Error(data.error||data.details||'Server error '+response.status);
+
+    const raw=await response.text();
+    let data={};
+
+    try{
+      data=JSON.parse(raw);
+    }catch(e){
+      throw new Error('Deebiin server irraa sirnaan hin dhufne.');
+    }
+
+    if(!response.ok){
+      throw new Error(data.error||data.details||'Server error '+response.status);
+    }
+
     const answer=data.reply||data.answer||data.text;
-    if(typeof answer!=='string'||!answer)throw new Error('Deebii sirrii hin arganne.');
+
+    if(typeof answer!=='string'||!answer.trim()){
+      throw new Error('Deebii sirrii hin arganne.');
+    }
+
     waiting.lastChild.textContent=answer;
-    history.push({role:'user',content:text},{role:'assistant',content:answer});
+
+    history.push(
+      {role:'user',content:text},
+      {role:'assistant',content:answer}
+    );
     history=history.slice(-12);
+
     setStatus(messages[language].ready);
     speakAnswer(answer);
+
   }catch(error){
     console.error(error);
-    waiting.lastChild.textContent='Dhiifama, deebii argachuu hin dandeenye.\n'+(error.name==='AbortError'?'Server yeroo dheeraa fudhate.':error.message);
+
+    let errorText=error.message;
+    if(error.name==='AbortError'){
+      errorText='Server yeroo dheeraa fudhate. Irra deebiʼi yaali.';
+    }else if(error instanceof TypeError){
+      errorText='Internet ykn walqunnamtii serverii mirkaneessi.';
+    }
+
+    waiting.lastChild.textContent='Dhiifama, deebii argachuu hin dandeenye.\n'+errorText;
+
     question.value=text;
     setStatus(messages[language].failed,true);
+
   }finally{
-    clearTimeout(timeout);busy=false;sendButton.disabled=false;
+    clearTimeout(timeout);
+    busy=false;
+    sendButton.disabled=false;
+    micButton.disabled=false;
   }
 }
+
 sendButton.addEventListener('click',sendMessage);
+
 question.addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage();}
+  if(e.key==='Enter'&&!e.shiftKey){
+    e.preventDefault();
+    sendMessage();
+  }
 });
 
-/* Tapha gaaffii fi deebii */
+/* Tapha beekumsaa - filannoowwan gaaffii waliin jijjiiramu */
 const games=[
-  {q:'Magaalaan guddoon Itoophiyaa maali?',a:'Addis Ababa'},
-  {q:'Bishaan mallattoo keemikaalaa maali?',a:'H2O'},
-  {q:'Torban keessa guyyoota meeqatu jira?',a:'7'}
+  {
+    q:'Magaalaan guddoon Itoophiyaa maali?',
+    a:'Addis Ababa',
+    choices:['Addis Ababa','Bishoftu','Hawassa']
+  },
+  {
+    q:'Bishaan mallattoo keemikaalaa maali?',
+    a:'H2O',
+    choices:['CO2','H2O','O2']
+  },
+  {
+    q:'Torban keessa guyyoota meeqatu jira?',
+    a:'7',
+    choices:['5','6','7']
+  }
 ];
+
 let gameIndex=0;
+let answered=false;
+
 function loadGame(){
-  document.getElementById('gameQuestion').textContent=games[gameIndex].q;
+  const game=games[gameIndex];
+
+  document.getElementById('gameQuestion').textContent=game.q;
   document.getElementById('gameResult').textContent='Deebii sirrii filadhu!';
-}
-document.querySelectorAll('[data-answer]').forEach(b=>{
-  b.addEventListener('click',()=>{
-    const right=b.dataset.answer===games[gameIndex].a;
-    document.getElementById('gameResult').textContent=
-      right?'Sirriidha! 👏':'Irra deebiʼii yaali.';
+  const choices=document.getElementById('gameChoices');
+
+  choices.innerHTML='';
+  answered=false;
+
+  game.choices.forEach(choice=>{
+    const button=document.createElement('button');
+    button.textContent=choice;
+
+    button.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+
+      if(choice===game.a){
+        document.getElementById('gameResult').textContent='Sirriidha! 👏';
+      }else{
+        document.getElementById('gameResult').textContent='Deebiin sirrii: '+game.a;
+      }
+    });
+
+    choices.appendChild(button);
   });
-});
+}
+
 document.getElementById('nextGame').addEventListener('click',()=>{
   gameIndex=(gameIndex+1)%games.length;
   loadGame();
 });
+
 loadGame();
+setLanguage('om');
 </script>
 </body>
-</html>
+                                  </html>
+  
