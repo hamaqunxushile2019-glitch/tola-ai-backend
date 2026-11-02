@@ -265,7 +265,7 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 </section>
 
 <section id="chatPage" class="page hidden">
-  <h2>💬 Marii Tola Ai</h2>
+  <h2></h2>
   <section id="chat" aria-live="polite"></section>
 </section>
 
@@ -388,7 +388,7 @@ function setLanguage(lang){
     try{recognition.lang=speechLanguages[lang];}catch(e){}
   }
 
-  setStatus('Afaan jijjiirame.');
+  setStatus('.');
   document.querySelectorAll('.folder').forEach(f=>f.removeAttribute('open'));
 }
 
