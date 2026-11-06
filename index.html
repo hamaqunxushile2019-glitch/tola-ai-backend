@@ -8,773 +8,524 @@
 
 <style>
 *{box-sizing:border-box}
-
 html,body{
-  margin:0;width:100%;min-height:100%;
-  background:#080b12;color:#fff;
-  font-family:Arial,sans-serif;
+ margin:0;width:100%;min-height:100%;
+ background:#080b12;color:#fff;
+ font-family:Arial,sans-serif
 }
-
 body{padding-bottom:145px}
-
 header{
-  position:sticky;top:0;z-index:20;
-  text-align:center;padding:10px;
-  background:#101725;
-  border-bottom:1px solid #263449;
+ position:sticky;top:0;z-index:20;
+ text-align:center;padding:10px;
+ background:#101725;border-bottom:1px solid #263449
 }
-
 h1{
-  margin:0;font-size:31px;font-weight:900;
-  letter-spacing:1px;
-  background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15);
-  -webkit-background-clip:text;
-  background-clip:text;color:transparent;
+ margin:0;font-size:31px;font-weight:900;
+ letter-spacing:1px;
+ background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15);
+ -webkit-background-clip:text;background-clip:text;color:transparent
 }
-
 .subtitle{font-size:11px;color:#cbd5e1;margin-top:3px}
-
 .languages{
-  display:flex;justify-content:center;
-  gap:7px;margin-top:10px;
+ display:flex;justify-content:center;gap:7px;margin-top:10px
 }
-
 .languages button{
-  background:#1e293b;color:#cbd5e1;
-  border:1px solid #40516b;
-  padding:6px 12px;border-radius:9px;
-  font-size:11px;
+ background:#1e293b;color:#cbd5e1;
+ border:1px solid #40516b;padding:6px 12px;
+ border-radius:9px;font-size:11px
 }
-
 .languages button.active{
-  background:#075985;color:white;
-  border-color:#38bdf8;
+ background:#075985;color:white;border-color:#38bdf8
 }
-
 .top-folders{
-  display:flex;justify-content:center;
-  align-items:center;gap:7px;
-  width:100%;max-width:360px;
-  margin:12px auto 0;
+ display:flex;justify-content:center;align-items:center;
+ gap:7px;width:100%;max-width:360px;margin:12px auto 0
 }
-
 .folder{position:relative;flex:0 0 auto}
-
 .folder summary{
-  list-style:none;cursor:pointer;
-  background:#1e293b;border:1px solid #40516b;
-  border-radius:12px;padding:7px 13px;
-  font-size:21px;
+ list-style:none;cursor:pointer;background:#1e293b;
+ border:1px solid #40516b;border-radius:12px;
+ padding:7px 13px;font-size:21px
 }
-
 .folder summary::-webkit-details-marker{display:none}
-
-.folder[open] summary{
-  background:#075985;border-color:#38bdf8;
-}
-
+.folder[open] summary{background:#075985;border-color:#38bdf8}
 .folder-content{
-  position:absolute;top:43px;left:50%;
-  transform:translateX(-50%);
-  width:min(280px,85vw);padding:10px;
-  background:#111c2d;border:1px solid #40516b;
-  border-radius:13px;box-shadow:0 8px 25px #000;
-  z-index:50;
+ position:absolute;top:43px;left:50%;
+ transform:translateX(-50%);width:min(280px,85vw);
+ padding:10px;background:#111c2d;border:1px solid #40516b;
+ border-radius:13px;box-shadow:0 8px 25px #000;z-index:50
 }
-
 .folder-content button{
-  display:block;width:100%;margin:4px 0;
-  background:#1e293b;color:white;
-  border:1px solid #40516b;
-  border-radius:9px;padding:10px;
-  text-align:left;
+ display:block;width:100%;margin:4px 0;
+ background:#1e293b;color:white;border:1px solid #40516b;
+ border-radius:9px;padding:10px;text-align:left
 }
-
 main{max-width:780px;margin:auto;padding:10px}
-
 .welcome{text-align:center;padding:15px 5px}
-
 .welcome .logo{font-size:38px}
-
 .welcome h2{color:#38bdf8}
-
-.welcome p{
-  color:#cbd5e1;line-height:1.6;font-size:14px;
-}
-
+.welcome p{color:#cbd5e1;line-height:1.6;font-size:14px}
 .panel{
-  background:#111c2d;border:1px solid #354761;
-  border-radius:14px;padding:10px;margin:10px 0;
+ background:#111c2d;border:1px solid #354761;
+ border-radius:14px;padding:10px;margin:10px 0
 }
-
-.panel summary{
-  color:#7dd3fc;font-weight:bold;
-  cursor:pointer;padding:5px;
-}
-
+.panel summary{color:#7dd3fc;font-weight:bold;cursor:pointer;padding:5px}
 .grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:7px;
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px
 }
-
 .grid button,.content-card button{
-  background:#1e293b;color:white;
-  border:1px solid #40516b;
-  border-radius:10px;padding:9px 6px;
-  font-size:13px;
+ background:#1e293b;color:white;border:1px solid #40516b;
+ border-radius:10px;padding:9px 6px;font-size:13px
 }
-
-.grid button.active{
-  background:#075985;border-color:#38bdf8;
-}
-
+.grid button.active{background:#075985;border-color:#38bdf8}
 .content-card{
-  background:#111c2d;border:1px solid #354761;
-  border-radius:13px;padding:13px;margin:10px 0;
+ background:#111c2d;border:1px solid #354761;
+ border-radius:13px;padding:13px;margin:10px 0
 }
-
 .content-card h3{color:#7dd3fc;margin-top:0}
-
 .content-card p{line-height:1.6;color:#e2e8f0}
-
-#chat{
-  display:flex;flex-direction:column;
-  gap:10px;padding-bottom:10px;
-}
-
+#chat{display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
 .msg{
-  max-width:94%;padding:11px;
-  border-radius:14px;line-height:1.6;
-  white-space:pre-wrap;overflow-wrap:anywhere;
-  font-size:15px;
+ max-width:94%;padding:11px;border-radius:14px;
+ line-height:1.6;white-space:pre-wrap;
+ overflow-wrap:anywhere;font-size:15px
 }
-
-.user{
-  align-self:flex-end;
-  background:#075985;color:#fff;
-}
-
-.ai{
-  align-self:flex-start;
-  background:#000;border:1px solid #334155;
-  color:#fff;
-}
-
-.label{
-  color:#7dd3fc;font-size:11px;
-  font-weight:bold;margin-bottom:5px;
-}
-
-.status{
-  text-align:center;color:#94a3b8;
-  font-size:12px;padding:7px;
-}
-
+.user{align-self:flex-end;background:#075985;color:#fff}
+.ai{align-self:flex-start;background:#000;border:1px solid #334155;color:#fff}
+.label{color:#7dd3fc;font-size:11px;font-weight:bold;margin-bottom:5px}
+.status{text-align:center;color:#94a3b8;font-size:12px;padding:7px}
 .status.error{color:#fca5a5}
-
 .status.success{color:#86efac}
-
 .composer{
-  position:fixed;left:0;right:0;
-  bottom:58px;z-index:30;
-  background:#080b12;padding:6px 9px;
-  padding-bottom:calc(6px + env(safe-area-inset-bottom));
-  border-top:1px solid #263449;
+ position:fixed;left:0;right:0;bottom:58px;z-index:30;
+ background:#080b12;padding:6px 9px;
+ padding-bottom:calc(6px + env(safe-area-inset-bottom));
+ border-top:1px solid #263449
 }
-
 .inputbox{
-  max-width:780px;margin:auto;
-  display:flex;align-items:flex-end;gap:5px;
-  background:#000;border:1px solid #64748b;
-  border-radius:13px;padding:5px;
+ max-width:780px;margin:auto;display:flex;
+ align-items:flex-end;gap:6px;background:#000;
+ border:1px solid #64748b;border-radius:13px;padding:5px
 }
-
 textarea{
-  flex:1;min-width:0;height:40px;
-  min-height:40px;max-height:110px;
-  resize:none;background:#075985;
-  color:white;border:1px solid #38bdf8;
-  border-radius:9px;padding:10px;
-  font-size:14px;outline:none;
-  font-family:Arial,sans-serif;
+ flex:1;min-width:0;height:40px;min-height:40px;
+ max-height:110px;resize:none;background:#075985;
+ color:white;border:1px solid #38bdf8;
+ border-radius:9px;padding:10px;font-size:14px;
+ outline:none;font-family:Arial,sans-serif
 }
-
 textarea::placeholder{color:#dbeafe}
 
+/* BUTTON ERGAA HAARAA */
 #send{
-  width:42px;height:38px;
-  border:0;border-radius:9px;
-  background:#0284c7;color:white;
-  font-size:20px;cursor:pointer;
+ width:46px;height:42px;min-width:46px;
+ border:0;border-radius:10px;
+ background:linear-gradient(135deg,#0284c7,#075985);
+ color:white;font-size:23px;font-weight:bold;
+ cursor:pointer;display:flex;
+ align-items:center;justify-content:center;
+ box-shadow:0 2px 8px #0284c755;
 }
+#send:active{transform:scale(.94)}
+#send:disabled{opacity:.5;cursor:not-allowed}
 
-button:disabled{
-  opacity:.5;cursor:not-allowed;
-}
-
+button:disabled{opacity:.5;cursor:not-allowed}
 .bottom-menu{
-  position:fixed;bottom:0;left:0;right:0;
-  z-index:40;display:flex;
-  justify-content:space-around;
-  align-items:center;
-  background:#101725;
-  border-top:1px solid #354761;
-  padding:5px 3px calc(5px + env(safe-area-inset-bottom));
-  min-height:65px;
+ position:fixed;bottom:0;left:0;right:0;z-index:40;
+ display:flex;justify-content:space-around;align-items:center;
+ background:#101725;border-top:1px solid #354761;
+ padding:5px 3px calc(5px + env(safe-area-inset-bottom));
+ min-height:65px
 }
-
 .bottom-menu button{
-  flex:1;background:transparent;
-  border:0;color:#cbd5e1;
-  font-size:8px;padding:4px 2px;
+ flex:1;background:transparent;border:0;
+ color:#cbd5e1;font-size:8px;padding:4px 2px
 }
-
 .bottom-menu button span{
-  display:block;font-size:16px;
-  margin-bottom:3px;
+ display:block;font-size:16px;margin-bottom:3px
 }
-
 .bottom-menu button.active{color:#38bdf8}
-
 .hidden{display:none!important}
-
 @media(max-width:360px){
-  h1{font-size:27px}
-  .languages button{padding:6px 8px}
-  .msg{font-size:14px}
+ h1{font-size:27px}
+ .languages button{padding:6px 8px}
+ .msg{font-size:14px}
 }
 </style>
 </head>
 
 <body>
-
 <header>
-  <h1>Tola Ai</h1>
-  <div class="subtitle" id="subtitle">Gargaaraa kee</div>
+<h1>Tola Ai</h1>
+<div class="subtitle" id="subtitle">Gargaaraa kee</div>
 
-  <div class="languages">
-    <button class="active" data-lang="om">Afaan Oromoo</button>
-    <button data-lang="am">አማርኛ</button>
-    <button data-lang="en">English</button>
-  </div>
+<div class="languages">
+<button class="active" data-lang="om">Afaan Oromoo</button>
+<button data-lang="am">አማርኛ</button>
+<button data-lang="en">English</button>
+</div>
 
-  <div class="top-folders">
+<div class="top-folders">
+<details class="folder">
+<summary>🏠</summary>
+<div class="folder-content">
+<button onclick="showSection('home')">🏠 Mana Jalqabaa</button>
+<button onclick="showSection('chatSection')">💬 Chat</button>
+</div>
+</details>
 
-    <details class="folder">
-      <summary>🏠</summary>
-      <div class="folder-content">
-        <button onclick="showSection('home')">🏠 Mana Jalqabaa</button>
-        <button onclick="showSection('chatSection')">💬 Chat</button>
-      </div>
-    </details>
+<details class="folder">
+<summary>📚</summary>
+<div class="folder-content">
+<button onclick="ask('Saayinsii waliigalaa na barsiisi')">🔬 Saayinsii</button>
+<button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
+<button onclick="ask('Seenaa addunyaa na barsiisi')">🌍 Seenaa</button>
+<button onclick="ask('Afaan Oromoo na barsiisi')">📖 Afaan Oromoo</button>
+<button onclick="ask('English na barsiisi')">🇬🇧 English</button>
+</div>
+</details>
 
-    <details class="folder">
-      <summary>📚</summary>
-      <div class="folder-content">
-        <button onclick="ask('Saayinsii waliigalaa na barsiisi')">🔬 Saayinsii</button>
-        <button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
-        <button onclick="ask('Seenaa addunyaa na barsiisi')">🌍 Seenaa</button>
-        <button onclick="ask('Afaan Oromoo na barsiisi')">📖 Afaan Oromoo</button>
-        <button onclick="ask('English na barsiisi')">🇬🇧 English</button>
-      </div>
-    </details>
-
-    <details class="folder">
-      <summary>🎮</summary>
-      <div class="folder-content">
-        <button onclick="ask('Gaaffii beekumsaa na gaafadhu')">🧠 Gaaffii beekumsaa</button>
-        <button onclick="ask('Mammaaksa Afaan Oromoo natti himi')">💡 Mammaaksa</button>
-        <button onclick="ask('Seenaa gabaabaa nama bashannansiisu natti himi')">📚 Seenaa gabaabaa</button>
-        <button onclick="ask('Tapha jechootaa naaf qopheessi')">🎯 Tapha jechootaa</button>
-      </div>
-    </details>
-
-  </div>
+<details class="folder">
+<summary>🎮</summary>
+<div class="folder-content">
+<button onclick="ask('Gaaffii beekumsaa na gaafadhu')">🧠 Gaaffii beekumsaa</button>
+<button onclick="ask('Mammaaksa Afaan Oromoo natti himi')">💡 Mammaaksa</button>
+<button onclick="ask('Seenaa gabaabaa nama bashannansiisu natti himi')">📚 Seenaa gabaabaa</button>
+<button onclick="ask('Tapha jechootaa naaf qopheessi')">🎯 Tapha jechootaa</button>
+</div>
+</details>
+</div>
 </header>
 
 <main>
-
 <section id="home">
-  <div class="welcome">
-    <div class="logo">🤖</div>
-    <h2 id="welcomeTitle">Baga gara Tola Ai dhuftan!</h2>
-    <p id="welcomeText">
-      Tola Ai gargaaraa barnootaa fi beekumsaa keeti.
-      Gaaffii kee barreessi; deebii siif kenna.
-    </p>
-  </div>
+<div class="welcome">
+<div class="logo">🤖</div>
+<h2 id="welcomeTitle">Baga gara Tola Ai dhuftan!</h2>
+<p id="welcomeText">Tola Ai gargaaraa barnootaa fi beekumsaa keeti. Gaaffii kee barreessi; deebii siif kenna.</p>
+</div>
 
-  <div class="panel">
-    <summary id="suggestTitle">💡 Gaaffilee filatamoo</summary>
-    <div class="grid">
-      <button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
-      <button onclick="ask('Saayinsii na barsiisi')">🔬 Saayinsii</button>
-      <button onclick="ask('Afaan Oromoo na barsiisi')">📖 Afaan Oromoo</button>
-      <button onclick="ask('Seenaa Itoophiyaa natti himi')">🌍 Seenaa</button>
-      <button onclick="ask('Gaaffii beekumsaa na gaafadhu')">🧠 Beekumsa</button>
-      <button onclick="ask('English na barsiisi')">🇬🇧 English</button>
-    </div>
-  </div>
+<div class="panel">
+<summary id="suggestTitle">💡 Gaaffilee filatamoo</summary>
+<div class="grid">
+<button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
+<button onclick="ask('Saayinsii na barsiisi')">🔬 Saayinsii</button>
+<button onclick="ask('Afaan Oromoo na barsiisi')">📖 Afaan Oromoo</button>
+<button onclick="ask('Seenaa Itoophiyaa natti himi')">🌍 Seenaa</button>
+<button onclick="ask('Gaaffii beekumsaa na gaafadhu')">🧠 Beekumsa</button>
+<button onclick="ask('English na barsiisi')">🇬🇧 English</button>
+</div>
+</div>
 </section>
 
 <section id="chatSection">
-  <div id="chat"></div>
-  <div id="status" class="status"></div>
+<div id="chat"></div>
+<div id="status" class="status"></div>
 </section>
 
 <section id="knowledgeSection" class="hidden">
-  <div class="content-card">
-    <h3>📚 Mana Beekumsaa</h3>
-    <p>Barnoota barbaaddu filadhu.</p>
-    <div class="grid">
-      <button onclick="ask('Physics na barsiisi')">Physics</button>
-      <button onclick="ask('Chemistry na barsiisi')">Chemistry</button>
-      <button onclick="ask('Biology na barsiisi')">Biology</button>
-      <button onclick="ask('Mathematics na barsiisi')">Mathematics</button>
-      <button onclick="ask('Geography na barsiisi')">Geography</button>
-      <button onclick="ask('History na barsiisi')">History</button>
-    </div>
-  </div>
+<div class="content-card">
+<h3>📚 Mana Beekumsaa</h3>
+<p>Barnoota barbaaddu filadhu.</p>
+<div class="grid">
+<button onclick="ask('Physics na barsiisi')">Physics</button>
+<button onclick="ask('Chemistry na barsiisi')">Chemistry</button>
+<button onclick="ask('Biology na barsiisi')">Biology</button>
+<button onclick="ask('Mathematics na barsiisi')">Mathematics</button>
+<button onclick="ask('Geography na barsiisi')">Geography</button>
+<button onclick="ask('History na barsiisi')">History</button>
+</div>
+</div>
 </section>
 
 <section id="gamesSection" class="hidden">
-  <div class="content-card">
-    <h3>🎮 Bakka Bashannanaa</h3>
-    <p>Gaaffii fi taphoota beekumsaa waliin bashannani.</p>
-    <button onclick="ask('Gaaffii beekumsaa 5 na gaafadhu, tokko tokkoon')">
-      🧠 Gaaffii Beekumsaa
-    </button>
-    <button onclick="ask('Mammaaksa Afaan Oromoo 5 natti himi')">
-      💡 Mammaaksa
-    </button>
-  </div>
+<div class="content-card">
+<h3>🎮 Bakka Bashannanaa</h3>
+<p>Gaaffii fi taphoota beekumsaa waliin bashannani.</p>
+<button onclick="ask('Gaaffii beekumsaa 5 na gaafadhu, tokko tokkoon')">🧠 Gaaffii Beekumsaa</button>
+<button onclick="ask('Mammaaksa Afaan Oromoo 5 natti himi')">💡 Mammaaksa</button>
+</div>
 </section>
-
 </main>
 
 <div class="composer">
-  <div class="inputbox">
-    <textarea id="question"
-      placeholder="Gaaffii kee barreessi..."
-      rows="1"></textarea>
-    <button id="send" onclick="sendMessage()">➤</button>
-  </div>
+<div class="inputbox">
+<textarea id="question" placeholder="Gaaffii kee barreessi..." rows="1"></textarea>
+<button id="send" type="button" onclick="sendMessage()" title="Ergaa ergi" aria-label="Ergaa ergi">➤</button>
+</div>
 </div>
 
 <nav class="bottom-menu">
-  <button class="active" onclick="showSection('home',this)">
-    <span>🏠</span>Mana
-  </button>
-  <button onclick="showSection('chatSection',this)">
-    <span>💬</span>Chat
-  </button>
-  <button onclick="showSection('knowledgeSection',this)">
-    <span>📚</span>Beekumsa
-  </button>
-  <button onclick="showSection('gamesSection',this)">
-    <span>🎮</span>Bashannana
-  </button>
+<button class="active" onclick="showSection('home',this)"><span>🏠</span>Mana</button>
+<button onclick="showSection('chatSection',this)"><span>💬</span>Chat</button>
+<button onclick="showSection('knowledgeSection',this)"><span>📚</span>Beekumsa</button>
+<button onclick="showSection('gamesSection',this)"><span>🎮</span>Bashannana</button>
 </nav>
 
 <script>
 "use strict";
 
-/* WORKER URL HAARAA */
-const API_URL =
-"https://tola-ai-new.hamaqunxushile2019.workers.dev/";
+const API_URL="https://tola-ai-new.hamaqunxushile2019.workers.dev/";
 
-/* Afaan */
-let language = "om";
+let language="om";
+let history=[];
 
-/* Seenaa marii */
-let history = [];
+try{
+ history=JSON.parse(localStorage.getItem("tola_ai_history")||"[]");
+ if(!Array.isArray(history))history=[];
+}catch(e){history=[];}
 
-try {
-  history = JSON.parse(
-    localStorage.getItem("tola_ai_history") || "[]"
-  );
+const chat=document.getElementById("chat");
+const question=document.getElementById("question");
+const sendButton=document.getElementById("send");
+const statusBox=document.getElementById("status");
 
-  if (!Array.isArray(history)) history = [];
-} catch(e) {
-  history = [];
-}
-
-const chat = document.getElementById("chat");
-const question = document.getElementById("question");
-const sendButton = document.getElementById("send");
-const statusBox = document.getElementById("status");
-
-const translations = {
-  om: {
-    subtitle:"Gargaaraa kee",
-    welcome:"Baga gara Tola Ai dhuftan!",
-    description:"Tola Ai gargaaraa barnootaa fi beekumsaa keeti. Gaaffii kee barreessi; deebii siif kenna.",
-    suggestions:"💡 Gaaffilee filatamoo",
-    placeholder:"Gaaffii kee barreessi...",
-    waiting:"Tola Ai deebii qopheessaa jira...",
-    error:"Dhiifama, deebii argachuu hin dandeenye.",
-    connection:"Walqunnamtii serverii mirkaneessi.",
-    retry:"Serveriin deebii hin kennine. Irra deebi'ee yaalaa jira..."
-  },
-  am: {
-    subtitle:"የእርስዎ ረዳት",
-    welcome:"ወደ Tola Ai እንኳን በደህና መጡ!",
-    description:"Tola Ai የትምህርትና የእውቀት ረዳትዎ ነው። ጥያቄዎን ይጻፉ።",
-    suggestions:"💡 ተመራጭ ጥያቄዎች",
-    placeholder:"ጥያቄዎን ይጻፉ...",
-    waiting:"Tola Ai መልስ እያዘጋጀ ነው...",
-    error:"ይቅርታ፣ መልስ ማግኘት አልተቻለም።",
-    connection:"የአገልጋይ ግንኙነትን ያረጋግጡ።",
-    retry:"አገልጋዩ መልስ አልሰጠም። እንደገና እየሞከርን ነው..."
-  },
-  en: {
-    subtitle:"Your assistant",
-    welcome:"Welcome to Tola Ai!",
-    description:"Tola Ai is your learning and knowledge assistant. Write your question and get an answer.",
-    suggestions:"💡 Suggested questions",
-    placeholder:"Write your question...",
-    waiting:"Tola Ai is preparing your answer...",
-    error:"Sorry, we could not get an answer.",
-    connection:"Please check the server connection.",
-    retry:"The server did not respond. Retrying..."
-  }
+const translations={
+ om:{
+ subtitle:"Gargaaraa kee",
+ welcome:"Baga gara Tola Ai dhuftan!",
+ description:"Tola Ai gargaaraa barnootaa fi beekumsaa keeti. Gaaffii kee barreessi; deebii siif kenna.",
+ suggestions:"💡 Gaaffilee filatamoo",
+ placeholder:"Gaaffii kee barreessi...",
+ waiting:"Tola Ai deebii qopheessaa jira...",
+ error:"Dhiifama, deebii argachuu hin dandeenye.",
+ connection:"Walqunnamtii serverii mirkaneessi.",
+ retry:"Serveriin deebii hin kennine. Irra deebi'ee yaalaa jira..."
+ },
+ am:{
+ subtitle:"የእርስዎ ረዳት",
+ welcome:"ወደ Tola Ai እንኳን በደህና በመጡ!",
+ description:"Tola Ai የትምህርትና የእውቀት ረዳትዎ ነው። ጥያቄዎን ይጻፉ።",
+ suggestions:"💡 ተመራጭ ጥያቄዎች",
+ placeholder:"ጥያቄዎን ይጻፉ...",
+ waiting:"Tola Ai መልስ እያዘጋጀ ነው...",
+ error:"ይቅርታ፣ መልስ ማግኘት አልተቻለም።",
+ connection:"የአገልጋይ ግንኙነትን ያረጋግጡ።",
+ retry:"አገልጋዩ መልስ አልሰጠም። እንደገና እየሞከርን ነው..."
+ },
+ en:{
+ subtitle:"Your assistant",
+ welcome:"Welcome to Tola Ai!",
+ description:"Tola Ai is your learning and knowledge assistant. Write your question and get an answer.",
+ suggestions:"💡 Suggested questions",
+ placeholder:"Write your question...",
+ waiting:"Tola Ai is preparing your answer...",
+ error:"Sorry, we could not get an answer.",
+ connection:"Please check the server connection.",
+ retry:"The server did not respond. Retrying..."
+ }
 };
 
-function setLanguage(lang) {
-  language = lang;
-
-  document.querySelectorAll(".languages button").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.lang === lang);
-  });
-
-  const t = translations[lang];
-
-  document.getElementById("subtitle").textContent = t.subtitle;
-  document.getElementById("welcomeTitle").textContent = t.welcome;
-  document.getElementById("welcomeText").textContent = t.description;
-  document.getElementById("suggestTitle").textContent = t.suggestions;
-  question.placeholder = t.placeholder;
-
-  localStorage.setItem("tola_ai_language", lang);
+function setLanguage(lang){
+ language=lang;
+ document.querySelectorAll(".languages button").forEach(btn=>{
+  btn.classList.toggle("active",btn.dataset.lang===lang);
+ });
+ const t=translations[lang];
+ document.getElementById("subtitle").textContent=t.subtitle;
+ document.getElementById("welcomeTitle").textContent=t.welcome;
+ document.getElementById("welcomeText").textContent=t.description;
+ document.getElementById("suggestTitle").textContent=t.suggestions;
+ question.placeholder=t.placeholder;
+ localStorage.setItem("tola_ai_language",lang);
 }
 
-document.querySelectorAll(".languages button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    setLanguage(btn.dataset.lang);
-  });
+document.querySelectorAll(".languages button").forEach(btn=>{
+ btn.addEventListener("click",()=>setLanguage(btn.dataset.lang));
 });
 
-const savedLanguage = localStorage.getItem("tola_ai_language");
+const savedLanguage=localStorage.getItem("tola_ai_language");
+if(["om","am","en"].includes(savedLanguage))setLanguage(savedLanguage);
 
-if (["om","am","en"].includes(savedLanguage)) {
-  setLanguage(savedLanguage);
+function showSection(id,button){
+ ["home","chatSection","knowledgeSection","gamesSection"].forEach(section=>{
+  document.getElementById(section).classList.add("hidden");
+ });
+ document.getElementById(id).classList.remove("hidden");
+ document.querySelectorAll(".bottom-menu button").forEach(btn=>btn.classList.remove("active"));
+ if(button)button.classList.add("active");
+ if(id==="chatSection")setTimeout(()=>question.focus(),100);
 }
 
-/* Fuula jijjiiruu */
-function showSection(id, button) {
-  const sections = [
-    "home",
-    "chatSection",
-    "knowledgeSection",
-    "gamesSection"
-  ];
-
-  sections.forEach(section => {
-    document.getElementById(section).classList.add("hidden");
-  });
-
-  document.getElementById(id).classList.remove("hidden");
-
-  document.querySelectorAll(".bottom-menu button").forEach(btn => {
-    btn.classList.remove("active");
-  });
-
-  if (button) button.classList.add("active");
-
-  if (id === "chatSection") {
-    setTimeout(() => question.focus(), 100);
-  }
+function addMessage(text,type){
+ const message=document.createElement("div");
+ message.className="msg "+type;
+ const label=document.createElement("div");
+ label.className="label";
+ label.textContent=type==="user"?"Ati":"Tola Ai";
+ const content=document.createElement("div");
+ content.textContent=text;
+ message.appendChild(label);
+ message.appendChild(content);
+ chat.appendChild(message);
+ window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+ return message;
 }
 
-/* Ergaa agarsiisuu */
-function addMessage(text, type) {
-  const message = document.createElement("div");
-  message.className = "msg " + type;
-
-  const label = document.createElement("div");
-  label.className = "label";
-  label.textContent = type === "user" ? "Ati" : "Tola Ai";
-
-  const content = document.createElement("div");
-  content.textContent = text;
-
-  message.appendChild(label);
-  message.appendChild(content);
-
-  chat.appendChild(message);
-
-  window.scrollTo({
-    top:document.body.scrollHeight,
-    behavior:"smooth"
-  });
-
-  return message;
+function saveHistory(){
+ try{
+  localStorage.setItem("tola_ai_history",JSON.stringify(history.slice(-30)));
+ }catch(e){console.warn("History save failed",e);}
 }
 
-/* Seenaa kuusuu */
-function saveHistory() {
-  try {
-    localStorage.setItem(
-      "tola_ai_history",
-      JSON.stringify(history.slice(-30))
-    );
-  } catch(e) {
-    console.warn("History save failed",e);
-  }
+function loadHistory(){
+ history.slice(-30).forEach(item=>{
+  if(!item||!item.content)return;
+  if(item.role==="user")addMessage(item.content,"user");
+  else if(item.role==="assistant"||item.role==="model")addMessage(item.content,"ai");
+ });
 }
-
-/* Seenaa duraanii agarsiisuu */
-function loadHistory() {
-  history.slice(-30).forEach(item => {
-    if (!item || !item.content) return;
-
-    if (item.role === "user") {
-      addMessage(item.content,"user");
-    } else if (item.role === "assistant" || item.role === "model") {
-      addMessage(item.content,"ai");
-    }
-  });
-}
-
 loadHistory();
 
-/* Gaaffii folder irraa erguu */
-function ask(text) {
-  question.value = text;
-  showSection("chatSection");
-  sendMessage();
+function ask(text){
+ question.value=text;
+ showSection("chatSection");
+ sendMessage();
 }
 
-/* Yaalii serverii */
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve,ms));
+function sleep(ms){
+ return new Promise(resolve=>setTimeout(resolve,ms));
 }
 
-/* HTTP 502, 503 fi timeout irratti irra deebi'uu */
-async function requestWithRetry(payload) {
-  const maxAttempts = 3;
-  const delays = [1500,3000,5000];
+async function requestWithRetry(payload){
+ const maxAttempts=3;
+ const delays=[1500,3000,5000];
 
-  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+ for(let attempt=1;attempt<=maxAttempts;attempt++){
+  const controller=new AbortController();
+  const timeout=setTimeout(()=>controller.abort(),45000);
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(),45000);
+  try{
+   const response=await fetch(API_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(payload),
+    signal:controller.signal
+   });
 
-    try {
-      const response = await fetch(API_URL,{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
-        },
-        body:JSON.stringify(payload),
-        signal:controller.signal
-      });
+   clearTimeout(timeout);
+   const rawText=await response.text();
+   let data;
 
-      clearTimeout(timeout);
+   try{data=JSON.parse(rawText);}
+   catch(e){throw new Error("Deebiin serverii JSON sirrii miti.");}
 
-      const rawText = await response.text();
+   if(!response.ok){
+    const error=new Error(data.error||data.message||("HTTP "+response.status));
+    error.status=response.status;
+    error.retryAfter=response.headers.get("Retry-After");
+    throw error;
+   }
 
-      let data;
+   if(data.success===false){
+    const error=new Error(data.error||data.message||"Server error");
+    error.status=data.status||502;
+    throw error;
+   }
 
-      try {
-        data = JSON.parse(rawText);
-      } catch(e) {
-        throw new Error(
-          "Deebiin serverii JSON sirrii miti."
-        );
-      }
+   const reply=data.reply||data.answer||data.text||data.response||data.output_text;
+   if(!reply||typeof reply!=="string")throw new Error("Deebiin AI duwwaa dha.");
+   return reply;
 
-      if (!response.ok) {
-        const error = new Error(
-          data.error || data.message ||
-          ("HTTP " + response.status)
-        );
+  }catch(error){
+   clearTimeout(timeout);
+   const status=error.status;
+   const retryable=!status||status===429||status===500||status===502||
+    status===503||status===504||error.name==="AbortError"||
+    error instanceof TypeError;
 
-        error.status = response.status;
-        error.retryAfter = response.headers.get("Retry-After");
+   if(!retryable||attempt===maxAttempts)throw error;
 
-        throw error;
-      }
+   statusBox.textContent=translations[language].retry;
+   let waitTime=delays[attempt-1];
 
-      if (data.success === false) {
-        const error = new Error(
-          data.error || data.message || "Server error"
-        );
-
-        error.status = data.status || 502;
-        throw error;
-      }
-
-      const reply =
-        data.reply ||
-        data.answer ||
-        data.text ||
-        data.response ||
-        data.output_text;
-
-      if (!reply || typeof reply !== "string") {
-        throw new Error("Deebiin AI duwwaa dha.");
-      }
-
-      return reply;
-
-    } catch(error) {
-
-      clearTimeout(timeout);
-
-      const status = error.status;
-
-      const retryable =
-        !status ||
-        status === 429 ||
-        status === 500 ||
-        status === 502 ||
-        status === 503 ||
-        status === 504 ||
-        error.name === "AbortError" ||
-        error instanceof TypeError;
-
-      if (!retryable || attempt === maxAttempts) {
-        throw error;
-      }
-
-      statusBox.textContent = translations[language].retry;
-
-      let waitTime = delays[attempt - 1];
-
-      if (status === 429 && error.retryAfter) {
-        const seconds = Number(error.retryAfter);
-        if (Number.isFinite(seconds) && seconds > 0) {
-          waitTime = Math.min(seconds * 1000,10000);
-        }
-      }
-
-      await sleep(waitTime);
-    }
+   if(status===429&&error.retryAfter){
+    const seconds=Number(error.retryAfter);
+    if(Number.isFinite(seconds)&&seconds>0)waitTime=Math.min(seconds*1000,10000);
+   }
+   await sleep(waitTime);
   }
-
-  throw new Error("Serveriin deebii hin kennine.");
+ }
+ throw new Error("Serveriin deebii hin kennine.");
 }
 
-/* Ergaa erguu */
-let busy = false;
+let busy=false;
 
-async function sendMessage() {
+async function sendMessage(){
+ const text=question.value.trim();
+ if(!text||busy)return;
 
-  const text = question.value.trim();
+ busy=true;
+ sendButton.disabled=true;
+ question.disabled=true;
 
-  if (!text || busy) return;
+ addMessage(text,"user");
+ question.value="";
+ question.style.height="40px";
 
-  busy = true;
-  sendButton.disabled = true;
-  question.disabled = true;
+ history.push({role:"user",content:text});
+ saveHistory();
 
-  addMessage(text,"user");
+ const loading=document.createElement("div");
+ loading.className="status";
+ loading.textContent=translations[language].waiting;
+ chat.appendChild(loading);
 
-  question.value = "";
-  question.style.height = "40px";
+ statusBox.className="status";
+ statusBox.textContent="";
 
-  const userMessage = {
-    role:"user",
-    content:text
+ try{
+  const payload={
+   message:text,
+   language:language,
+   history:history.slice(-12)
   };
 
-  history.push(userMessage);
+  const reply=await requestWithRetry(payload);
+  loading.remove();
+  addMessage(reply,"ai");
+
+  history.push({role:"assistant",content:reply});
   saveHistory();
 
-  const loading = document.createElement("div");
-  loading.className = "status";
-  loading.textContent = translations[language].waiting;
+  statusBox.className="status success";
+  statusBox.textContent="";
 
-  chat.appendChild(loading);
+ }catch(error){
+  loading.remove();
+  console.error("Tola Ai error:",error);
 
-  statusBox.className = "status";
-  statusBox.textContent = "";
+  let message=translations[language].error;
 
-  try {
+  if(error.name==="AbortError")message+=" Yeroon eegumsaa xumurame.";
+  else if(error.status===503)message+=" Gemini yeroo ammaa hojii baay'ee qaba (503).";
+  else if(error.status===502)message+=" Rakkoo serverii (502).";
+  else if(error.status===429)message+=" Daangaan gaaffii yeroo ammaa ga'eera (429).";
+  else if(error.status)message+=" HTTP "+error.status+".";
+  else message+=" "+translations[language].connection;
 
-    const payload = {
-      message:text,
-      language:language,
-      history:history.slice(-12)
-    };
+  statusBox.className="status error";
+  statusBox.textContent=message;
 
-    const reply = await requestWithRetry(payload);
-
-    loading.remove();
-
-    addMessage(reply,"ai");
-
-    history.push({
-      role:"assistant",
-      content:reply
-    });
-
-    saveHistory();
-
-    statusBox.className = "status success";
-    statusBox.textContent = "";
-
-  } catch(error) {
-
-    loading.remove();
-
-    console.error("Tola Ai error:",error);
-
-    let message = translations[language].error;
-
-    if (error.name === "AbortError") {
-      message += " Yeroon eegumsaa xumurame.";
-    } else if (error.status === 503) {
-      message += " Gemini yeroo ammaa hojii baay'ee qaba (503).";
-    } else if (error.status === 502) {
-      message += " Rakkoo serverii (502).";
-    } else if (error.status === 429) {
-      message += " Daangaan gaaffii yeroo ammaa ga'eera (429).";
-    } else if (error.status) {
-      message += " HTTP " + error.status + ".";
-    } else {
-      message += " " + translations[language].connection;
-    }
-
-    statusBox.className = "status error";
-    statusBox.textContent = message;
-
-  } finally {
-
-    busy = false;
-    sendButton.disabled = false;
-    question.disabled = false;
-
-    question.focus();
-  }
+ }finally{
+  busy=false;
+  sendButton.disabled=false;
+  question.disabled=false;
+  question.focus();
+ }
 }
 
-/* Enter irratti erguu */
-question.addEventListener("keydown",function(event) {
-  if (event.key === "Enter" && !event.shiftKey) {
-    event.preventDefault();
-    sendMessage();
-  }
+question.addEventListener("keydown",function(event){
+ if(event.key==="Enter"&&!event.shiftKey){
+  event.preventDefault();
+  sendMessage();
+ }
 });
 
-/* Sanduuqa barreessuu ofumaan dheeressuu */
-question.addEventListener("input",function() {
-  this.style.height = "40px";
-  this.style.height = Math.min(this.scrollHeight,110) + "px";
+question.addEventListener("input",function(){
+ this.style.height="40px";
+ this.style.height=Math.min(this.scrollHeight,110)+"px";
 });
 </script>
-
 </body>
-  </html>
+</html>
