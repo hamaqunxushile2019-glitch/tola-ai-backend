@@ -303,15 +303,7 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 <script>
 'use strict';
 
-const API_URL = "https://tola-ai-new.hamaqunxushile2019.workers.dev";
-
-const chat=document.getElementById('chat');
-const question=document.getElementById('question');
-const sendButton=document.getElementById('send');
-const micButton=document.getElementById('micButton');
-const voiceButton=document.getElementById('voiceButton');
-const statusBox=document.getElementById('status');
-const composer=document.getElementById('composer');
+const API_URL = "https://tola-ai-new.hamaqunxushile2019.workers.dev"
 
 let language='om';
 let history=[];
@@ -326,10 +318,7 @@ const speechLanguages={
   en:'en-US'
 };
 
-const messages={
-  om:{
-    placeholder:'Tola Ai gaafadhu!
-  },
+const message{
   am:{
     placeholder:'Tola Aiን ይጠይቁ...',
     waiting:'መልሱን እያዘጋጀሁ ነው...',
