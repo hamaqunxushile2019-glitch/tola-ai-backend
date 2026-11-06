@@ -328,10 +328,7 @@ const speechLanguages={
 
 const messages={
   om:{
-    placeholder:'Tola Ai gaafadhu...',
-    waiting:'Deebii qopheessaa jira...',
-    ready:'Deebiin qophaaʼeera.',
-    failed:'Rakkoo walqunnamtii uumame.'
+    placeholder:'Tola Ai gaafadhu!
   },
   am:{
     placeholder:'Tola Aiን ይጠይቁ...',
@@ -402,7 +399,7 @@ function addMessage(text,type){
 
   const label=document.createElement('div');
   label.className='label';
-  label.textContent=type==='user'?'Ati':'Tola Ai';
+  label.textContent=type==='user'?'Ana':'Tola Ai';
 
   const content=document.createElement('div');
   content.textContent=text;
@@ -427,127 +424,7 @@ document.querySelectorAll('[data-ask]').forEach(b=>{
   b.addEventListener('click',()=>askTola(b.dataset.ask));
 });
 
-function speakAnswer(text){
-  if(!voiceMode)return;
-
-  if(!('speechSynthesis' in window)){
-    setStatus('Sagalee dubbisuu browser kanaan hin deeggaramu.');
-    return;
-  }
-
-  window.speechSynthesis.cancel();
-
-  const speech=new SpeechSynthesisUtterance(text);
-  speech.lang=speechLanguages[language];
-  speech.rate=0.95;
-  speech.pitch=1;
-
-  speech.onstart=()=>setStatus('Deebii sagaleedhaan dubbisaa jira...');
-  speech.onend=()=>setStatus(messages[language].ready);
-  speech.onerror=()=>setStatus('Sagalee dubbisuu hin dandeenye. Deebii barreeffamaa ilaali.');
-
-  window.speechSynthesis.speak(speech);
-}
-
-voiceButton.addEventListener('click',()=>{
-  voiceMode=!voiceMode;
-  voiceButton.classList.toggle('active',voiceMode);
-
-  if(!voiceMode && 'speechSynthesis' in window){
-    window.speechSynthesis.cancel();
-  }
-
-  setStatus(
-    voiceMode
-      ? 'Deebiin sagaleedhaan ni dubbifama.'
-      : 'Deebiin sagaleedhaan dubbifamu dhaabbate.'
-  );
-});
-
-function startVoice(){
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-
-  if(!SR){
-    setStatus('Browser kun sagalee kallattiin hin deeggaru. Gboard microphone fayyadami.',true);
-    question.focus();
-    return;
-  }
-
-  if(isListening && recognition){
-    recognition.stop();
-    return;
-  }
-
-  if(busy){
-    setStatus('Deebii duraa eegi.');
-    return;
-  }
-
-  try{
-    recognition=new SR();
-    recognition.lang=speechLanguages[language];
-    recognition.continuous=false;
-    recognition.interimResults=true;
-    recognition.maxAlternatives=1;
-
-    let finalTranscript='';
-
-    recognition.onstart=()=>{
-      isListening=true;
-      voiceMode=true;
-      voiceButton.classList.add('active');
-      micButton.classList.add('listening');
-      micButton.textContent='⏹';
-      setStatus('Amma dubbadhu...');
-    };
-
-    recognition.onresult=e=>{
-      let interim='';
-
-      for(let i=e.resultIndex;i<e.results.length;i++){
-        const part=e.results[i][0].transcript;
-        if(e.results[i].isFinal)finalTranscript+=part;
-        else interim+=part;
-      }
-
-      setStatus(finalTranscript||interim||'Sagalee kee dhagaʼaa jira...');
-    };
-
-    recognition.onerror=e=>{
-      let message='Microphone hayyama isaa mirkaneessi.';
-      if(e.error==='not-allowed')message='Microphone hayyama hin arganne. Browser settings ilaali.';
-      if(e.error==='no-speech')message='Sagaleen hin dhagaʼamne. Irra deebiʼi dubbadhu.';
-      if(e.error==='network')message='Rakkoo network uumame.';
-      setStatus(message,true);
-    };
-
-    recognition.onend=()=>{
-      isListening=false;
-      micButton.classList.remove('listening');
-      micButton.textContent='🎙️';
-
-      const spoken=finalTranscript.trim();
-
-      if(spoken){
-        question.value=spoken;
-        sendMessage();
-      }else{
-        setStatus('Sagalee hin galmeessine. Irra deebiʼi dubbadhu.');
-      }
-    };
-
-    recognition.start();
-
-  }catch(error){
-    isListening=false;
-    micButton.classList.remove('listening');
-    micButton.textContent='🎙️';
-    setStatus('Microphone jalqabuu hin dandeenye. Gboard yaali.',true);
-  }
-}
-
-micButton.addEventListener('click',startVoice);
-
+  
 /* Ergaa gara AI erguu */
 async function sendMessage(){
   const text=question.value.trim();
