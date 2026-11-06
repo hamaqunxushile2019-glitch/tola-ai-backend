@@ -182,6 +182,10 @@ textarea::placeholder{color:#dbeafe}
  <div class="quick-folders">
   <details class="folder">
    <summary>🌐</summary>
+   <div class="folder-content">
+    <button onclick="setLanguage('om')">🇪🇹 Afaan Oromoo</button>
+    <button onclick="setLanguage('am')">🇪🇹 አማርኛ</button>
+    <button onclick="setLanguage('en')">🇬🇧 English</button>
    </div>
   </details>
   <details class="folder">
@@ -215,13 +219,19 @@ textarea::placeholder{color:#dbeafe}
 <main>
 <section id="home">
  <div class="welcome">
-  <div class="logo"></div>
-  <h2 id="welcomeTitle"></h2>
-  <p id="welcomeText"></p>
+  <div class="logo">🤖</div>
+  <h2 id="welcomeTitle">Baga gara Tola Ai dhuftan!</h2>
+  <p id="welcomeText">Tola Ai gargaaraa barnootaa fi beekumsaa keeti. Gaaffii kee barreessi; deebii siif kenna.</p>
  </div>
  <div class="panel">
-  <div class="panel-title" id="suggestTitle"></div>
+  <div class="panel-title" id="suggestTitle">💡 Gaaffilee filatamoo</div>
   <div class="grid">
+   <button onclick="ask('Herrega na barsiisi')">➗ Herrega</button>
+   <button onclick="ask('Saayinsii na barsiisi')">🔬 Saayinsii</button>
+   <button onclick="ask('Afaan Oromoo na barsiisi')">📖 Afaan Oromoo</button>
+   <button onclick="ask('Seenaa Itoophiyaa natti himi')">🌍 Seenaa</button>
+   <button onclick="ask('Gaaffii beekumsaa na gaafadhu')">🧠 Beekumsa</button>
+   <button onclick="ask('English na barsiisi')">🇬🇧 English</button>
   </div>
  </div>
 </section>
@@ -272,8 +282,8 @@ textarea::placeholder{color:#dbeafe}
    <button class="setting-button danger" onclick="clearHistory()">Seenaa marii qulqulleessi</button>
   </div>
   <div class="settings-item">
-   <h4></h4>
-   <p></p>
+   <h4>🤖 Waa'ee Tola Ai</h4>
+   <p>Tola Ai gargaaraa barnootaa fi beekumsaa dha. Afaan Oromoo, Afaan Amaaraa fi English ni deeggera.</p>
    <p>Kaayyoon isaa barattootaaf barnoota fi beekumsa irratti gargaarsa kennuudha.</p>
   </div>
  </div>
@@ -314,14 +324,32 @@ const statusBox=document.getElementById("status");
 const translations={
  om:{
   subtitle:"Gargaaraa kee",
-  welcome:
-  description:
-  suggestions:
+  welcome:"Baga gara Tola Ai dhuftan!",
+  description:"Tola Ai gargaaraa barnootaa fi beekumsaa keeti. Gaaffii kee barreessi; deebii siif kenna.",
+  suggestions:"💡 Gaaffilee filatamoo",
   placeholder:"Gaaffii kee barreessi...",
-  waiting:"Eegi...",
+  waiting:"Tola Ai deebii qopheessaa jira...",
   error:"Dhiifama, deebii argachuu hin dandeenye."
+ },
+ am:{
+  subtitle:"የእርስዎ ረዳት",
+  welcome:"ወደ Tola Ai እንኳን በደህና በመጡ!",
+  description:"Tola Ai የትምህርትና የእውቀት ረዳትዎ ነው። ጥያቄዎን ይጻፉ።",
+  suggestions:"💡 ተመራጭ ጥያቄዎች",
+  placeholder:"ጥያቄዎን ይጻፉ...",
+  waiting:"Tola Ai መልስ እያዘጋጀ ነው...",
+  error:"ይቅርታ፣ መልስ ማግኘት አልተቻለም።"
+ },
  en:{
   subtitle:"Your assistant",
+  welcome:"Welcome to Tola Ai!",
+  description:"Tola Ai is your learning and knowledge assistant. Write your question and get an answer.",
+  suggestions:"💡 Suggested questions",
+  placeholder:"Write your question...",
+  waiting:"Tola Ai is preparing your answer...",
+  error:"Sorry, we could not get an answer."
+ }
+};
 
 function setLanguage(lang){
  if(!translations[lang])return;
