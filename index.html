@@ -285,9 +285,6 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
   <div class="status" id="status">Gaaffii kee barreessi ykn sagaleedhaan dubbadhu.</div>
   <div class="inputbox">
     <textarea id="question" rows="1" placeholder="Tola Ai gaafadhu..." aria-label="Gaaffii barreessi"></textarea>
-    <button id="voiceButton" type="button" aria-label="Deebii sagaleedhaan dubbisi" title="Sagalee deebii">🔊</button>
-    <button id="micButton" type="button" aria-label="Sagalee galchi" title="Sagalee galchi">🎙️</button>
-    <button id="send" type="button" aria-label="Ergi">➤</button>
   </div>
 </div>
 
@@ -303,20 +300,7 @@ footer{text-align:center;color:#64748b;font-size:11px;padding:15px}
 <script>
 'use strict';
 
-const API_URL = "https://tola-ai-new.hamaqunxushile2019.workers.dev"
-
-let language='om';
-let history=[];
-let busy=false;
-let recognition=null;
-let isListening=false;
-let voiceMode=false;
-
-const speechLanguages={
-  om:'om-ET',
-  am:'am-ET',
-  en:'en-US'
-};
+const API_URL = "https://tola-ai-new.hamaqunxushile2019.workers
 
 const message{
   am:{
