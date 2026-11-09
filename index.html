@@ -314,26 +314,24 @@ footer button.active{color:#38bdf8}
   <button onclick="ask('Seenaa gabaabaa nama barsiisu naaf himi.')">📖 Seenaa gabaabaa</button>
  </div>
 
- <button id="returnButton" onclick="newChat()">← Tola Ai deebi'i</button>
+ <button id="returnButton" onclick="newChat()"></button>
 </header>
 
 <main>
 
  <section id="welcome">
-  <h2>Baga gara Tola Ai dhuftan!</h2>
+  <h2></h2>
   <p>
-   Tola Ai gargaaraa kee isa barnootaa fi beekumsaa ti.
-   Gaaffii kee barreessi. Ani si gargaaruuf qophiidha.
   </p>
  </section>
 
  <div id="chatMessages"></div>
- <div id="typing">Tola Ai deebii qopheessaa jira...</div>
+ <div id="typing">Eegi...</div>
 
  <section class="composer">
   <div class="input-row">
    <textarea id="question"
-    placeholder="Gaaffii kee asitti barreessi..."
+    placeholder=
     rows="1"></textarea>
 
    <button id="send" onclick="sendMessage()">➤</button>
@@ -584,7 +582,7 @@ async function sendMessage(){
  busy=true;
  sendButton.disabled=true;
  typing.style.display="block";
- statusBox.textContent="Tola Ai deebii qopheessaa jira...";
+ statusBox.textContent=
  showChat();
 
  addMessage(message,"user");
