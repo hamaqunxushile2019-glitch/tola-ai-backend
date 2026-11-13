@@ -4,709 +4,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#080b12">
+<meta name="theme-color" content="#080808">
 <title>Tola Ai</title>
 
 <style>
 *{box-sizing:border-box}
-body{
- margin:0;
- background:#080b12;
- color:#fff;
- font-family:Arial,sans-serif;
- font-size:16px;
- min-height:100vh;
- display:flex;
- flex-direction:column;
+html,body{
+margin:0;padding:0;width:100%;min-height:100%;
+background:#080808;color:#f5f5f5;font-family:Arial,sans-serif;
 }
-header{
- background:#101827;
- padding:13px 12px;
- border-bottom:1px solid #26344a;
- position:sticky;
- top:0;
- z-index:10;
+body{min-height:100vh;min-height:100dvh;padding-bottom:85px}
+header{text-align:center;padding:20px 12px 16px;background:#111;border-bottom:1px solid #292929}
+header h1{
+margin:0;font-size:37px;font-weight:900;letter-spacing:1px;
+background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15,#00e5ff);
+background-size:250% auto;-webkit-background-clip:text;
+background-clip:text;color:transparent;animation:shine 5s linear infinite
 }
-.header-top{
- display:flex;
- align-items:center;
- justify-content:space-between;
- gap:8px;
+@keyframes shine{to{background-position:250% center}}
+.toolbar{display:flex;justify-content:center;align-items:center;padding:11px 10px;background:#101010;border-bottom:1px solid #292929}
+.new-chat{background:#262626;color:white;border:1px solid #404040;border-radius:10px;padding:10px 16px;font-size:13px;cursor:pointer}
+.container{width:100%;max-width:850px;margin:auto;padding:12px 12px 20px}
+.folder-row{display:flex;justify-content:center;align-items:flex-start;gap:11px;width:100%;margin:8px auto 17px}
+.folder{width:min(45%,210px);background:#191919;border:1px solid #414141;border-radius:13px;overflow:hidden;min-height:45px;box-shadow:0 3px 12px #0005}
+.folder summary{list-style:none;padding:12px 8px;cursor:pointer;text-align:center;color:#f5f5f5;font-size:14px;font-weight:bold}
+.folder summary::-webkit-details-marker{display:none}
+.folder summary:after{content:"  ＋";color:#facc15;font-size:15px}
+.folder[open] summary:after{content:"  −"}
+.folder-content{padding:5px 8px 10px;display:grid;gap:7px}
+.folder-content button{width:100%;min-height:37px;padding:8px 6px;background:#292929;border:1px solid #454545;color:#eee;border-radius:8px;text-align:center;font-size:12px;cursor:pointer}
+.folder-content button:active{background:#0756a8}
+#chatMessages{margin-top:12px;padding-bottom:12px}
+.message{margin:13px 0;padding:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
+.user{background:#0756a8;color:white;border-radius:14px;margin-left:25px;border:1px solid #218be8}
+.ai{background:transparent;color:#f5f5f5;border:0;margin-right:5px;padding:12px 3px;box-shadow:none}
+.message-actions{display:flex;gap:8px;margin-top:10px}
+.message-actions button{background:#202020;color:#ddd;border:1px solid #414141;border-radius:8px;padding:7px 11px;font-size:12px;cursor:pointer}
+.input-area{position:fixed;left:0;right:0;bottom:0;z-index:999;width:100%;margin:0;padding:7px 10px;padding-bottom:calc(7px + env(safe-area-inset-bottom));background:#080808;border:0}
+.input-inner{width:100%;max-width:800px;margin:0 auto;display:flex;align-items:flex-end;gap:7px;padding:6px 7px;background:#303030;border:1px solid #555;border-radius:20px;box-shadow:0 3px 15px #0009}
+#question{display:block;flex:1;width:100%;min-width:0;min-height:38px;max-height:120px;resize:none;overflow-y:auto;background:transparent;color:#fff;border:0;padding:9px 8px;font-size:16px;line-height:1.4;outline:none;font-family:Arial,sans-serif}
+#question::placeholder{color:#c0c0c0}
+#send{width:39px;height:39px;flex-shrink:0;border:1px solid #b8860b;border-radius:50%;background:linear-gradient(145deg,#facc15,#b8860b);color:#080808;font-size:22px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
+#send:disabled{opacity:.45}
+#status{text-align:center;color:#b5b5b5;font-size:12px;min-height:17px;padding:0 3px 3px}
+.typing-dots{display:inline-flex;gap:5px;align-items:center}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:#facc15;animation:pulse 1s infinite ease-in-out}
+.typing-dots span:nth-child(2){animation-delay:.15s}
+.typing-dots span:nth-child(3){animation-delay:.3s}
+@keyframes pulse{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+@media(max-width:360px){
+header h1{font-size:33px}
+.folder-row{gap:8px}
+.folder{width:46%}
+.folder summary{font-size:12px;padding:12px 4px}
+.folder-content{padding:5px 6px 8px}
+.folder-content button{font-size:11px}
+.message{font-size:14px}
 }
-.logo{
- font-size:25px;
- font-weight:bold;
- letter-spacing:.5px;
- background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15);
- -webkit-background-clip:text;
- color:transparent;
-}
-.folders{
- display:flex;
- align-items:center;
- justify-content:flex-end;
- gap:5px;
-}
-.folder{
- width:39px;
- height:37px;
- border:1px solid #34445d;
- border-radius:10px;
- background:#1b2940;
- color:white;
- font-size:20px;
- display:flex;
- align-items:center;
- justify-content:center;
- cursor:pointer;
-}
-.folder:active{transform:scale(.94)}
-.folder.active{
- background:#075985;
- border-color:#0ea5e9;
-}
-.dropdown{
- display:none;
- position:absolute;
- right:10px;
- top:62px;
- min-width:165px;
- background:#17243a;
- border:1px solid #34445d;
- border-radius:12px;
- padding:7px;
- box-shadow:0 8px 25px #0009;
- z-index:20;
-}
-.dropdown.show{display:block}
-.dropdown button{
- display:block;
- width:100%;
- padding:12px 10px;
- margin:3px 0;
- border:0;
- border-radius:8px;
- background:#22334d;
- color:white;
- text-align:left;
- font-size:15px;
-}
-.dropdown button:active{background:#0369a1}
-#returnButton{
- display:none;
- width:100%;
- padding:10px;
- margin-top:12px;
- background:#000;
- color:#fff;
- border:1px solid #555;
- border-radius:9px;
- font-size:15px;
- text-align:left;
-}
-main{
- flex:1;
- width:100%;
- max-width:850px;
- margin:auto;
- padding:12px;
- display:flex;
- flex-direction:column;
-}
-#welcome{
- text-align:center;
- margin:35px 8px 20px;
-}
-#welcome h2{
- color:#38bdf8;
- font-size:24px;
-}
-#welcome p{
- color:#aebbd0;
- line-height:1.7;
-}
-#chatMessages{
- display:flex;
- flex-direction:column;
- gap:13px;
- padding-bottom:15px;
-}
-.message{
- max-width:90%;
- padding:13px 15px;
- border-radius:15px;
- line-height:1.65;
- font-size:16px;
- white-space:pre-wrap;
- overflow-wrap:anywhere;
-}
-.user{
- align-self:flex-end;
- background:#075985;
- border-bottom-right-radius:4px;
-}
-.ai{
- align-self:flex-start;
- background:#17243a;
- border:1px solid #293a52;
- border-bottom-left-radius:4px;
-}
-.message small{
- display:block;
- font-size:11px;
- color:#aabbd1;
- margin-bottom:5px;
-}
-#typing{
- display:none;
- color:#38bdf8;
- padding:10px;
- font-size:14px;
-}
-.composer{
- position:sticky;
- bottom:65px;
- background:#080b12;
- padding:10px 0;
- margin-top:auto;
-}
-.input-row{
- display:flex;
- align-items:flex-end;
- gap:8px;
-}
-#question{
- flex:1;
- min-width:0;
- min-height:50px;
- max-height:150px;
- resize:none;
- border:1px solid #0284c7;
- background:#10243b;
- color:white;
- border-radius:13px;
- padding:13px;
- font-size:16px;
- outline:none;
-}
-#question::placeholder{color:#9db2ca}
-#send{
- width:50px;
- height:50px;
- flex-shrink:0;
- border:0;
- border-radius:13px;
- background:#0284c7;
- color:white;
- font-size:24px;
- cursor:pointer;
-}
-#send:disabled{opacity:.5}
-#statusBox{
- min-height:20px;
- padding:5px 3px;
- color:#fbbf24;
- font-size:12px;
-}
-footer{
- position:sticky;
- bottom:0;
- background:#101827;
- border-top:1px solid #26344a;
- display:flex;
- justify-content:space-around;
- padding:10px 5px;
- z-index:5;
-}
-footer button{
- background:transparent;
- border:0;
- color:#b8c6da;
- font-size:14px;
- padding:5px 12px;
-}
-footer button.active{color:#38bdf8}
-#settingsPanel{
- display:none;
- position:fixed;
- inset:0;
- z-index:50;
- background:#000b;
- align-items:center;
- justify-content:center;
- padding:20px;
-}
-.settings-content{
- width:100%;
- max-width:400px;
- background:#17243a;
- border:1px solid #34445d;
- border-radius:15px;
- padding:20px;
-}
-.settings-content h3{color:#38bdf8}
-.settings-content button{
- width:100%;
- padding:12px;
- margin:5px 0;
- border:0;
- border-radius:9px;
- background:#263b56;
- color:white;
- font-size:15px;
-}
-#clearHistory{background:#991b1b}
-.hidden{display:none!important}
-@media(max-width:400px){
- .logo{font-size:22px}
- .folder{width:35px;height:35px}
- .folders{gap:4px}
- main{padding:9px}
+@media(prefers-reduced-motion:reduce){
+header h1{animation:none}
+.typing-dots span{animation:none}
 }
 </style>
 </head>
 
 <body>
+<header><h1>Tola Ai</h1></header>
 
-<header>
- <div class="header-top">
-  <div class="logo">Tola Ai</div>
+<div class="toolbar">
+<button class="new-chat" onclick="newConversation()">＋ Haaraa</button>
+</div>
 
-  <div class="folders">
+<main class="container">
+<section class="folder-row">
+<details class="folder">
+<summary>🌐 Afaan</summary>
+<div class="folder-content">
+<button onclick="setLanguage('om')">Afaan Oromoo</button>
+<button onclick="setLanguage('am')">አማርኛ</button>
+<button onclick="setLanguage('en')">English</button>
+</div>
+</details>
 
-   <button class="folder" id="languageFolder"
-   aria-label="Afaan filadhu" title="Afaan"
-   onclick="toggleMenu('languageMenu',this)">🌐</button>
+<details class="folder">
+<summary>📚 Barnoota</summary>
+<div class="folder-content">
+<button onclick="askTopic('Herrega na barsiisi.')">📐 Herrega</button>
+<button onclick="askTopic('Saayinsii na barsiisi.')">🧪 Saayinsii</button>
+<button onclick="askTopic('Afaan Oromoo na barsiisi.')">📖 Afaan Oromoo</button>
+<button onclick="askTopic('English na barsiisi.')">🇬🇧 English</button>
+<button onclick="askTopic('Afaan Amaaraa na barsiisi.')">🇪🇹 Afaan Amaaraa</button>
+<button onclick="askTopic('Hawaasummaa na barsiisi.')">🌍 Hawaasummaa</button>
+<button onclick="askTopic('ICT na barsiisi.')">💻 ICT</button>
+<button onclick="askTopic('Beekumsa waliigalaa na barsiisi.')">💡 Beekumsa Waliigalaa</button>
+</div>
+</details>
+</section>
 
-   <button class="folder" id="subjectFolder"
-   aria-label="Gosa barnootaa filadhu" title="Gosa barnootaa"
-   onclick="toggleMenu('subjectMenu',this)">📚</button>
-
-   <button class="folder" id="gameFolder"
-   aria-label="Bashannana" title="Bashannana"
-   onclick="toggleMenu('gameMenu',this)">🎮</button>
-
-  </div>
- </div>
-
- <div class="dropdown" id="languageMenu">
-  <button onclick="setLanguage('om','Afaan Oromoo')">Afaan Oromoo</button>
-  <button onclick="setLanguage('am','አማርኛ')">አማርኛ</button>
-  <button onclick="setLanguage('en','English')">English</button>
- </div>
-
- <div class="dropdown" id="subjectMenu">
-  <button onclick="setSubject('Barnoota waliigalaa')">Barnoota waliigalaa</button>
-  <button onclick="setSubject('Herrega')">Herrega</button>
-  <button onclick="setSubject('Physics')">Physics</button>
-  <button onclick="setSubject('Chemistry')">Chemistry</button>
-  <button onclick="setSubject('Biology')">Biology</button>
-  <button onclick="setSubject('English')">English</button>
-  <button onclick="setSubject('Afaan Oromoo')">Afaan Oromoo</button>
-  <button onclick="setSubject('Geography')">Geography</button>
-  <button onclick="setSubject('History')">History</button>
- </div>
-
- <div class="dropdown" id="gameMenu">
-  <button onclick="ask('Gaaffii beekumsa waliigalaa 5 na gaafadhu.')">🧠 Gaaffii beekumsaa</button>
-  <button onclick="ask('Tapha jechootaa na waliin taphadhu.')">🔤 Tapha jechootaa</button>
-  <button onclick="ask('Gaaffii herregaa salphaa naaf kenni.')">➗ Tapha herregaa</button>
-  <button onclick="ask('Seenaa gabaabaa nama barsiisu naaf himi.')">📖 Seenaa gabaabaa</button>
- </div>
-
- <button id="returnButton" onclick="newChat()"></button>
-</header>
-
-<main>
-
- <section id="welcome">
-  <h2></h2>
-  <p>
-  </p>
- </section>
-
- <div id="chatMessages"></div>
- <div id="typing">Eegi...</div>
-
- <section class="composer">
-  <div class="input-row">
-   <textarea id="question"
-    placeholder=
-></textarea>
-   <button id="send" onclick="sendMessage()">➤</button>
-  </div>
-  <div id="statusBox"></div>
- </section>
-
+<section id="chatMessages"></section>
 </main>
 
-<footer>
- <button class="active" onclick="newChat()">＋ Haaraa</button>
- <button onclick="showSettings()">⚙️ Qindaa'ina</button>
-</footer>
-
-<div id="settingsPanel" onclick="closeSettingsOutside(event)">
- <div class="settings-content">
-  <h3>⚙️ Qindaa'ina Tola Ai</h3>
-  <p id="currentLanguage">Afaan: Afaan Oromoo</p>
-  <p id="currentSubject">Gosa barnootaa: Waliigalaa</p>
-  <button onclick="newChat();hideSettings()">Mari'aa haaraa jalqabi</button>
-  <button id="clearHistory" onclick="clearHistory()">Seenaa marii haqi</button>
-  <button onclick="hideSettings()">Cufi</button>
- </div>
+<div class="input-area">
+<div id="status"></div>
+<div class="input-inner">
+<textarea id="question" placeholder="Gaaffii kee barreessi..." rows="1"
+oninput="resizeInput(this)" onkeydown="handleKey(event)"></textarea>
+<button id="send" onclick="sendMessage()" aria-label="Ergi">↑</button>
+</div>
 </div>
 
 <script>
- const API_URL = "https://script.google.com/macros/s/AKfycbzbVv5eMVe5RWVJOXFzVtvBAicP_xUEULwI8cGgAUJ6elhikdBguWNO7gSCut9o9m9Vbg/exec";
-"use strict";
-
-/* QINDAA'INA SERVERII */
-
-let language = "om";
-let languageName = "Afaan Oromoo";
-let subject = "Barnoota waliigalaa";
 let history = [];
+let language = "om";
 let busy = false;
 
+const messages = document.getElementById("chatMessages");
 const question = document.getElementById("question");
 const sendButton = document.getElementById("send");
-const chatMessages = document.getElementById("chatMessages");
-const welcome = document.getElementById("welcome");
-const typing = document.getElementById("typing");
-const statusBox = document.getElementById("statusBox");
+const statusBox = document.getElementById("status");
 
-/* SEENAA MARII */
-
-try {
- history = JSON.parse(localStorage.getItem("tola_history") || "[]");
- if (!Array.isArray(history)) history = [];
-} catch(e) {
- history = [];
+function resizeInput(element){
+  element.style.height = "38px";
+  element.style.height = Math.min(element.scrollHeight,120) + "px";
 }
 
-function saveHistory(){
- try{
-  localStorage.setItem("tola_history",JSON.stringify(history));
- }catch(e){}
+function setLanguage(code){
+  language = code;
+  const placeholders = {
+    om:"Gaaffii kee barreessi...",
+    am:"ጥያቄህን እዚህ ጻፍ...",
+    en:"Write your question here..."
+  };
+  question.placeholder = placeholders[code] || placeholders.om;
 }
 
-/* MENU FOLDER */
-
-function toggleMenu(id,button){
- const menu=document.getElementById(id);
- const wasOpen=menu.classList.contains("show");
-
- document.querySelectorAll(".dropdown").forEach(m=>{
-  m.classList.remove("show");
- });
-
- document.querySelectorAll(".folder").forEach(b=>{
-  b.classList.remove("active");
- });
-
- if(!wasOpen){
-  menu.classList.add("show");
-  button.classList.add("active");
- }
+function isNameQuestion(text){
+  const q = text.toLowerCase().trim();
+  const patterns = [
+    /maqaan kee eenyu/,
+    /ati eenyu/,
+    /maqaa kee natti himi/,
+    /eenyu si/,
+    /who are you/,
+    /what is your name/,
+    /your name/,
+    /ማን ነህ/,
+    /ስምህ ማን ነው/
+  ];
+  return patterns.some(pattern => pattern.test(q));
 }
 
-document.addEventListener("click",function(e){
- if(!e.target.closest(".folders") &&
-    !e.target.closest(".dropdown")){
-  document.querySelectorAll(".dropdown").forEach(m=>{
-   m.classList.remove("show");
+/* Barruu deebii saffisaan agarsiisa */
+function typeText(element,text){
+  return new Promise(function(resolve){
+    let position = 0;
+    const reduced = window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if(reduced){
+      element.textContent = text;
+      resolve();
+      return;
+    }
+
+    function draw(){
+      position = Math.min(position + 72,text.length);
+      element.textContent = text.slice(0,position);
+
+      if(position < text.length){
+        requestAnimationFrame(draw);
+      }else{
+        resolve();
+      }
+    }
+
+    draw();
   });
-  document.querySelectorAll(".folder").forEach(b=>{
-   b.classList.remove("active");
-  });
- }
-});
-
-/* AFAAN FILADHU */
-
-function setLanguage(code,name){
- language=code;
- languageName=name;
-
- document.getElementById("currentLanguage").textContent=
- "Afaan: "+name;
-
- closeMenus();
- statusBox.textContent="Afaan "+name+" filatameera.";
 }
 
-/* GOSA BARNOOTAA FILADHU */
+function addMessage(text,type,animated){
+  const div = document.createElement("div");
+  div.className = "message " + type;
 
-function setSubject(name){
- subject=name;
+  const content = document.createElement("div");
+  div.appendChild(content);
 
- document.getElementById("currentSubject").textContent=
- "Gosa barnootaa: "+name;
+  messages.appendChild(div);
 
- closeMenus();
- statusBox.textContent=name+" filatameera.";
-}
+  const renderPromise = animated
+    ? typeText(content,text)
+    : Promise.resolve(content.textContent = text);
 
-function closeMenus(){
- document.querySelectorAll(".dropdown").forEach(m=>{
-  m.classList.remove("show");
- });
- document.querySelectorAll(".folder").forEach(b=>{
-  b.classList.remove("active");
- });
-}
+  if(type === "ai"){
+    const actions = document.createElement("div");
+    actions.className = "message-actions";
 
-/* ERGAA AGARSIISUU */
+    const copy = document.createElement("button");
+    copy.textContent = "📋 Copy";
 
-function addMessage(text,type){
- const box=document.createElement("div");
- box.className="message "+type;
+    copy.onclick = function(){
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text)
+          .then(function(){
+            statusBox.textContent = "Deebiin copy ta'eera.";
+          })
+          .catch(function(){
+            statusBox.textContent = "Copy gochuun hin danda'amne.";
+          });
+      }else{
+        statusBox.textContent = "Copy hin danda'amne.";
+      }
+    };
 
- const label=document.createElement("small");
- label.textContent=type==="user"?"Ana":"Tola Ai";
-
- const content=document.createElement("div");
- content.textContent=text;
-
- box.appendChild(label);
- box.appendChild(content);
-
- chatMessages.appendChild(box);
-
- window.scrollTo({
-  top:document.body.scrollHeight,
-  behavior:"smooth"
- });
-}
-
-function showChat(){
- welcome.style.display="none";
- document.getElementById("returnButton").style.display="block";
-}
-
-function newChat(){
- history=[];
- chatMessages.innerHTML="";
- welcome.style.display="block";
- document.getElementById("returnButton").style.display="none";
- saveHistory();
- statusBox.textContent=
- question.focus();
-}
-
-/* SEENAA DEEBISUU */
-
-function restoreHistory(){
- if(history.length===0)return;
-
- showChat();
-
- history.forEach(item=>{
-  if(item.role==="user"){
-   addMessage(item.content,"user");
-  }else if(item.role==="assistant"){
-   addMessage(item.content,"ai");
-  }
- });
-}
-
-/* ERGAA SERVERIIF ERGUU */
-
-async function requestWithRetry(payload){
- let lastError;
-
- for(let attempt=0;attempt<2;attempt++){
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),45000);
-
-  try{
-   const response=await fetch(API_URL,{
-    method:"POST",
-    headers:{
-     "Content-Type":"application/json"
-    },
-    body:JSON.stringify(payload),
-    signal:controller.signal
-   });
-
-   clearTimeout(timeout);
-
-   const raw=await response.text();
-   let data;
-
-   try{
-    data=JSON.parse(raw);
-   }catch(e){
-    throw new Error("Deebiin serverii sirrii miti. HTTP "+response.status);
-   }
-
-   if(!response.ok){
-    const err=new Error(
-     data.error || data.message || "Server error "+response.status
-    );
-    err.status=response.status;
-    throw err;
-   }
-
-   return data;
-
-  }catch(error){
-   clearTimeout(timeout);
-   lastError=error;
-
-   if(error.name==="AbortError"){
-    lastError=new Error("Serveriin yeroo dheeraa fudhate.");
-   }
-
-   const status=error.status;
-   const retryable=
-    !status || [429,500,502,503,504].includes(status);
-
-   if(!retryable || attempt===1)break;
-
-   await new Promise(resolve=>setTimeout(resolve,1500));
-  }
- }
-
- throw lastError;
-}
-
-/* ERGAA ERGUU */
-
-async function sendMessage(){
- const message=question.value.trim();
-
- if(!message || busy)return;
-
- busy=true;
- sendButton.disabled=true;
- typing.style.display="block";
- statusBox.textContent=
- showChat();
-
- addMessage(message,"user");
-
- history.push({
-  role:"user",
-  content:message
- });
-
- question.value="";
- question.style.height="50px";
-
- const payload={
-  message:message,
-  language:language,
-  subject:subject,
-  history:history.slice(-12)
- };
-
- try{
-  const data=await requestWithRetry(payload);
-
-  const reply=
-   data.reply || data.answer || data.text ||
-   data.response || "";
-
-  if(!reply){
-   throw new Error("Deebiin serverii duwwaa dha.");
+    actions.appendChild(copy);
+    div.appendChild(actions);
   }
 
-  addMessage(String(reply),"ai");
-
-  history.push({
-   role:"assistant",
-   content:String(reply)
+  requestAnimationFrame(function(){
+    window.scrollTo({
+      top:document.body.scrollHeight,
+      behavior:"smooth"
+    });
   });
 
-  history=history.slice(-24);
-  saveHistory();
-
-  statusBox.textContent="Deebiin argameera.";
-
- }catch(error){
-  let message="Dhiifama, deebii argachuu hin dandeenye.";
-
-  if(error.name==="AbortError"){
-   message="Serveriin yeroo dheeraa fudhate. Irra deebi'ii yaali.";
-  }else if(error.status===429){
-   message="Gaaffiin serverii baay'ateera. Booda irra deebi'ii yaali.";
-  }else if(error.status===502 || error.status===503 ||
-           error.status===504){
-   message="Serveriin yeroo ammaa deebii kennuu hin dandeenye. Xiqqoo booda yaali.";
-  }else{
-   message+=" "+error.message;
-  }
-
-  addMessage(message,"ai");
-  statusBox.textContent="Walqunnamtiin serverii rakkoo qaba.";
- }finally{
-  busy=false;
-  sendButton.disabled=false;
-  typing.style.display="none";
-  question.focus();
- }
+  return renderPromise;
 }
 
-/* ENTER TUQII ERGI */
+function showTyping(){
+  statusBox.innerHTML =
+    '<span class="typing-dots"><span></span><span></span><span></span></span> Tola AI deebii qopheessaa jira...';
+}
 
-question.addEventListener("keydown",function(e){
- if(e.key==="Enter" && !e.shiftKey){
-  e.preventDefault();
+function handleKey(event){
+  if(event.key === "Enter" && !event.shiftKey){
+    event.preventDefault();
+    sendMessage();
+  }
+}
+
+function askTopic(text){
+  if(busy) return;
+  question.value = text;
+  resizeInput(question);
   sendMessage();
- }
-});
-
-/* BAL'INA BOXII BARREESSUU */
-
-question.addEventListener("input",function(){
- this.style.height="50px";
- this.style.height=Math.min(this.scrollHeight,150)+"px";
-});
-
-/* GAFFII FOLDER IRRAA */
-
-function ask(text){
- question.value=text;
- closeMenus();
- sendMessage();
 }
 
-/* QINDAA'INA */
+function sendMessage(){
+  if(busy) return;
 
-function showSettings(){
- document.getElementById("settingsPanel").style.display="flex";
+  const text = question.value.trim();
+  if(!text){
+    question.focus();
+    return;
+  }
+
+  busy = true;
+  sendButton.disabled = true;
+  question.value = "";
+  resizeInput(question);
+
+  addMessage(text,"user",false);
+  showTyping();
+
+  if(isNameQuestion(text)){
+    const answer = language === "en"
+      ? "I am Tola Ai."
+      : language === "am"
+      ? "እኔ ቶላ AI ነኝ።"
+      : "Ani Tola Ai dha.";
+
+    statusBox.textContent = "";
+    addMessage(answer,"ai",true).then(finish);
+
+    history.push(
+      {role:"user",text:text},
+      {role:"model",text:answer}
+    );
+    history = history.slice(-16);
+    return;
+  }
+
+  if(typeof google === "undefined" ||
+     !google.script ||
+     !google.script.run){
+    statusBox.textContent = "";
+    addMessage("Web App sirriitti bani.","ai",false);
+    finish();
+    return;
+  }
+
+  const previousHistory = history.slice(-8);
+
+  google.script.run
+    .withSuccessHandler(function(reply){
+      if(reply && String(reply).trim()){
+        const answer = String(reply);
+
+        history.push(
+          {role:"user",text:text},
+          {role:"model",text:answer}
+        );
+        history = history.slice(-16);
+
+        statusBox.textContent = "";
+        addMessage(answer,"ai",true).then(finish);
+      }else{
+        statusBox.textContent = "";
+        addMessage(
+          "Deebii argachuun hin danda'amne. Irra deebi'ii yaali.",
+          "ai",false
+        );
+        finish();
+      }
+    })
+    .withFailureHandler(function(error){
+      const errorText = error && error.message
+        ? error.message
+        : "Rakkoo hin beekamne.";
+
+      statusBox.textContent = "";
+      addMessage(
+        "Dhiifama, deebii argachuu hin dandeenye.\n" + errorText,
+        "ai",false
+      );
+      finish();
+    })
+    .askGemini(text,language,previousHistory);
 }
 
-function hideSettings(){
- document.getElementById("settingsPanel").style.display="none";
+function finish(){
+  busy = false;
+  sendButton.disabled = false;
+  statusBox.textContent = "";
+  question.focus();
 }
 
-function closeSettingsOutside(event){
- if(event.target.id==="settingsPanel"){
-  hideSettings();
- }
+function newConversation(){
+  if(busy) return;
+
+  history = [];
+  messages.innerHTML = "";
+  question.value = "";
+  resizeInput(question);
+  statusBox.textContent = "";
+  question.focus();
 }
-
-/* SEENAA HAQUU */
-
-function clearHistory(){
- if(!confirm("Seenaa marii hunda haquu barbaaddaa?"))return;
-
- history=[];
- saveHistory();
- chatMessages.innerHTML="";
- welcome.style.display="block";
- document.getElementById("returnButton").style.display="none";
- hideSettings();
- statusBox.textContent="Seenaa marii haqameera.";
-}
-
-/* JALQABA */
-
-restoreHistory();
-
 </script>
 </body>
- </html>
- 
+</html>
