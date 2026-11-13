@@ -9,49 +9,300 @@
 
 <style>
 *{box-sizing:border-box}
+
 html,body{
-margin:0;padding:0;width:100%;min-height:100%;
-background:#080808;color:#f5f5f5;font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+width:100%;
+min-height:100%;
+background:#080808;
+color:#fff;
+font-family:Arial,sans-serif;
 }
-body{min-height:100vh;min-height:100dvh;padding-bottom:85px}
-header{text-align:center;padding:20px 12px 16px;background:#111;border-bottom:1px solid #292929}
+
+body{
+min-height:100vh;
+min-height:100dvh;
+padding-bottom:95px;
+}
+
+header{
+text-align:center;
+padding:20px 12px 16px;
+background:#111;
+border-bottom:1px solid #292929;
+}
+
 header h1{
-margin:0;font-size:37px;font-weight:900;letter-spacing:1px;
+margin:0;
+font-size:37px;
+font-weight:900;
+letter-spacing:1px;
 background:linear-gradient(90deg,#00e5ff,#a855f7,#facc15,#00e5ff);
-background-size:250% auto;-webkit-background-clip:text;
-background-clip:text;color:transparent;animation:shine 5s linear infinite
+background-size:250% auto;
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
+animation:shine 5s linear infinite;
 }
-@keyframes shine{to{background-position:250% center}}
-.toolbar{display:flex;justify-content:center;align-items:center;padding:11px 10px;background:#101010;border-bottom:1px solid #292929}
-.new-chat{background:#262626;color:white;border:1px solid #404040;border-radius:10px;padding:10px 16px;font-size:13px;cursor:pointer}
-.container{width:100%;max-width:850px;margin:auto;padding:12px 12px 20px}
-.folder-row{display:flex;justify-content:center;align-items:flex-start;gap:11px;width:100%;margin:8px auto 17px}
-.folder{width:min(45%,210px);background:#191919;border:1px solid #414141;border-radius:13px;overflow:hidden;min-height:45px;box-shadow:0 3px 12px #0005}
-.folder summary{list-style:none;padding:12px 8px;cursor:pointer;text-align:center;color:#f5f5f5;font-size:14px;font-weight:bold}
-.folder summary::-webkit-details-marker{display:none}
-.folder summary:after{content:"  ＋";color:#facc15;font-size:15px}
-.folder[open] summary:after{content:"  −"}
-.folder-content{padding:5px 8px 10px;display:grid;gap:7px}
-.folder-content button{width:100%;min-height:37px;padding:8px 6px;background:#292929;border:1px solid #454545;color:#eee;border-radius:8px;text-align:center;font-size:12px;cursor:pointer}
-.folder-content button:active{background:#0756a8}
-#chatMessages{margin-top:12px;padding-bottom:12px}
-.message{margin:13px 0;padding:13px;line-height:1.75;white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px}
-.user{background:#0756a8;color:white;border-radius:14px;margin-left:25px;border:1px solid #218be8}
-.ai{background:transparent;color:#f5f5f5;border:0;margin-right:5px;padding:12px 3px;box-shadow:none}
-.message-actions{display:flex;gap:8px;margin-top:10px}
-.message-actions button{background:#202020;color:#ddd;border:1px solid #414141;border-radius:8px;padding:7px 11px;font-size:12px;cursor:pointer}
-.input-area{position:fixed;left:0;right:0;bottom:0;z-index:999;width:100%;margin:0;padding:7px 10px;padding-bottom:calc(7px + env(safe-area-inset-bottom));background:#080808;border:0}
-.input-inner{width:100%;max-width:800px;margin:0 auto;display:flex;align-items:flex-end;gap:7px;padding:6px 7px;background:#303030;border:1px solid #555;border-radius:20px;box-shadow:0 3px 15px #0009}
-#question{display:block;flex:1;width:100%;min-width:0;min-height:38px;max-height:120px;resize:none;overflow-y:auto;background:transparent;color:#fff;border:0;padding:9px 8px;font-size:16px;line-height:1.4;outline:none;font-family:Arial,sans-serif}
-#question::placeholder{color:#c0c0c0}
-#send{width:39px;height:39px;flex-shrink:0;border:1px solid #b8860b;border-radius:50%;background:linear-gradient(145deg,#facc15,#b8860b);color:#080808;font-size:22px;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
-#send:disabled{opacity:.45}
-#status{text-align:center;color:#b5b5b5;font-size:12px;min-height:17px;padding:0 3px 3px}
-.typing-dots{display:inline-flex;gap:5px;align-items:center}
-.typing-dots span{width:6px;height:6px;border-radius:50%;background:#facc15;animation:pulse 1s infinite ease-in-out}
-.typing-dots span:nth-child(2){animation-delay:.15s}
-.typing-dots span:nth-child(3){animation-delay:.3s}
-@keyframes pulse{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+
+@keyframes shine{
+to{background-position:250% center}
+}
+
+.toolbar{
+display:flex;
+justify-content:center;
+align-items:center;
+padding:11px 10px;
+background:#101010;
+border-bottom:1px solid #292929;
+}
+
+.new-chat{
+background:#292929;
+color:#fff;
+border:1px solid #666;
+border-radius:10px;
+padding:10px 18px;
+font-size:14px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.new-chat:active{
+background:#444;
+}
+
+.container{
+width:100%;
+max-width:850px;
+margin:auto;
+padding:12px 12px 20px;
+}
+
+.folder-row{
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:11px;
+width:100%;
+margin:8px auto 17px;
+}
+
+.folder{
+width:min(45%,210px);
+background:#191919;
+border:1px solid #414141;
+border-radius:13px;
+overflow:hidden;
+min-height:45px;
+box-shadow:0 3px 12px #0005;
+}
+
+.folder summary{
+list-style:none;
+padding:12px 8px;
+cursor:pointer;
+text-align:center;
+color:#fff;
+font-size:14px;
+font-weight:bold;
+}
+
+.folder summary::-webkit-details-marker{
+display:none;
+}
+
+.folder summary:after{
+content:"  ＋";
+color:#facc15;
+font-size:15px;
+}
+
+.folder[open] summary:after{
+content:"  −";
+}
+
+.folder-content{
+padding:5px 8px 10px;
+display:grid;
+gap:7px;
+}
+
+.folder-content button{
+width:100%;
+min-height:37px;
+padding:8px 6px;
+background:#292929;
+border:1px solid #555;
+color:#fff;
+border-radius:8px;
+text-align:center;
+font-size:12px;
+cursor:pointer;
+}
+
+.folder-content button:active{
+background:#0756a8;
+}
+
+#chatMessages{
+margin-top:12px;
+padding-bottom:12px;
+}
+
+.message{
+margin:13px 0;
+padding:14px;
+line-height:1.8;
+white-space:pre-wrap;
+overflow-wrap:anywhere;
+font-size:17px;
+color:#fff;
+}
+
+.user{
+background:#0756a8;
+color:#fff;
+border-radius:14px;
+margin-left:25px;
+border:1px solid #218be8;
+}
+
+.ai{
+background:transparent;
+color:#fff;
+border:0;
+margin-right:5px;
+padding:14px 3px;
+font-size:17px;
+line-height:1.85;
+font-weight:400;
+text-shadow:0 0 1px #fff;
+}
+
+.input-area{
+position:fixed;
+left:0;
+right:0;
+bottom:0;
+z-index:999;
+width:100%;
+margin:0;
+padding:8px 10px;
+padding-bottom:calc(8px + env(safe-area-inset-bottom));
+background:#080808;
+border-top:1px solid #333;
+}
+
+.input-inner{
+width:100%;
+max-width:800px;
+margin:0 auto;
+display:flex;
+align-items:flex-end;
+gap:9px;
+padding:7px 8px;
+background:#303030;
+border:1px solid #666;
+border-radius:20px;
+box-shadow:0 3px 15px #0009;
+}
+
+#question{
+display:block;
+flex:1;
+width:100%;
+min-width:0;
+min-height:42px;
+max-height:150px;
+resize:none;
+overflow-y:auto;
+background:transparent;
+color:#fff;
+border:0;
+padding:10px 8px;
+font-size:16px;
+line-height:1.5;
+outline:none;
+font-family:Arial,sans-serif;
+}
+
+#question::placeholder{
+color:#ddd;
+opacity:1;
+}
+
+#send{
+width:48px;
+height:48px;
+flex-shrink:0;
+border:2px solid #ffe680;
+border-radius:50%;
+background:linear-gradient(145deg,#ffe45c,#ffb800,#d99500);
+color:#111;
+font-size:28px;
+font-weight:900;
+cursor:pointer;
+display:flex;
+align-items:center;
+justify-content:center;
+box-shadow:0 0 12px #facc1580;
+transition:transform .15s,filter .15s;
+}
+
+#send:active{
+transform:scale(.91);
+filter:brightness(1.2);
+}
+
+#send:disabled{
+opacity:.45;
+cursor:not-allowed;
+}
+
+#status{
+text-align:center;
+color:#eee;
+font-size:12px;
+min-height:18px;
+padding:0 3px 4px;
+}
+
+.typing-dots{
+display:inline-flex;
+gap:5px;
+align-items:center;
+}
+
+.typing-dots span{
+width:6px;
+height:6px;
+border-radius:50%;
+background:#facc15;
+animation:pulse 1s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2){
+animation-delay:.15s;
+}
+
+.typing-dots span:nth-child(3){
+animation-delay:.3s;
+}
+
+@keyframes pulse{
+0%,80%,100%{
+opacity:.25;
+transform:translateY(0);
+}
+40%{
+opacity:1;
+transform:translateY(-4px);
+}
+}
+
 @media(max-width:360px){
 header h1{font-size:33px}
 .folder-row{gap:8px}
@@ -59,8 +310,10 @@ header h1{font-size:33px}
 .folder summary{font-size:12px;padding:12px 4px}
 .folder-content{padding:5px 6px 8px}
 .folder-content button{font-size:11px}
-.message{font-size:14px}
+.message{font-size:16px}
+#send{width:45px;height:45px}
 }
+
 @media(prefers-reduced-motion:reduce){
 header h1{animation:none}
 .typing-dots span{animation:none}
@@ -69,14 +322,19 @@ header h1{animation:none}
 </head>
 
 <body>
-<header><h1>Tola Ai</h1></header>
+
+<header>
+<h1>Tola Ai</h1>
+</header>
 
 <div class="toolbar">
 <button class="new-chat" onclick="newConversation()">＋ Haaraa</button>
 </div>
 
 <main class="container">
+
 <section class="folder-row">
+
 <details class="folder">
 <summary>🌐 Afaan</summary>
 <div class="folder-content">
@@ -99,21 +357,39 @@ header h1{animation:none}
 <button onclick="askTopic('Beekumsa waliigalaa na barsiisi.')">💡 Beekumsa Waliigalaa</button>
 </div>
 </details>
+
 </section>
 
 <section id="chatMessages"></section>
+
 </main>
 
 <div class="input-area">
+
 <div id="status"></div>
+
 <div class="input-inner">
-<textarea id="question" placeholder="Gaaffii kee barreessi..." rows="1"
-oninput="resizeInput(this)" onkeydown="handleKey(event)"></textarea>
-<button id="send" onclick="sendMessage()" aria-label="Ergi">↑</button>
+
+<textarea
+id="question"
+placeholder="Gaaffii kee barreessi..."
+rows="1"
+oninput="resizeInput(this)"
+onkeydown="handleKey(event)"
+></textarea>
+
+<button
+id="send"
+onclick="sendMessage()"
+aria-label="Ergi"
+title="Ergi"
+>↑</button>
+
 </div>
 </div>
 
 <script>
+
 let history = [];
 let language = "om";
 let busy = false;
@@ -123,232 +399,132 @@ const question = document.getElementById("question");
 const sendButton = document.getElementById("send");
 const statusBox = document.getElementById("status");
 
+
 function resizeInput(element){
-  element.style.height = "38px";
-  element.style.height = Math.min(element.scrollHeight,120) + "px";
-}
+  element.style.height = "42px";
+    element.style.height =
+        Math.min(element.scrollHeight,150) + "px";
+        }
 
-function setLanguage(code){
-  language = code;
-  const placeholders = {
-    om:"Gaaffii kee barreessi...",
-    am:"ጥያቄህን እዚህ ጻፍ...",
-    en:"Write your question here..."
-  };
-  question.placeholder = placeholders[code] || placeholders.om;
-}
 
-function isNameQuestion(text){
-  const q = text.toLowerCase().trim();
-  const patterns = [
-    /maqaan kee eenyu/,
-    /ati eenyu/,
-    /maqaa kee natti himi/,
-    /eenyu si/,
-    /who are you/,
-    /what is your name/,
-    /your name/,
-    /ማን ነህ/,
-    /ስምህ ማን ነው/
-  ];
-  return patterns.some(pattern => pattern.test(q));
-}
+        /* Afaan filachuu */
 
-/* Barruu deebii saffisaan agarsiisa */
-function typeText(element,text){
-  return new Promise(function(resolve){
-    let position = 0;
-    const reduced = window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        function setLanguage(code){
+          language = code;
 
-    if(reduced){
-      element.textContent = text;
-      resolve();
-      return;
-    }
+            const placeholders = {
+                om:"Gaaffii kee barreessi...",
+                    am:"ጥያቄህን እዚህ ጻፍ...",
+                        en:"Write your question here..."
+                          };
 
-    function draw(){
-      position = Math.min(position + 72,text.length);
-      element.textContent = text.slice(0,position);
+                            question.placeholder = placeholders[code] || placeholders.om;
+                            }
 
-      if(position < text.length){
-        requestAnimationFrame(draw);
-      }else{
-        resolve();
-      }
-    }
 
-    draw();
-  });
-}
+                            /* Gaaffii maqaa Tola AI */
 
-function addMessage(text,type,animated){
-  const div = document.createElement("div");
-  div.className = "message " + type;
+                            function isNameQuestion(text){
+                              const q = text.toLowerCase().trim();
 
-  const content = document.createElement("div");
-  div.appendChild(content);
+                                const patterns = [
+                                    /maqaan kee eenyu/,
+                                        /ati eenyu/,
+                                            /maqaa kee natti himi/,
+                                                /eenyu si/,
+                                                    /who are you/,
+                                                        /what is your name/,
+                                                            /your name/,
+                                                                /ማን ነህ/,
+                                                                    /ስምህ ማን ነው/
+                                                                      ];
 
-  messages.appendChild(div);
+                                                                        return patterns.some(function(pattern){
+                                                                            return pattern.test(q);
+                                                                              });
+                                                                              }
 
-  const renderPromise = animated
-    ? typeText(content,text)
-    : Promise.resolve(content.textContent = text);
 
-  if(type === "ai"){
-    const actions = document.createElement("div");
-    actions.className = "message-actions";
+                                                                              /* Typing saffisaa */
 
-    const copy = document.createElement("button");
-    copy.textContent = "📋 Copy";
+                                                                              function typeText(element,text){
 
-    copy.onclick = function(){
-      if(navigator.clipboard && navigator.clipboard.writeText){
-        navigator.clipboard.writeText(text)
-          .then(function(){
-            statusBox.textContent = "Deebiin copy ta'eera.";
-          })
-          .catch(function(){
-            statusBox.textContent = "Copy gochuun hin danda'amne.";
-          });
-      }else{
-        statusBox.textContent = "Copy hin danda'amne.";
-      }
-    };
+                                                                                return new Promise(function(resolve){
 
-    actions.appendChild(copy);
-    div.appendChild(actions);
-  }
+                                                                                    let position = 0;
 
-  requestAnimationFrame(function(){
-    window.scrollTo({
-      top:document.body.scrollHeight,
-      behavior:"smooth"
-    });
-  });
+                                                                                        const reduced = window.matchMedia &&
+                                                                                              window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  return renderPromise;
-}
+                                                                                                  if(reduced){
+                                                                                                        element.textContent = text;
+                                                                                                              resolve();
+                                                                                                                    return;
+                                                                                                                        }
 
-function showTyping(){
-  statusBox.innerHTML =
-    '<span class="typing-dots"><span></span><span></span><span></span></span> Tola AI deebii qopheessaa jira...';
-}
+                                                                                                                            const chunkSize = 220;
 
-function handleKey(event){
-  if(event.key === "Enter" && !event.shiftKey){
-    event.preventDefault();
-    sendMessage();
-  }
-}
+                                                                                                                                function draw(){
 
-function askTopic(text){
-  if(busy) return;
-  question.value = text;
-  resizeInput(question);
-  sendMessage();
-}
+                                                                                                                                      position = Math.min(
+                                                                                                                                              position + chunkSize,
+                                                                                                                                                      text.length
+                                                                                                                                                            );
 
-function sendMessage(){
-  if(busy) return;
+                                                                                                                                                                  element.textContent = text.slice(0,position);
 
-  const text = question.value.trim();
-  if(!text){
-    question.focus();
-    return;
-  }
+                                                                                                                                                                        if(position < text.length){
+                                                                                                                                                                                requestAnimationFrame(draw);
+                                                                                                                                                                                      }else{
+                                                                                                                                                                                              resolve();
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                        }
 
-  busy = true;
-  sendButton.disabled = true;
-  question.value = "";
-  resizeInput(question);
+                                                                                                                                                                                                            draw();
 
-  addMessage(text,"user",false);
-  showTyping();
+                                                                                                                                                                                                              });
+                                                                                                                                                                                                              }
 
-  if(isNameQuestion(text)){
-    const answer = language === "en"
-      ? "I am Tola Ai."
-      : language === "am"
-      ? "እኔ ቶላ AI ነኝ።"
-      : "Ani Tola Ai dha.";
 
-    statusBox.textContent = "";
-    addMessage(answer,"ai",true).then(finish);
+                                                                                                                                                                                                              /* Ergaa fuula irratti agarsiisuu */
 
-    history.push(
-      {role:"user",text:text},
-      {role:"model",text:answer}
-    );
-    history = history.slice(-16);
-    return;
-  }
+                                                                                                                                                                                                              function addMessage(text,type,animated){
 
-  if(typeof google === "undefined" ||
-     !google.script ||
-     !google.script.run){
-    statusBox.textContent = "";
-    addMessage("Web App sirriitti bani.","ai",false);
-    finish();
-    return;
-  }
+                                                                                                                                                                                                                const div = document.createElement("div");
+                                                                                                                                                                                                                  div.className = "message " + type;
 
-  const previousHistory = history.slice(-8);
+                                                                                                                                                                                                                    const content = document.createElement("div");
+                                                                                                                                                                                                                      div.appendChild(content);
 
-  google.script.run
-    .withSuccessHandler(function(reply){
-      if(reply && String(reply).trim()){
-        const answer = String(reply);
+                                                                                                                                                                                                                        messages.appendChild(div);
 
-        history.push(
-          {role:"user",text:text},
-          {role:"model",text:answer}
-        );
-        history = history.slice(-16);
+                                                                                                                                                                                                                          const renderPromise = animated
+                                                                                                                                                                                                                              ? typeText(content,text)
+                                                                                                                                                                                                                                  : Promise.resolve(content.textContent = text);
 
-        statusBox.textContent = "";
-        addMessage(answer,"ai",true).then(finish);
-      }else{
-        statusBox.textContent = "";
-        addMessage(
-          "Deebii argachuun hin danda'amne. Irra deebi'ii yaali.",
-          "ai",false
-        );
-        finish();
-      }
-    })
-    .withFailureHandler(function(error){
-      const errorText = error && error.message
-        ? error.message
-        : "Rakkoo hin beekamne.";
+                                                                                                                                                                                                                                    requestAnimationFrame(function(){
+                                                                                                                                                                                                                                        window.scrollTo({
+                                                                                                                                                                                                                                              top:document.body.scrollHeight,
+                                                                                                                                                                                                                                                    behavior:"smooth"
+                                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                                          });
 
-      statusBox.textContent = "";
-      addMessage(
-        "Dhiifama, deebii argachuu hin dandeenye.\n" + errorText,
-        "ai",false
-      );
-      finish();
-    })
-    .askGemini(text,language,previousHistory);
-}
+                                                                                                                                                                                                                                                            return renderPromise;
+                                                                                                                                                                                                                                                            }
 
-function finish(){
-  busy = false;
-  sendButton.disabled = false;
-  statusBox.textContent = "";
-  question.focus();
-}
 
-function newConversation(){
-  if(busy) return;
+                                                                                                                                                                                                                                                            /* Mallattoo Tola AI deebii qopheessaa jiru */
 
-  history = [];
-  messages.innerHTML = "";
-  question.value = "";
-  resizeInput(question);
-  statusBox.textContent = "";
-  question.focus();
-}
-</script>
-</body>
-</html>
+                                                                                                                                                                                                                                                            function showTyping(){
+
+                                                                                                                                                                                                                                                              statusBox.innerHTML =
+                                                                                                                                                                                                                                                                  '<span class="typing-dots">' +
+                                                                                                                                                                                                                                                                      '<span></span><span></span><span></span>' +
+                                                                                                                                                                                                                                                                          '</span> Tola AI deebii qopheessaa jira...';
+
+                                                                                                                                                                                                                                                                          }
+
+
+                                                                                                                                                                                                                                                                          /* Enter sarara haaraa; Ctrl+Enter ergaa erga */
+
+                                                                                                                                                                                                                                            
